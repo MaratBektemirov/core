@@ -1,0 +1,48 @@
+@import 'src/styles/variables';
+@import 'src/styles/mixins';
+
+page {
+  main {
+    min-height: calc(100% - #{$main-minus-height});
+    width: 100%;
+    z-index: 10;
+    position: relative;
+    background-color: #ffffff;
+  }
+
+  footer {
+    height: $footer-height;
+    background-color: $primary-color;
+    z-index: 11;
+    position: relative;
+    padding-left: 50px;
+    padding-top: 15px;
+  }
+
+  nav {
+    height: $nav-height;
+    background-color: $white;
+    position: relative;
+  }
+
+  .navigation-item {
+    color: $steel;
+    font-size: 14px;
+    margin-left: 25px;
+  }
+
+  .navigation-item-active {
+    color: $cherry;
+  }
+}
+
+.page-section {
+  padding-left: 103px;
+  padding-right: 84px;
+}
+
+.footer-copyright {
+  font-size: 10px;
+  color: #757575;
+  width: 500px;
+}

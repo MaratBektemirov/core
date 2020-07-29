@@ -1,0 +1,39 @@
+<div class="auth-one-side fx fx-al-items-center fx-jc-center fx-dir-col">
+  <a class="auth-one-side-logo centered-logo-symbol-wrapper" [routerLink]="['/']">
+    <div class="centered-logo-symbol centered-logo-symbol-img"></div>
+  </a>
+
+  <span class="auth-one-side-text">
+    {{tr.auth.title}}
+  </span>
+</div>
+
+<div class="auth-two-side fx fx-dir-col fx-al-items-center fx-jc-center">
+  <div class="fx auth-two-side-header">
+    <a class="bz-button bz-button-secondary"
+       [routerLinkActive]="'bz-button-secondary-active'"
+       [routerLink]="[paths.login.getAbsoluteUrl()]">
+      {{tr.common.login}}
+    </a>
+
+    <a class="bz-button bz-button-secondary"
+       [routerLinkActive]="'bz-button-secondary-active'"
+       [routerLink]="[paths.registration.getAbsoluteUrl()]">
+      {{tr.common.registration}}
+    </a>
+
+    <a class="bz-button bz-button-secondary"
+       [routerLinkActive]="'bz-button-secondary-active'"
+       [routerLink]="[paths.restore.getAbsoluteUrl()]">
+      {{tr.common.forgotPassword}}
+    </a>
+  </div>
+
+  <router-outlet></router-outlet>
+
+  <div class="auth-two-side-footer fx">
+    <a class="auth-logo" [routerLink]="['/']"></a>
+    <!--    При входе, вы принимаете условия <a [routerLink]="['/']">Пользовательского соглашения</a> -->
+    <!--    и <a [routerLink]="['/']">Политики конфиденциальности</a>-->
+  </div>
+</div>

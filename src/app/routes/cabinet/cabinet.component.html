@@ -1,0 +1,43 @@
+<nav class="fx fx-al-items-center fx-jc-between">
+  <div class="cabinet-nav-left fx fx-al-items-center">
+    <a class="cabinet-root-url" [routerLink]="[paths.traders.getAbsoluteUrl()]">
+      <img src="/assets/img/logo-symbol.svg" class="cabinet-root-url-img">
+    </a>
+
+<!--    <a class="cabinet-nav-url bz-button bz-button-secondary" mat-button-->
+<!--       [routerLinkActive]="'bz-button-secondary-active'"-->
+<!--       [routerLink]="[paths.invoice.getAbsoluteUrl()]">-->
+<!--      Сообщения-->
+<!--    </a>-->
+
+<!--    <a class="cabinet-nav-url bz-button bz-button-secondary" mat-button-->
+<!--       [routerLinkActive]="'bz-button-secondary-active'"-->
+<!--       [routerLink]="[paths.content.getAbsoluteUrl()]">-->
+<!--      Объявления-->
+<!--    </a>-->
+
+    <a class="cabinet-nav-url bz-button bz-button-secondary" ibmButton
+       [routerLinkActive]="'bz-button-secondary-active'"
+       [routerLink]="[paths.partner.getAbsoluteUrl()]">
+      Страница партнера
+    </a>
+
+    <a class="cabinet-nav-url bz-button bz-button-secondary" ibmButton
+       [routerLinkActive]="'bz-button-secondary-active'"
+       [routerLink]="[paths.account.getAbsoluteUrl()]">
+      Аккаунт
+    </a>
+  </div>
+
+  <div class="cabinet-nav-right fx fx-al-items-center">
+    <a class="cabinet-nav-url bz-button" ibmButton (click)="logout()">
+      Выход
+    </a>
+  </div>
+</nav>
+
+<main>
+  <router-outlet></router-outlet>
+</main>
+
+<footer></footer>

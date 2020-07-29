@@ -1,0 +1,54 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "noEmit": true,
+    "noEmitHelpers": true,
+    "importHelpers": true,
+    "strictNullChecks": false,
+    "lib": [
+      "dom",
+      "es6"
+    ],
+    "baseUrl": "./",
+    "paths": {
+      "@angular/*": ["node_modules/@angular/*"],
+      "@app/*": ["src/app/*"],
+      "@styles/*": ["src/styles/*"],
+      "@interfaces/*": ["api/src/interfaces/*"],
+      "@constants/*": ["api/src/constants/*"],
+      "@localization/*": ["api/src/localization/*"],
+      "@classes/*": ["api/src/classes/*"],
+      "@paths/*": ["api/src/paths/*"]
+    },
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "types": [
+      "hammerjs",
+      "jasmine",
+      "node",
+      "uglify-js",
+      "webpack"
+    ]
+  },
+  "exclude": [
+    "node_modules",
+    "build",
+    "api"
+  ],
+  "awesomeTypescriptLoaderOptions": {
+    "forkChecker": true,
+    "useWebpackText": true
+  },
+  "compileOnSave": false,
+  "buildOnSave": false,
+  "atom": {
+    "rewriteTsconfig": false
+  }
+}

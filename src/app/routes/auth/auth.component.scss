@@ -1,0 +1,68 @@
+@import 'src/styles/variables';
+@import 'src/styles/mixins';
+
+auth {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.auth-logo {
+  position: relative;
+  z-index: 1;
+  // background-image: url(/assets/img/logo-gray.svg);
+  background-size: cover;
+  width: 100px;
+  height: 20px;
+}
+
+.auth-one-side {
+  width: 30%;
+  min-width: 380px;
+  height: 100%;
+  background: $primary-color;
+  position: relative;
+}
+
+.auth-one-side-logo {
+  position: relative;
+}
+
+.auth-one-side-text {
+  width: 292px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.auth-one-side-version {
+  margin-top: 25px;
+  margin-bottom: 53px;
+  color: $grey;
+  font-size: 16px;
+}
+
+.auth-two-side {
+  background: #fff;
+  height: 100%;
+  flex: 1 1 auto;
+  position: relative;
+}
+
+.auth-two-side-footer {
+  position: absolute;
+  bottom: 20px;
+}
+
+.auth-two-side-header {
+  margin-bottom: 30px;
+}
+
+.auth-two-side-form {
+  width: 400px;
+}
+
+.auth-two-side-form-field {
+  width: 100%;
+}
+

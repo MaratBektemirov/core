@@ -1,0 +1,28 @@
+<form [formGroup]="form" class="auth-two-side-form" (ngSubmit)="onSubmit()">
+  <ibm-label>
+    {{tr.common.phone}}
+    <input type="text"
+           class="bx--text-input bx--text__input"
+           formControlName="userPhone">
+  </ibm-label>
+
+  <ibm-label>
+    {{tr.common.password}}
+    <input type="password"
+           class="bx--text-input bx--text__input"
+           formControlName="password">
+  </ibm-label>
+
+  <span class="bz-error-text" *ngIf="error">
+    {{error}}
+  </span>
+
+  <div class="fx fx-jc-end form-buttons">
+    <button ibmButton
+            [disabled]="!formIsValid() || submitting"
+            type="submit"
+            class="bz-button bz-button-primary">
+      {{tr.common.send}}
+    </button>
+  </div>
+</form>
