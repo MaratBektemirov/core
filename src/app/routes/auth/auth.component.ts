@@ -10,6 +10,8 @@ import { BaseComponentService } from '@app/base/base-component.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class AuthComponent extends BaseComponent implements OnInit {
+  subscriptions$ = [];
+
   constructor(baseComponentsService: BaseComponentService) {
     super(baseComponentsService);
 

@@ -10,7 +10,9 @@ import { BaseComponentService } from '@app/base/base-component.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class NoContentComponent extends BaseComponent {
- constructor(baseComponentService: BaseComponentService) {
-   super(baseComponentService);
- }
+  subscriptions$ = [];
+
+  constructor(baseComponentService: BaseComponentService) {
+    super(baseComponentService);
+  }
 }

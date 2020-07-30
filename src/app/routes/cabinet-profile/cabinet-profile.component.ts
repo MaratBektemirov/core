@@ -10,6 +10,8 @@ import { BaseComponentService } from '@app/base/base-component.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class CabinetProfileComponent extends BaseComponent implements OnInit {
+  subscriptions$ = [];
+
   constructor(baseComponentService: BaseComponentService,) {
     super(baseComponentService);
   }

@@ -12,7 +12,6 @@ import { AppSwitcher20Module } from '@carbon/icons-angular/lib/app-switcher/20';
 
 import { HeaderComponent } from './header/header.component';
 
-import '@styles/styles.scss';
 import { routesConfig } from './app.routes';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { PreloadAllModules, RouterModule } from '@angular/router';
@@ -31,7 +30,7 @@ import { CabinetComponent } from '@app/routes/cabinet/cabinet.component';
 import { CabinetProfileComponent } from '@app/routes/cabinet-profile/cabinet-profile.component';
 import { NoContentComponent } from '@app/routes/no-content/no-content.component';
 import { PageComponent } from '@app/components/page/page.component';
-import { ButtonModule, InputModule } from 'carbon-components-angular/index';
+import { ButtonModule, InputModule, LinkModule } from 'carbon-components-angular/index';
 import { NumberOnlyDirective } from '@app/directives/number-only.directive';
 import { InfoPageComponent } from '@app/routes/info/info-page.component';
 
@@ -87,7 +86,8 @@ const InfoModule = [
     UserAvatar20Module,
     AppSwitcher20Module,
     InputModule,
-    ButtonModule
+    ButtonModule,
+    LinkModule
   ],
   bootstrap: [AppComponent],
   providers: [

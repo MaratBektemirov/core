@@ -10,6 +10,8 @@ import { BaseComponentService } from '@app/base/base-component.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class InfoPageComponent extends BaseComponent implements OnInit {
+  subscriptions$ = [];
+
   constructor(baseComponentService: BaseComponentService) {
     super(baseComponentService);
   }

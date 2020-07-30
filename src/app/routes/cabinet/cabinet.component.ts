@@ -12,6 +12,8 @@ import { BaseComponentService } from '@app/base/base-component.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class CabinetComponent extends BaseComponent {
+  subscriptions$ = [];
+
   constructor(private router: Router,
               baseComponentService: BaseComponentService,
               private userService: UserService) {

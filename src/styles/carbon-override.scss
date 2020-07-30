@@ -2,3 +2,16 @@
 .bx--header__nav {
 	display: block;
 }
+
+.bx--link.bx--link--active {
+  color: #161616;
+  text-decoration: underline;
+}
+
+.bx--link ~ .bx--link {
+  margin-left: 1rem;
+}
+
+ibm-label ~ ibm-label {
+  margin-top: 1.2rem;
+}

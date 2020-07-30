@@ -1,8 +1,10 @@
 <form [formGroup]="form" class="auth-two-side-form" (ngSubmit)="onSubmit()">
   <ibm-label>
     {{tr.common.phone}}
-    <input type="text" class="bx--text-input bx--text__input"
-           formControlName="userPhone">
+    <input type="text"
+           #phone
+           class="bx--text-input bx--text__input"
+           formControlName="phone">
   </ibm-label>
 
   <span class="bz-error-text" *ngIf="error">

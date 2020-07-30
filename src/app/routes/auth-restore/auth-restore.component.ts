@@ -2,7 +2,7 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy, ChangeDetectorRef,
   Component,
-  ElementRef,
+  ElementRef, OnDestroy,
   OnInit,
   ViewChild,
   ViewEncapsulation
@@ -19,26 +19,22 @@ import { BaseComponentService } from '@app/base/base-component.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
-export class AuthRestoreComponent extends BaseComponent implements OnInit, AfterViewInit {
+export class AuthRestoreComponent extends BaseComponent implements OnInit, AfterViewInit, OnDestroy {
   public form = new FormGroup(
     {
-      userPhone: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required]),
+      phone: new FormControl('', [Validators.required]),
     }
   );
 
-  @ViewChild('login', { read: ElementRef, static: true })
-  public userPhone: ElementRef<HTMLElement>;
-  @ViewChild('password', { read: ElementRef, static: true })
-  public password: ElementRef<HTMLElement>;
+  @ViewChild('phone', { read: ElementRef, static: true })
+  public phone: ElementRef<HTMLElement>;
 
   public submitting: boolean = false;
   public error: string;
   public hide: boolean = true;
 
-  private subscriptions$ = [];
+  subscriptions$ = [];
   private _loginAutoCompleted: boolean;
-  private _passwordAutoCompleted: boolean;
 
   constructor(
     private autoFillMonitor: AutofillMonitor,
@@ -52,17 +48,15 @@ export class AuthRestoreComponent extends BaseComponent implements OnInit, After
 
   public ngAfterViewInit() {
     this.subscriptions$.push(
-      this.autoFillMonitor.monitor(this.userPhone)
+      this.autoFillMonitor.monitor(this.phone)
         .subscribe(() => this._loginAutoCompleted = true),
-      this.autoFillMonitor.monitor(this.password)
-        .subscribe(() => this._passwordAutoCompleted = true),
     );
   }
 
   public formIsValid() {
     console.log(this);
 
-    return (this._loginAutoCompleted && this._passwordAutoCompleted) || this.form.valid;
+    return this._loginAutoCompleted || this.form.valid;
   }
 
   public hidePasswordToggle($event: MouseEvent) {
@@ -74,7 +68,7 @@ export class AuthRestoreComponent extends BaseComponent implements OnInit, After
     // this.submitting = true;
     this.error = '';
 
-    const { login, password } = this.form.value;
+    const { login } = this.form.value;
 
     // this.userService.login(login, password)
     //   .subscribe(() => {
@@ -100,5 +94,9 @@ export class AuthRestoreComponent extends BaseComponent implements OnInit, After
     //     this.submitting = false;
     //     this.error = 'Invalid Email, Username or Password';
     //   });
+  }
+
+  ngOnDestroy() {
+    super.ngOnDestroy();
   }
 }

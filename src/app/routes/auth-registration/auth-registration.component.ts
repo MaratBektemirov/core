@@ -27,20 +27,20 @@ import { BaseComponentService } from '@app/base/base-component.service';
 export class AuthRegistrationComponent extends BaseComponent implements OnInit, AfterViewInit {
   public form = new FormGroup(
     {
-      userPhone: new FormControl('', [Validators.required]),
+      phone: new FormControl('', [Validators.required]),
       regionId: new FormControl('', [Validators.required]),
     }
   );
 
-  @ViewChild('userPhone', { read: ElementRef, static: true })
-  public userPhone: ElementRef<HTMLElement>;
+  @ViewChild('phone', { read: ElementRef, static: true })
+  public phone: ElementRef<HTMLElement>;
 
   public submitting: boolean = false;
   public error: string;
   public hide: boolean = true;
   public filteredRegions: Observable<Regions[]>;
 
-  private subscriptions$ = [];
+  subscriptions$ = [];
   private _loginAutoCompleted: boolean;
   private _allRegions: Regions[] = [];
 
@@ -66,7 +66,7 @@ export class AuthRegistrationComponent extends BaseComponent implements OnInit, 
 
   public ngAfterViewInit() {
     this.subscriptions$.push(
-      this.autoFillMonitor.monitor(this.userPhone)
+      this.autoFillMonitor.monitor(this.phone)
         .subscribe(() => this._loginAutoCompleted = true),
     );
   }
@@ -92,7 +92,7 @@ export class AuthRegistrationComponent extends BaseComponent implements OnInit, 
     const { userPhone, regionId } = this.form.value;
 
     // this.partnerService.createPartnerInvoke({
-    //   phone: userPhone,
+    //   phone: phone,
     //   regionId
     // }).toPromise();
 

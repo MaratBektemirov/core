@@ -10,20 +10,23 @@
 
 <div class="auth-two-side fx fx-dir-col fx-al-items-center fx-jc-center">
   <div class="fx auth-two-side-header">
-    <a class="bz-button bz-button-secondary"
-       [routerLinkActive]="'bz-button-secondary-active'"
+    <a ibmLink
+       class="bx--link"
+       [routerLinkActive]="'bx--link--active'"
        [routerLink]="[paths.login.getAbsoluteUrl()]">
       {{tr.common.login}}
     </a>
 
-    <a class="bz-button bz-button-secondary"
-       [routerLinkActive]="'bz-button-secondary-active'"
+    <a ibmLink
+       class="bx--link"
+       [routerLinkActive]="'bx--link--active'"
        [routerLink]="[paths.registration.getAbsoluteUrl()]">
       {{tr.common.registration}}
     </a>
 
-    <a class="bz-button bz-button-secondary"
-       [routerLinkActive]="'bz-button-secondary-active'"
+    <a ibmLink
+       class="bx--link"
+       [routerLinkActive]="'bx--link--active'"
        [routerLink]="[paths.restore.getAbsoluteUrl()]">
       {{tr.common.forgotPassword}}
     </a>

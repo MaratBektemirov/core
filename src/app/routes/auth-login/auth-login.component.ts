@@ -21,13 +21,13 @@ import { BaseComponentService } from '@app/base/base-component.service';
 export class AuthLoginComponent extends BaseComponent implements AfterViewInit {
   public form = new FormGroup(
     {
-      userPhone: new FormControl('', [Validators.required]),
+      phone: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
     }
   );
 
-  @ViewChild('userPhone', { read: ElementRef, static: true })
-  public userPhone: ElementRef<HTMLElement>;
+  @ViewChild('phone', { read: ElementRef, static: true })
+  public phone: ElementRef<HTMLElement>;
   @ViewChild('password', { read: ElementRef, static: true })
   public password: ElementRef<HTMLElement>;
 
@@ -35,7 +35,7 @@ export class AuthLoginComponent extends BaseComponent implements AfterViewInit {
   public error: string;
   public hide: boolean = true;
 
-  private subscriptions$ = [];
+  subscriptions$ = [];
   private _loginAutoCompleted: boolean;
   private _passwordAutoCompleted: boolean;
 
@@ -47,7 +47,7 @@ export class AuthLoginComponent extends BaseComponent implements AfterViewInit {
 
   public ngAfterViewInit() {
     this.subscriptions$.push(
-      this.autoFillMonitor.monitor(this.userPhone)
+      this.autoFillMonitor.monitor(this.phone)
         .subscribe(() => this._loginAutoCompleted = true),
       this.autoFillMonitor.monitor(this.password)
         .subscribe(() => this._passwordAutoCompleted = true),
@@ -67,10 +67,10 @@ export class AuthLoginComponent extends BaseComponent implements AfterViewInit {
     this.submitting = true;
     this.error = '';
 
-    const { userPhone, userPassword } = this.form.value;
+    const { phone, password } = this.form.value;
 
     try {
-      await this.baseComponentService.userService.login({ userPhone, userPassword });
+      await this.baseComponentService.userService.login({ phone, password });
       this.baseComponentService.router.navigateByUrl(this.paths.cabinet.getAbsoluteUrl());
     } catch (e) {
       this.error = 'Неверный телефон или пин-код';
