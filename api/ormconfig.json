@@ -1,0 +1,24 @@
+{
+  "type": "postgres",
+  "host": "localhost",
+  "port": 5432,
+  "username": "marato",
+  "password": "newlife100",
+  "database": "investhub",
+  "synchronize": true,
+  "logging": false,
+  "entities": [
+    "dist/typeorm/entity/**/*.js"
+  ],
+  "migrations": [
+    "typeorm/migration/*.ts"
+  ],
+  "subscribers": [
+    "typeorm/subscriber/*.ts"
+  ],
+  "cli": {
+    "entitiesDir": "typeorm/entity",
+    "migrationsDir": "typeorm/migration",
+    "subscribersDir": "typeorm/subscriber"
+  }
+}
