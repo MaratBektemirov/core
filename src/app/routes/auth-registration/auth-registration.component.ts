@@ -1,6 +1,6 @@
 import {
   AfterViewInit,
-  ChangeDetectionStrategy, ChangeDetectorRef,
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   OnInit,
@@ -9,9 +9,6 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AutofillMonitor } from '@angular/cdk/text-field';
-import { RegionService } from '@app/services/region.service';
-import { map, startWith } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 import { Regions } from '@constants/regions';
 import { UserService } from '@app/services/user.service';
 import { BaseComponent } from '@app/base/base.component';
@@ -28,115 +25,50 @@ export class AuthRegistrationComponent extends BaseComponent implements OnInit, 
   public form = new FormGroup(
     {
       phone: new FormControl('', [Validators.required]),
-      regionId: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required]),
     }
   );
 
   @ViewChild('phone', { read: ElementRef, static: true })
   public phone: ElementRef<HTMLElement>;
+  @ViewChild('password', { read: ElementRef, static: true })
+  public password: ElementRef<HTMLElement>;
 
   public submitting: boolean = false;
   public error: string;
   public hide: boolean = true;
-  public filteredRegions: Observable<Regions[]>;
 
   subscriptions$ = [];
   private _loginAutoCompleted: boolean;
-  private _allRegions: Regions[] = [];
+  private _passwordAutoCompleted: boolean;
 
   constructor(public userService: UserService,
               private autoFillMonitor: AutofillMonitor,
-              baseComponentService: BaseComponentService,
-              private regionService: RegionService,
-              private cdr: ChangeDetectorRef) {
+              baseComponentService: BaseComponentService) {
     super(baseComponentService);
-
-    this.filteredRegions = this.form.controls['regionId'].valueChanges
-      .pipe(
-        startWith(''),
-        map((filterValue) => filterValue ? this._filterRegions(filterValue) : this._allRegions.slice())
-      );
   }
 
-  public async ngOnInit() {
-    // this._allRegions = await this.regionService.getAllRegions();
-    this._allRegions = [];
-    this.form.controls['regionId'].setValue('');
-  }
+  public async ngOnInit() {}
 
   public ngAfterViewInit() {
     this.subscriptions$.push(
       this.autoFillMonitor.monitor(this.phone)
         .subscribe(() => this._loginAutoCompleted = true),
+      this.autoFillMonitor.monitor(this.password)
+        .subscribe(() => this._passwordAutoCompleted = true),
     );
   }
 
   public formIsValid() {
-    return (this._loginAutoCompleted) || this.form.valid;
-  }
-
-  public getRegionById(regionId: Regions): string {
-    return null;
-    // return this.TR.regions[regionId][this.UL];
-  }
-
-  public autocompleteDisplayValue: (regionId: Regions) => string = (regionId) => {
-    return null;
-    // return typeof regionId === 'number' ? this.TR.regions[regionId][this.UL] : '';
+    return (this._loginAutoCompleted && this._passwordAutoCompleted) || this.form.valid;
   }
 
   public async onSubmit() {
     // this.submitting = true;
     this.error = '';
 
-    const { userPhone, regionId } = this.form.value;
+    const { phone, password } = this.form.value;
 
-    // this.partnerService.createPartnerInvoke({
-    //   phone: phone,
-    //   regionId
-    // }).toPromise();
-
-    // this.userService.login(login, password)
-    //   .subscribe(() => {
-    //     this.submitting = false;
-    //   }, (err: HttpErrorResponse) => {
-    //     if (err.error.error) {
-    //       let errMsg = err.error.error.message;
-    //
-    //       this.submitting = false;
-    //
-    //       // @hack: maybe non-standard MongoDB error
-    //       if (typeof errMsg === 'object') {
-    //         console.error('Non-standard error response', err.error.error);
-    //
-    //         errMsg = `${errMsg.name}: ${errMsg.message}`;
-    //       }
-    //
-    //       this.error = errMsg;
-    //
-    //       return;
-    //     }
-    //
-    //     this.submitting = false;
-    //     this.error = 'Invalid Email, Username or Password';
-    //   });
-  }
-
-  private _filterRegions(value: string): Regions[] {
-    let filterValue: string;
-
-    if (typeof value === 'number') {
-      const region = this.getRegionById(value);
-
-      region
-        ? filterValue = ''
-        : filterValue = this.getRegionById(value).toLowerCase();
-    } else {
-      filterValue = value.toLowerCase();
-    }
-
-    return this._allRegions.filter((region) => {
-      return this.getRegionById(region).toLowerCase().includes(filterValue);
-    });
+    await this.userService.registration({ phone, password });
   }
 }

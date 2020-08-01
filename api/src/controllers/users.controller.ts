@@ -1,19 +1,40 @@
-import { Controller, Post, Body, HttpStatus, Res, BadRequestException } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Post, Res } from '@nestjs/common';
 import { DbService } from '@api/services/db.service';
 import { UsersService } from '@api/services/users.service';
-import { LoginRequest, LoginResponse, LogoutRequest } from '@interfaces/api';
+import { LoginRegistration, LoginRequest, LoginResponse, LogoutRequest } from '@interfaces/api';
 import { TokenService } from '@api/services/token.service';
+import { usersApiEndpoints } from '@endpoints/users';
+import { Tables } from '@api/tables';
+import { IUser } from '@interfaces/user';
 
-@Controller('users')
+@Controller(usersApiEndpoints.prefix)
 export class UsersController {
-  constructor(private dbService: DbService,
+  constructor(private db: DbService,
               private tokenService: TokenService,
               private usersService: UsersService) {
   }
 
-  @Post('/login')
+  @Post(usersApiEndpoints.api.registration)
+  public async registration(@Body() body: LoginRegistration): Promise<LoginResponse> {
+    const createdUser = await this.db.insert<LoginRegistration>(Tables.user, body);
+
+    if (!createdUser) {
+      throw new BadRequestException('User not found');
+    }
+
+    delete createdUser[0].password;
+
+    const token = await this.tokenService.createToken(createdUser[0].id);
+
+    return {
+      token: token[0],
+      user: createdUser[0],
+    };
+  }
+
+  @Post(usersApiEndpoints.api.login)
   public async login(@Body() body: LoginRequest): Promise<LoginResponse> {
-    const user = await this.usersService.find(body);
+    const user = await this.db.find<IUser>(Tables.user, body);
 
     if (!user) {
       throw new BadRequestException('User not found');
@@ -29,7 +50,7 @@ export class UsersController {
     };
   }
 
-  @Post('/logout')
+  @Post(usersApiEndpoints.api.logout)
   public async logout(@Body() body: LogoutRequest, @Res() res): Promise<any> {
     const deleteTokenResult = await this.tokenService.deleteToken(body.tokenId);
 

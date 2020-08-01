@@ -1,17 +1,17 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
-import { IUser } from '@interfaces/user';
 import { Languages } from '@constants/languages';
 import { Regions } from '@constants/regions';
+import { IUser } from '@interfaces/user';
 
 @Entity()
 export class User implements IUser {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({nullable: true})
     balanceId: number;
 
-    @Column()
+    @Column({nullable: true})
     userName: string;
 
     @Column()
@@ -20,9 +20,9 @@ export class User implements IUser {
     @Column()
     phone: string;
 
-    @Column()
+    @Column({nullable: true})
     language: Languages;
 
-    @Column()
+    @Column({nullable: true})
     regionId: Regions;
 }

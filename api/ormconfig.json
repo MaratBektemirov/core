@@ -6,19 +6,20 @@
   "password": "newlife100",
   "database": "investhub",
   "synchronize": true,
-  "logging": false,
+  "logging": true,
+  "autoLoadEntities": true,
   "entities": [
-    "dist/typeorm/entity/**/*.js"
+    "dist/entity/**/*.js"
   ],
   "migrations": [
-    "typeorm/migration/*.ts"
+    "src/migration/*.ts"
   ],
   "subscribers": [
-    "typeorm/subscriber/*.ts"
+    "src/subscriber/*.ts"
   ],
   "cli": {
-    "entitiesDir": "typeorm/entity",
-    "migrationsDir": "typeorm/migration",
-    "subscribersDir": "typeorm/subscriber"
+    "entitiesDir": "src/entity",
+    "migrationsDir": "src/migration",
+    "subscribersDir": "src/subscriber"
   }
 }

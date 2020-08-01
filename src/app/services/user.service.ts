@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '@app/services/api.service';
 import { HttpClient } from '@angular/common/http';
-import { LoginRequest, LoginResponse } from '@interfaces/api';
+import { LoginRegistration, LoginRequest, LoginResponse } from '@interfaces/api';
 import { IUserAccessToken } from '@interfaces/user';
 import { GUEST_USER } from '@constants/common';
 import { UserUI } from '@interfaces/ui';
+import { usersApiEndpoints } from '@endpoints/users';
 
 @Injectable()
 export class UserService {
@@ -44,19 +45,28 @@ export class UserService {
   }
 
   public async login(data: LoginRequest) {
-    const url = this.apiService.host('users/login');
-    const resp = await this.http.post(url, data).toPromise() as LoginResponse;
+    const url = this.apiService.host(usersApiEndpoints.client.login);
+    const resp = await this.http.post<LoginResponse>(url, data).toPromise();
 
     this.token = resp.token;
     this.user = resp.user;
   }
 
   public async logout() {
-    this.http.post(this.apiService.host('users/logout'), {}).subscribe();
+    const url = this.apiService.host(usersApiEndpoints.client.logout);
+    this.http.post(this.apiService.host(url), {}).subscribe();
 
     localStorage.removeItem('user');
     localStorage.removeItem('token');
 
     this.user = Object.assign({}, GUEST_USER);
+  }
+
+  public async registration(data: LoginRegistration) {
+    const url = this.apiService.host(usersApiEndpoints.client.registration);
+    const resp = await this.http.post<LoginResponse>(url, data).toPromise();
+
+    this.token = resp.token;
+    this.user = resp.user;
   }
 }

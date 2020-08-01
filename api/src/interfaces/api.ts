@@ -1,6 +1,11 @@
 import { UserUI } from '@interfaces/ui';
 import { IUserAccessToken } from '@interfaces/user';
 
+export interface LoginRegistration {
+  phone: string;
+  password: number;
+}
+
 export interface LoginRequest {
   phone: string;
   password: number;

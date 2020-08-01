@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { createConnection, Connection } from 'typeorm';
-import { User } from 'typeorm/entity/User';
+import { Tables } from '@api/tables';
 
 @Injectable()
 export class DbService {
@@ -9,7 +9,6 @@ export class DbService {
   constructor() {
     (async () => {
       await this.createConnection();
-      this.connection.getRepository(User);
     })();
   }
 
@@ -80,6 +79,24 @@ export class DbService {
       where: where.join(' AND '),
       values,
     };
+  }
+
+  public async insert<T>(table: Tables, data: T) {
+    const { keys, values, indexes } = this.prepareForInsert(data);
+
+    return await this.query(
+      `INSERT INTO ${table}(${keys.join(', ')}) VALUES(${indexes.join(', ')})`,
+      values,
+    );
+  }
+
+  public async find<T>(table: Tables, data: Partial<T>): Promise<T[]> {
+    const { where, values } = this.prepareForGet(data);
+
+    return await this.query(
+      `SELECT * FROM ${table} WHERE ${where}`,
+      values,
+    );
   }
 
   private async createConnection() {

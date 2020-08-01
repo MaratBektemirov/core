@@ -7,9 +7,20 @@
            formControlName="phone">
   </ibm-label>
 
-  <span class="bz-error-text" *ngIf="error">
-    {{error}}
-  </span>
+  <ibm-label>
+    {{tr.common.password}}
+    <input type="password"
+           #password
+           class="bx--text-input bx--text__input"
+           formControlName="password">
+  </ibm-label>
+
+  <ibm-notification
+    *ngIf="error"
+    [notificationObj]="{
+				type: 'error',
+				message: error}">
+  </ibm-notification>
 
   <div class="fx fx-jc-end form-buttons">
     <button ibmButton

@@ -24,7 +24,8 @@
       "@constants/*": ["api/src/constants/*"],
       "@localization/*": ["api/src/localization/*"],
       "@classes/*": ["api/src/classes/*"],
-      "@paths/*": ["api/src/paths/*"]
+      "@paths/*": ["api/src/paths/*"],
+      "@endpoints/*": ["api/src/endpoints/*"]
     },
     "typeRoots": [
       "node_modules/@types"

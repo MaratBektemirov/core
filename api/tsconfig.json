@@ -16,7 +16,10 @@
       "@interfaces/*": ["src/interfaces/*"],
       "@constants/*": ["src/constants/*"],
       "@localization/*": ["src/localization/*"],
-      "@classes/*": ["src/classes/*"]
+      "@classes/*": ["src/classes/*"],
+      "@endpoints/*": ["src/endpoints/*"],
+      "@entity/*": ["src/entity/*"],
+      "@tables/*": ["src/tables/*"]
     },
     "resolveJsonModule": true
   },

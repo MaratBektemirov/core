@@ -1,4 +1,4 @@
-import { RouterPath } from '@classes/router-path';
+import { RouterPath } from '@classes/router.path';
 
 class Paths {
   public pages = new RouterPath({url: 'page'});

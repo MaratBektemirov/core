@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import * as md5 from 'md5';
 import { DbService } from '@api/services/db.service';
 import { IUserAccessToken } from '@interfaces/user';
+import { Tables } from '@api/tables';
 
 @Injectable()
 export class TokenService {
@@ -10,7 +11,7 @@ export class TokenService {
 
   public async getToken(id: string) {
     const res = await this.dbService.query<IUserAccessToken[]>(
-      `SELECT * FROM user_access_token WHERE id = $1`,
+      `SELECT * FROM ${Tables.user_access_token} WHERE id = $1`,
       [id]
     );
 
@@ -26,14 +27,14 @@ export class TokenService {
     const {values, indexes, keys} = this.dbService.prepareForInsert(token);
 
     return await this.dbService.query<IUserAccessToken[]>(
-      `INSERT INTO user_access_token(${keys.join(', ')}) VALUES (${indexes.join(', ')}) RETURNING *`,
+      `INSERT INTO ${Tables.user_access_token}(${keys.join(', ')}) VALUES (${indexes.join(', ')}) RETURNING *`,
       values
     );
   }
 
   public async deleteToken(id: string) {
     return await this.dbService.query<{rowCount: number}>(
-      `DELETE FROM user_access_token WHERE id = $1`,
+      `DELETE FROM ${Tables.user_access_token} WHERE id = $1`,
       [id]
     );
   }
