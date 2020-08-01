@@ -12,7 +12,7 @@ import { BaseComponentService } from '@app/base/base-component.service';
 export class CabinetProfileComponent extends BaseComponent implements OnInit {
   subscriptions$ = [];
 
-  constructor(baseComponentService: BaseComponentService,) {
+  constructor(baseComponentService: BaseComponentService, ) {
     super(baseComponentService);
   }
 

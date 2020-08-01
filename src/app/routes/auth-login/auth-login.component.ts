@@ -73,7 +73,7 @@ export class AuthLoginComponent extends BaseComponent implements AfterViewInit {
       await this.baseComponentService.userService.login({ phone, password });
       this.baseComponentService.router.navigateByUrl(this.paths.cabinet.getAbsoluteUrl());
     } catch (e) {
-      this.error = 'Неверный телефон или пин-код';
+      this.error = this.tr.auth.error;
     }
 
     this.submitting = false;

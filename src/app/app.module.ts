@@ -30,7 +30,7 @@ import { CabinetComponent } from '@app/routes/cabinet/cabinet.component';
 import { CabinetProfileComponent } from '@app/routes/cabinet-profile/cabinet-profile.component';
 import { NoContentComponent } from '@app/routes/no-content/no-content.component';
 import { PageComponent } from '@app/components/page/page.component';
-import { ButtonModule, InputModule, LinkModule } from 'carbon-components-angular/index';
+import { ButtonModule, InputModule, LinkModule, NotificationModule } from 'carbon-components-angular/index';
 import { NumberOnlyDirective } from '@app/directives/number-only.directive';
 import { InfoPageComponent } from '@app/routes/info/info-page.component';
 
@@ -87,7 +87,8 @@ const InfoModule = [
     AppSwitcher20Module,
     InputModule,
     ButtonModule,
-    LinkModule
+    LinkModule,
+    NotificationModule
   ],
   bootstrap: [AppComponent],
   providers: [

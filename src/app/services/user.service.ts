@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiService } from '@app/services/api.service';
 import { HttpClient } from '@angular/common/http';
 import { LoginRequest, LoginResponse } from '@interfaces/api';
-import { UserAccessToken } from '@interfaces/user';
+import { IUserAccessToken } from '@interfaces/user';
 import { GUEST_USER } from '@constants/common';
 import { UserUI } from '@interfaces/ui';
 
@@ -20,13 +20,13 @@ export class UserService {
     localStorage.setItem('user', $user);
   }
 
-  get token(): UserAccessToken {
+  get token(): IUserAccessToken {
     const token = localStorage.getItem('token');
 
     return JSON.parse(token);
   }
 
-  set token(token: UserAccessToken) {
+  set token(token: IUserAccessToken) {
     const $token = JSON.stringify(token);
 
     localStorage.setItem('token', $token);

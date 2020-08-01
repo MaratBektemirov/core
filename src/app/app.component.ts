@@ -1,11 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 export const ROOT_SELECTOR = 'app-root';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['@styles/styles.scss']
+  encapsulation: ViewEncapsulation.None,
+  styleUrls: [
+    './styles/app.scss',
+    './styles/carbon-override.scss',
+    './styles/flex.scss',
+    './styles/common.scss',
+  ]
 })
 export class AppComponent {
 }

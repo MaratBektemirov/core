@@ -13,6 +13,7 @@ enum LabelState {
 export abstract class BaseComponent implements OnDestroy {
   public paths = paths;
   public LabelState = LabelState;
+  public TR = TR;
 
   abstract subscriptions$: Subscription[];
 
