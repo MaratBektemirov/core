@@ -11,4 +11,6 @@ export const GUEST_USER: UserUI = {
   balanceId: null,
   regionId: Regions.RU,
   phone: null,
+  createdAt: null,
+  updatedAt: null
 };

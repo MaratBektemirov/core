@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 import { Languages } from '@constants/languages';
 import { Regions } from '@constants/regions';
 import { IUser } from '@interfaces/user';
@@ -11,13 +11,13 @@ export class User implements IUser {
     @Column({nullable: true})
     balanceId: number;
 
-    @Column({nullable: true})
+    @Column({nullable: true, unique: true})
     userName: string;
 
     @Column()
     password: number;
 
-    @Column()
+    @Column({unique: true})
     phone: string;
 
     @Column({nullable: true})
@@ -25,4 +25,10 @@ export class User implements IUser {
 
     @Column({nullable: true})
     regionId: Regions;
+
+    @CreateDateColumn({type: 'timestamp'})
+    createdAt: Date;
+
+    @UpdateDateColumn({type: 'timestamp'})
+    updatedAt: Date;
 }

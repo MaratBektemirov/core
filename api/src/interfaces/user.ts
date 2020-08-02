@@ -8,7 +8,7 @@ export enum UserRoles {
   partner,
 }
 
-export interface UserRole {
+export interface IUserRole {
   id: number;
   userId: number;
   roleId: UserRoles;
@@ -22,10 +22,12 @@ export interface IUser {
   password: number;
   phone: string;
   language: Languages;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface IUserAccessToken {
-  id: number;
+  id: string;
   userId: number;
-  createdAt?: Date;
+  createdAt: Date;
 }

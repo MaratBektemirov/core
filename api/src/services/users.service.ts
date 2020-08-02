@@ -1,32 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { DbService } from '@api/services/db.service';
 import { TokenService } from '@api/services/token.service';
-import { IUser, UserRole } from '@interfaces/user';
+import { Tables } from '@api/tables';
 
 @Injectable()
 export class UsersService {
-  constructor(private dbService: DbService, private tokenService: TokenService) {}
+  constructor(private db: DbService, private tokenService: TokenService) {}
 
-  public async getUserRoles(userId: number): Promise<UserRole[]> {
-    const { where, values } = this.dbService.prepareForGet({userId});
-
-    return await this.dbService.query(
-      `SELECT DISTINCT user_role_id FROM users_roles WHERE ${where}`,
-      values,
-    );
+  public async getUserRoles(userId: number) {
+    return this.db.find(Tables.user_role, {userId});
   }
 
-  public async getUserByTokenId(tokenId: string): Promise<IUser> {
+  public async getUserByTokenId(tokenId: string) {
     const token = await this.tokenService.getToken(tokenId);
-
-    const user = {id: token.userId} as IUser;
-
-    const { where, values } = this.dbService.prepareForGet(user);
-
-    const res = await this.dbService.query(
-      `SELECT * FROM users WHERE ${where}`,
-      values,
-    );
+    const res = await this.db.find(Tables.user, {id: token.userId});
 
     return res[0];
   }

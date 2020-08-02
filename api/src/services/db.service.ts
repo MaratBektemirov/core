@@ -1,42 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { createConnection, Connection } from 'typeorm';
-import { Tables } from '@api/tables';
+import { Tables, TablesSpec } from '@api/tables';
+import { QueryResult, QueryResultBase } from 'pg';
 
 @Injectable()
 export class DbService {
   private connection: Connection;
 
   constructor() {
-    (async () => {
-      await this.createConnection();
-    })();
-  }
-
-  public async query<T>(query, values): Promise<T> {
-    if (!this.connection) {
-      this.connection = await createConnection();
-      console.log('Connected PostgreSQL');
-    }
-
-    let result;
-    let error;
-
-    try {
-      console.log(query);
-      console.log(values);
-
-      result = await this.connection.query(query, values);
-    } catch (e) {
-      error = e;
-
-      console.log(e);
-    }
-
-    if (error) {
-      throw Error(error);
-    }
-
-    return result.rows;
+    this.createConnection();
   }
 
   public prepareForInsert(obj: any) {
@@ -50,7 +22,7 @@ export class DbService {
       const key = objectKeys[i];
       const value = obj[key];
 
-      keys.push(key);
+      keys.push(`"${key}"`);
       values.push(value);
       indexes.push('$' + (i + 1));
     }
@@ -81,26 +53,58 @@ export class DbService {
     };
   }
 
-  public async insert<T>(table: Tables, data: T) {
+  public async query<A>(query, values): Promise<A> {
+    await this.createConnection();
+
+    let result;
+    let error;
+
+    try {
+      result = await this.connection.query(query, values);
+    } catch (e) {
+      error = e;
+
+      console.log(e);
+    }
+
+    if (error) {
+      throw Error(error);
+    }
+
+    return result;
+  }
+
+  public async insert<A extends Tables>(table: A, data: Partial<TablesSpec[A]>) {
     const { keys, values, indexes } = this.prepareForInsert(data);
 
-    return await this.query(
-      `INSERT INTO ${table}(${keys.join(', ')}) VALUES(${indexes.join(', ')})`,
+    return await this.query<TablesSpec[A][]>(
+      `INSERT INTO ${table}(${keys.join(', ')}) VALUES(${indexes.join(', ')}) RETURNING *`,
       values,
     );
   }
 
-  public async find<T>(table: Tables, data: Partial<T>): Promise<T[]> {
+  public async find<A extends Tables>(table: A, data: Partial<TablesSpec[A]>) {
     const { where, values } = this.prepareForGet(data);
 
-    return await this.query(
+    return await this.query<TablesSpec[A][]>(
       `SELECT * FROM ${table} WHERE ${where}`,
       values,
     );
   }
 
+  public async delete<A extends Tables>(table: A, data: Partial<TablesSpec[A]>)  {
+    const { where, values } = this.prepareForGet(data);
+
+    return await this.query<QueryResultBase>(
+      `DELETE FROM ${table} WHERE ${where} RETURNING *`,
+      values,
+    );
+  }
+
   private async createConnection() {
-    this.connection = await createConnection();
-    console.log('Connected PostgreSQL');
+    if (!this.connection) {
+      this.connection = await createConnection();
+      console.log('Connected PostgreSQL');
+    }
   }
 }

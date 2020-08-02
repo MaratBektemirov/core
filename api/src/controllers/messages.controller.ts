@@ -6,7 +6,7 @@ import { TokenService } from '@api/services/token.service';
 
 @Controller('messages')
 export class MessagesController {
-  constructor(private dbService: DbService,
+  constructor(private db: DbService,
               private tokenService: TokenService,
               private usersService: UsersService) {
   }

@@ -1,11 +1,11 @@
-import { BadRequestException, Body, Controller, Post, Res } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Post, Req, Res } from '@nestjs/common';
 import { DbService } from '@api/services/db.service';
 import { UsersService } from '@api/services/users.service';
 import { LoginRegistration, LoginRequest, LoginResponse, LogoutRequest } from '@interfaces/api';
 import { TokenService } from '@api/services/token.service';
 import { usersApiEndpoints } from '@endpoints/users';
 import { Tables } from '@api/tables';
-import { IUser } from '@interfaces/user';
+import { UserRoles } from '@interfaces/user';
 
 @Controller(usersApiEndpoints.prefix)
 export class UsersController {
@@ -16,50 +16,53 @@ export class UsersController {
 
   @Post(usersApiEndpoints.api.registration)
   public async registration(@Body() body: LoginRegistration): Promise<LoginResponse> {
-    const createdUser = await this.db.insert<LoginRegistration>(Tables.user, body);
+    const res = await this.db.insert(Tables.user, body);
 
-    if (!createdUser) {
+    if (!res) {
       throw new BadRequestException('User not found');
     }
 
-    delete createdUser[0].password;
+    const user = res[0];
+    delete user.password;
 
-    const token = await this.tokenService.createToken(createdUser[0].id);
+    const token = await this.tokenService.createToken(user.id);
+    await this.db.insert(Tables.user_role, {userId: user.id, roleId: UserRoles.user});
 
     return {
-      token: token[0],
-      user: createdUser[0],
+      token,
+      user,
     };
   }
 
   @Post(usersApiEndpoints.api.login)
-  public async login(@Body() body: LoginRequest): Promise<LoginResponse> {
-    const user = await this.db.find<IUser>(Tables.user, body);
+  public async login(@Body() body: LoginRequest, @Req() req): Promise<LoginResponse> {
+    const res = await this.db.find(Tables.user, body);
 
-    if (!user) {
+    if (!res) {
       throw new BadRequestException('User not found');
     }
 
-    delete user[0].password;
+    console.log(res);
 
-    const token = await this.tokenService.createToken(user[0].id);
+    const user = res[0];
+    delete user.password;
+
+    const token = await this.tokenService.createToken(user.id);
 
     return {
-      token: token[0],
-      user: user[0],
+      token,
+      user,
     };
   }
 
   @Post(usersApiEndpoints.api.logout)
-  public async logout(@Body() body: LogoutRequest, @Res() res): Promise<any> {
+  public async logout(@Body() body: LogoutRequest, @Res() res): Promise<string> {
     const deleteTokenResult = await this.tokenService.deleteToken(body.tokenId);
 
     if (deleteTokenResult.rowCount) {
       return 'ok';
     } else {
-      // res.status(HttpStatus.NOT_FOUND).send();
+      throw new BadRequestException('Token not found');
     }
-
-    console.log(deleteTokenResult);
   }
 }

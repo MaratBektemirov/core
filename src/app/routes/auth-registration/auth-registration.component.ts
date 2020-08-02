@@ -9,7 +9,6 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AutofillMonitor } from '@angular/cdk/text-field';
-import { Regions } from '@constants/regions';
 import { UserService } from '@app/services/user.service';
 import { BaseComponent } from '@app/base/base.component';
 import { BaseComponentService } from '@app/base/base-component.service';
@@ -64,7 +63,6 @@ export class AuthRegistrationComponent extends BaseComponent implements OnInit, 
   }
 
   public async onSubmit() {
-    // this.submitting = true;
     this.error = '';
 
     const { phone, password } = this.form.value;
