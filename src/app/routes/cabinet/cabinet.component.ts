@@ -18,29 +18,10 @@ export class CabinetComponent extends BaseComponent {
               baseComponentService: BaseComponentService,
               private userService: UserService) {
     super(baseComponentService);
-
-    if (!this.userService.isAuth()) {
-      this.router.navigateByUrl(this.paths.login.getAbsoluteUrl());
-
-      return;
-    }
-
-    if (this.isRoot()) {
-      this.router.navigateByUrl(this.paths.partner.getAbsoluteUrl());
-    }
   }
 
   public logout() {
     this.userService.logout();
     this.router.navigateByUrl(this.paths.login.getAbsoluteUrl());
-  }
-
-  private isRoot() {
-    let { pathname } = window.location;
-    pathname = pathname.replace(/\//g, '');
-
-    const rootUrl = this.paths.cabinet.getAbsoluteUrl();
-
-    return pathname === rootUrl;
   }
 }

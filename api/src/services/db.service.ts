@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { createConnection, Connection } from 'typeorm';
 import { Tables, TablesSpec } from '@api/tables';
-import { QueryResult, QueryResultBase } from 'pg';
+import { QueryResultBase } from 'pg';
 
 @Injectable()
 export class DbService {

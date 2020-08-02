@@ -4,8 +4,7 @@ import { Tables } from '@api/tables';
 
 @Injectable()
 export class TokenService {
-  constructor(private db: DbService) {
-  }
+  constructor(private db: DbService) {}
 
   public async getToken(id: string) {
     const res = await this.db.find(Tables.user_access_token, {id});

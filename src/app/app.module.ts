@@ -33,14 +33,17 @@ import { PageComponent } from '@app/components/page/page.component';
 import { ButtonModule, InputModule, LinkModule, NotificationModule } from 'carbon-components-angular/index';
 import { NumberOnlyDirective } from '@app/directives/number-only.directive';
 import { InfoPageComponent } from '@app/routes/info/info-page.component';
+import { AuthGuard } from '@app/guards/auth.guard';
+import { NoAuthGuard } from '@app/guards/no.auth.guard';
 
-// Application wide providers
-const APP_PROVIDERS = [
+const Providers = [
   RegionService,
   MessageService,
   UserService,
   ApiService,
   BaseComponentService,
+  AuthGuard,
+  NoAuthGuard,
 ];
 
 const AuthModule = [
@@ -93,7 +96,7 @@ const InfoModule = [
   bootstrap: [AppComponent],
   providers: [
     environment.ENV_PROVIDERS,
-    APP_PROVIDERS,
+    Providers,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenHttpInterceptor,
