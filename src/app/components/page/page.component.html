@@ -1,4 +1,32 @@
-<ibm-header name="[Platform]">
+<ibm-header name="[Platform]" *ngIf="baseComponentService.userService.isAuth()">
+  <ibm-header-navigation>
+    <a [routerLink]="paths.account.getAbsoluteUrl()">
+      <ibm-header-item>{{tr.common.profile}}</ibm-header-item>
+    </a>
+    <!--        <ibm-header-menu title="Manage">-->
+    <!--          <ibm-header-item routerLink="link1">Link 1</ibm-header-item>-->
+    <!--          <ibm-header-item>Link 2</ibm-header-item>-->
+    <!--          <ibm-header-item>Link 3</ibm-header-item>-->
+    <!--        </ibm-header-menu>-->
+  </ibm-header-navigation>
+  <ibm-header-global>
+    <ibm-header-action title="action">
+      <svg ibmIconNotification20></svg>
+    </ibm-header-action>
+    <ibm-header-action title="action">
+      <svg ibmIconUserAvatar20></svg>
+    </ibm-header-action>
+    <ibm-header-action title="action">
+      <svg ibmIconAppSwitcher20></svg>
+      <ibm-panel [expanded]="true">
+        <ibm-switcher-list>
+          <ibm-switcher-list-item (click)="baseComponentService.userService.logout()">
+            {{tr.common.logout}}
+          </ibm-switcher-list-item>
+        </ibm-switcher-list>
+      </ibm-panel>
+    </ibm-header-action>
+  </ibm-header-global>
 </ibm-header>
 
 <main class="bx--content">
@@ -12,11 +40,11 @@
   </div>
 
   <div class="footer-copyright">
-    <div>© 2020 Bazarun Trade. Все права защищены</div>
-    <div>“Bazarun” являются зарегистрированным торговыми знаками Bazarun Trade.</div>
+    <div>© 2020 App. Все права защищены</div>
+    <div>“App” являются зарегистрированным торговыми знаками App.</div>
 
     <div>Весь текст, графика, аудио файлы, код, скачиваемые материалы и другие работы на этом сайте защищены авторским
-      правом компании Bazarun Trade. Все права защищены.</div>
+      правом компании App. Все права защищены.</div>
     <div>Любое несанкционированное перераспределение или воспроизведение любого материала, защищенного авторским правом
       на этом сайте строго запрещено.</div>
     <div>Другие названия продуктов и компаний являются товарными знаками

@@ -6,14 +6,12 @@ import { Notification20Module } from '@carbon/icons-angular/lib/notification/20'
 import { UserAvatar20Module } from '@carbon/icons-angular/lib/user--avatar/20';
 import { AppSwitcher20Module } from '@carbon/icons-angular/lib/app-switcher/20';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent,
-        HeaderComponent
       ],
       imports: [
         RouterTestingModule,

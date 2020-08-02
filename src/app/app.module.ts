@@ -2,15 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
 
 // carbon-components-angular default imports
 import { UIShellModule } from 'carbon-components-angular';
 import { Notification20Module } from '@carbon/icons-angular/lib/notification/20';
 import { UserAvatar20Module } from '@carbon/icons-angular/lib/user--avatar/20';
 import { AppSwitcher20Module } from '@carbon/icons-angular/lib/app-switcher/20';
-
-import { HeaderComponent } from './header/header.component';
 
 import { routesConfig } from './app.routes';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -27,14 +24,14 @@ import { AuthLoginComponent } from '@app/routes/auth-login/auth-login.component'
 import { AuthRegistrationComponent } from '@app/routes/auth-registration/auth-registration.component';
 import { AuthRestoreComponent } from '@app/routes/auth-restore/auth-restore.component';
 import { CabinetComponent } from '@app/routes/cabinet/cabinet.component';
-import { CabinetProfileComponent } from '@app/routes/cabinet-profile/cabinet-profile.component';
 import { NoContentComponent } from '@app/routes/no-content/no-content.component';
 import { PageComponent } from '@app/components/page/page.component';
 import { ButtonModule, InputModule, LinkModule, NotificationModule } from 'carbon-components-angular/index';
-import { NumberOnlyDirective } from '@app/directives/number-only.directive';
 import { InfoPageComponent } from '@app/routes/info/info-page.component';
 import { AuthGuard } from '@app/guards/auth.guard';
 import { NoAuthGuard } from '@app/guards/no.auth.guard';
+import { PasswordRegistrationDirective } from '@app/directives/password-registration.directive';
+import { AppComponent } from '@app/app.component';
 
 const Providers = [
   RegionService,
@@ -55,24 +52,26 @@ const AuthModule = [
 
 const CabinetModule = [
   CabinetComponent,
-  CabinetProfileComponent,
 ];
 
 const InfoModule = [
   InfoPageComponent,
 ];
 
+const Directives = [
+  PasswordRegistrationDirective,
+];
+
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     NoContentComponent,
     PageComponent,
-    NumberOnlyDirective,
 
     ...AuthModule,
     ...CabinetModule,
-    ...InfoModule
+    ...InfoModule,
+    ...Directives,
   ],
   imports: [
     BrowserModule,
@@ -93,7 +92,6 @@ const InfoModule = [
     LinkModule,
     NotificationModule
   ],
-  bootstrap: [AppComponent],
   providers: [
     environment.ENV_PROVIDERS,
     Providers,
@@ -102,6 +100,8 @@ const InfoModule = [
       useClass: TokenHttpInterceptor,
       multi: true,
     }
-  ]
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {
+}

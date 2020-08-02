@@ -10,6 +10,7 @@ import { BaseComponentService } from '@app/base/base-component.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class PageComponent extends BaseComponent implements OnInit, OnDestroy {
+  expandedPanel = false;
   subscriptions$ = [];
 
   constructor(baseComponentsService: BaseComponentService) {
@@ -17,6 +18,7 @@ export class PageComponent extends BaseComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit() {
+    console.log(this);
   }
 
   ngOnDestroy() {

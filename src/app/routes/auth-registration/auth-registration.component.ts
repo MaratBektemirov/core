@@ -2,9 +2,7 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
   OnInit,
-  ViewChild,
   ViewEncapsulation
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -25,21 +23,15 @@ export class AuthRegistrationComponent extends BaseComponent implements OnInit, 
     {
       phone: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
+      passwordAgain: new FormControl('', [Validators.required]),
     }
   );
-
-  @ViewChild('phone', { read: ElementRef, static: true })
-  public phone: ElementRef<HTMLElement>;
-  @ViewChild('password', { read: ElementRef, static: true })
-  public password: ElementRef<HTMLElement>;
 
   public submitting: boolean = false;
   public error: string;
   public hide: boolean = true;
 
   subscriptions$ = [];
-  private _loginAutoCompleted: boolean;
-  private _passwordAutoCompleted: boolean;
 
   constructor(public userService: UserService,
               private autoFillMonitor: AutofillMonitor,
@@ -50,16 +42,11 @@ export class AuthRegistrationComponent extends BaseComponent implements OnInit, 
   public async ngOnInit() {}
 
   public ngAfterViewInit() {
-    this.subscriptions$.push(
-      this.autoFillMonitor.monitor(this.phone)
-        .subscribe(() => this._loginAutoCompleted = true),
-      this.autoFillMonitor.monitor(this.password)
-        .subscribe(() => this._passwordAutoCompleted = true),
-    );
+    this.subscriptions$.push();
   }
 
   public formIsValid() {
-    return (this._loginAutoCompleted && this._passwordAutoCompleted) || this.form.valid;
+    return this.form.valid && (this.form.value.password === this.form.value.passwordAgain);
   }
 
   public async onSubmit() {

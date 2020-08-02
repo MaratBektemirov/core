@@ -8,9 +8,9 @@ import { NgModuleRef } from '@angular/core';
  * App Module
  * our top level module that holds all of our components
  */
-import { AppModule } from './app';
 import { ROOT_SELECTOR } from './app/app.component';
 import { environment } from './environments/environment';
+import { AppModule } from '@app/app.module';
 
 /**
  * Bootstrap our Angular app with a top level NgModule

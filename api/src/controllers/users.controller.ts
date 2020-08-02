@@ -6,6 +6,7 @@ import { TokenService } from '@api/services/token.service';
 import { usersApiEndpoints } from '@endpoints/users';
 import { Tables } from '@api/tables';
 import { UserRoles } from '@interfaces/user';
+import { Languages } from '@constants/languages';
 
 @Controller(usersApiEndpoints.prefix)
 export class UsersController {
@@ -16,7 +17,7 @@ export class UsersController {
 
   @Post(usersApiEndpoints.api.registration)
   public async registration(@Body() body: LoginRegistration): Promise<LoginResponse> {
-    const res = await this.db.insert(Tables.user, body);
+    const res = await this.db.insert(Tables.user, Object.assign(body, {language: Languages.RU}));
 
     if (!res) {
       throw new BadRequestException('User not found');

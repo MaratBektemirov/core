@@ -10,8 +10,11 @@ export const TR = {
       forgotPassword: 'Забыли пароль ?',
       phone: 'Телефон',
       password: 'Пароль',
+      passwordAgain: 'Пароль ещё раз',
       send: 'Отправить',
-      error: 'Ошибка'
+      error: 'Ошибка',
+      logout: 'Выход',
+      profile: 'Профиль',
     }
   },
   EN: {
@@ -25,8 +28,11 @@ export const TR = {
       forgotPassword: '',
       phone: '',
       password: '',
+      passwordAgain: '',
       send: '',
-      error: 'Error'
+      error: 'Error',
+      logout: '',
+      profile: '',
     }
   }
 };

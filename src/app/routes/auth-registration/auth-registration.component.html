@@ -1,18 +1,27 @@
 <form [formGroup]="form" class="auth-two-side-form" (ngSubmit)="onSubmit()">
   <ibm-label>
     {{tr.common.phone}}
-    <input type="text"
-           #phone
-           class="bx--text-input bx--text__input"
-           formControlName="phone">
+    <input
+         ibmText
+         type="text"
+         name="phone"
+         formControlName="phone">
   </ibm-label>
 
   <ibm-label>
     {{tr.common.password}}
-    <input type="password"
-           #password
-           class="bx--text-input bx--text__input"
+    <input type="text"
+           passwordRegistrationDirective
+           ibmText
            formControlName="password">
+  </ibm-label>
+
+  <ibm-label>
+    {{tr.common.passwordAgain}}
+    <input type="text"
+           passwordRegistrationDirective
+           ibmText
+           formControlName="passwordAgain">
   </ibm-label>
 
   <ibm-notification
