@@ -1,7 +1,7 @@
-import { BadRequestException, Body, Controller, Post, Req, Res } from '@nestjs/common';
+import { BadRequestException, Body, Controller, HttpCode, Post, Req } from '@nestjs/common';
 import { DbService } from '@api/services/db.service';
 import { UsersService } from '@api/services/users.service';
-import { LoginRegistration, LoginRequest, LoginResponse, LogoutRequest } from '@interfaces/api';
+import { LoginRegistration, LoginRequest, LoginResponse } from '@interfaces/api';
 import { TokenService } from '@api/services/token.service';
 import { usersApiEndpoints } from '@endpoints/users';
 import { Tables } from '@api/tables';
@@ -57,11 +57,12 @@ export class UsersController {
   }
 
   @Post(usersApiEndpoints.api.logout)
-  public async logout(@Body() body: LogoutRequest, @Res() res): Promise<string> {
-    const deleteTokenResult = await this.tokenService.deleteToken(body.tokenId);
+  @HttpCode(200)
+  public async logout(@Req() req) {
+    const deleteTokenResult = await this.tokenService.deleteToken(req.headers['token-id']);
 
-    if (deleteTokenResult.rowCount) {
-      return 'ok';
+    if (deleteTokenResult && deleteTokenResult[1] > 0) {
+      return {};
     } else {
       throw new BadRequestException('Token not found');
     }

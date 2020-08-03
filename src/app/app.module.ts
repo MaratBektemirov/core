@@ -32,6 +32,7 @@ import { AuthGuard } from '@app/guards/auth.guard';
 import { NoAuthGuard } from '@app/guards/no.auth.guard';
 import { PasswordRegistrationDirective } from '@app/directives/password-registration.directive';
 import { AppComponent } from '@app/app.component';
+import { Logout20Module } from '@carbon/icons-angular/lib/logout/20';
 
 const Providers = [
   RegionService,
@@ -90,7 +91,8 @@ const Directives = [
     InputModule,
     ButtonModule,
     LinkModule,
-    NotificationModule
+    NotificationModule,
+    Logout20Module
   ],
   providers: [
     environment.ENV_PROVIDERS,

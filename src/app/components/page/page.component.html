@@ -3,11 +3,6 @@
     <a [routerLink]="paths.account.getAbsoluteUrl()">
       <ibm-header-item>{{tr.common.profile}}</ibm-header-item>
     </a>
-    <!--        <ibm-header-menu title="Manage">-->
-    <!--          <ibm-header-item routerLink="link1">Link 1</ibm-header-item>-->
-    <!--          <ibm-header-item>Link 2</ibm-header-item>-->
-    <!--          <ibm-header-item>Link 3</ibm-header-item>-->
-    <!--        </ibm-header-menu>-->
   </ibm-header-navigation>
   <ibm-header-global>
     <ibm-header-action title="action">
@@ -16,15 +11,9 @@
     <ibm-header-action title="action">
       <svg ibmIconUserAvatar20></svg>
     </ibm-header-action>
-    <ibm-header-action title="action">
-      <svg ibmIconAppSwitcher20></svg>
-      <ibm-panel [expanded]="true">
-        <ibm-switcher-list>
-          <ibm-switcher-list-item (click)="baseComponentService.userService.logout()">
-            {{tr.common.logout}}
-          </ibm-switcher-list-item>
-        </ibm-switcher-list>
-      </ibm-panel>
+    <ibm-header-action title="action"
+                       (click)="baseComponentService.userService.logout()">
+      <svg ibmIconLogout20></svg>
     </ibm-header-action>
   </ibm-header-global>
 </ibm-header>

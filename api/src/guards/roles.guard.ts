@@ -15,16 +15,16 @@ export class RolesGuard implements CanActivate {
     const tokenId = request.headers['token-id'];
 
     if (tokenId) {
-      request.user = await this.usersService.getUserByTokenId(tokenId);
-      request.userRoles = await this.usersService.getUserRoles(request.user.id);
-    }
+      const user = await this.usersService.getUserByTokenId(tokenId);
+      const userRoles = await this.usersService.getUserRoles(user.id);
 
-    const roles = this.reflector.get<UserRoles[]>('roles', context.getHandler()) || [];
+      const roles = this.reflector.get<UserRoles[]>('roles', context.getHandler()) || [];
 
-    if (roles.length) {
-      for (const roleId of roles) {
-        if (!request.userRoles.map((r) => r.roleId).includes(roleId)) {
-          return false;
+      if (roles.length) {
+        for (const roleId of roles) {
+          if (!userRoles.map((r) => r.roleId).includes(roleId)) {
+            return false;
+          }
         }
       }
     }

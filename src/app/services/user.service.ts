@@ -6,6 +6,8 @@ import { IUserAccessToken } from '@interfaces/user';
 import { GUEST_USER } from '@constants/common';
 import { UserUI } from '@interfaces/ui';
 import { usersApiEndpoints } from '@endpoints/users';
+import { Router } from '@angular/router';
+import paths from '@paths/client';
 
 @Injectable()
 export class UserService {
@@ -34,6 +36,7 @@ export class UserService {
   }
 
   constructor(private apiService: ApiService,
+              private router: Router,
               private http: HttpClient) {
     if (!this.user) {
       this.user = Object.assign({}, GUEST_USER);
@@ -54,12 +57,13 @@ export class UserService {
 
   public async logout() {
     const url = this.apiService.host(usersApiEndpoints.client.logout);
-    this.http.post(this.apiService.host(url), {}).subscribe();
+    await this.http.post(url, {}).toPromise();
 
     localStorage.removeItem('user');
     localStorage.removeItem('token');
 
     this.user = Object.assign({}, GUEST_USER);
+    this.router.navigateByUrl(paths.login.getAbsoluteUrl());
   }
 
   public async registration(data: LoginRegistration) {

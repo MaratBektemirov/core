@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { createConnection, Connection } from 'typeorm';
 import { Tables, TablesSpec } from '@api/tables';
-import { QueryResultBase } from 'pg';
 
 @Injectable()
 export class DbService {
@@ -43,7 +42,7 @@ export class DbService {
       const key = objectKeys[i];
       const value = obj[key];
 
-      where.push(`${key} = $${i + 1}`);
+      where.push(`"${key}" = $${i + 1}`);
       values.push(value);
     }
 
@@ -95,7 +94,7 @@ export class DbService {
   public async delete<A extends Tables>(table: A, data: Partial<TablesSpec[A]>)  {
     const { where, values } = this.prepareForGet(data);
 
-    return await this.query<QueryResultBase>(
+    return await this.query<[TablesSpec[A][], number]>(
       `DELETE FROM ${table} WHERE ${where} RETURNING *`,
       values,
     );
