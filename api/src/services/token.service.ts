@@ -7,18 +7,18 @@ export class TokenService {
   constructor(private db: DbService) {}
 
   public async getToken(id: string) {
-    const res = await this.db.find(Tables.user_access_token, {id});
+    const res = await this.db.find(Tables.userAccessToken, {id});
 
     return res[0];
   }
 
   public async createToken(userId: number) {
-    const res = await this.db.insert(Tables.user_access_token, {userId});
+    const res = await this.db.insert(Tables.userAccessToken, {userId});
 
     return res[0];
   }
 
   public async deleteToken(id: string) {
-    return await this.db.delete(Tables.user_access_token, {id});
+    return await this.db.delete(Tables.userAccessToken, {id});
   }
 }

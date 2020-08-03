@@ -27,7 +27,7 @@ export class UsersController {
     delete user.password;
 
     const token = await this.tokenService.createToken(user.id);
-    await this.db.insert(Tables.user_role, {userId: user.id, roleId: UserRoles.user});
+    await this.db.insert(Tables.userRole, {userId: user.id, roleId: UserRoles.user});
 
     return {
       token,

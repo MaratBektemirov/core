@@ -8,7 +8,7 @@ export class UsersService {
   constructor(private db: DbService, private tokenService: TokenService) {}
 
   public async getUserRoles(userId: number) {
-    return this.db.find(Tables.user_role, {userId});
+    return this.db.find(Tables.userRole, {userId});
   }
 
   public async getUserByTokenId(tokenId: string) {
