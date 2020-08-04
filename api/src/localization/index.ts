@@ -1,4 +1,4 @@
-import { RealtyCategory, RealtyPurpose, RealtySpaceItem } from '@interfaces/realty';
+import { RealtyOfficeCategory, RealtyPurpose, RealtySpaceItem } from '@interfaces/realty';
 
 export const TR = {
   RU: {
@@ -22,18 +22,18 @@ export const TR = {
     },
     realty: {
       purposeTitle: 'Назначение',
-      categoryTitle: 'Класс',
-      category: {
-        [RealtyCategory.A]: 'A',
-        [RealtyCategory.B]: 'B',
-        OTHER: 'Другое',
+      categoryTitle: 'Класс офиса',
+      officeCategory: {
+        [RealtyOfficeCategory.A]: 'A',
+        [RealtyOfficeCategory.B]: 'B',
+        null: 'Не важно',
       },
       purpose: {
         [RealtyPurpose.store]: 'склад',
         [RealtyPurpose.retail]: 'магазин',
         [RealtyPurpose.default]: 'свободное',
         [RealtyPurpose.manufacture]: 'производство',
-        [RealtyPurpose.commercial]: 'коммерция',
+        [RealtyPurpose.office]: 'офис',
         [RealtyPurpose.cafe]: 'кафе',
       }
     },

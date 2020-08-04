@@ -2,10 +2,10 @@ import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewEncapsulatio
 import { BaseComponent } from '@app/base/base.component';
 import { BaseComponentService } from '@app/base/base-component.service';
 import { TableHeaderItem, TableItem, TableModel } from 'carbon-components-angular/index';
-import { RealtyCategory, RealtyPurpose } from '@interfaces/realty';
+import { RealtyOfficeCategory, RealtyPurpose } from '@interfaces/realty';
 
 interface RealtyCategoryRadio {
-  category: RealtyCategory;
+  category: RealtyOfficeCategory;
   checked: boolean;
 }
 
@@ -39,31 +39,47 @@ export class SearchPageComponent extends BaseComponent implements OnInit, OnDest
   ];
 
   public radios: RealtyCategoryRadio[] = [
-    { category: RealtyCategory.A, checked: false },
-    { category: RealtyCategory.B, checked: false },
-    { category: RealtyCategory.OTHER, checked: false },
+    { category: RealtyOfficeCategory.A, checked: false },
+    { category: RealtyOfficeCategory.B, checked: false },
+    { category: null, checked: false },
   ];
 
   public checkboxList: RealtyPurposeCheckbox[] = [
-    { value: RealtyPurpose.cafe, checked: false},
-    { value: RealtyPurpose.commercial, checked: false},
-    { value: RealtyPurpose.manufacture, checked: false},
     { value: RealtyPurpose.default, checked: false},
+    { value: RealtyPurpose.office, checked: false},
+    { value: RealtyPurpose.manufacture, checked: false},
     { value: RealtyPurpose.retail, checked: false},
     { value: RealtyPurpose.store, checked: false},
+    { value: RealtyPurpose.cafe, checked: false},
   ];
+
+  public RealtyPurpose = RealtyPurpose;
+  public showOfficeCategory = false;
 
   constructor(baseComponentService: BaseComponentService) {
     super(baseComponentService);
   }
 
-  onCheckboxChange(event) {
-    if (event.checked) {
-      this.checkBoxFilters.push(event.source.value);
-    } else {
-      this.checkBoxFilters.splice(this.checkBoxFilters.indexOf(event.source.value), 1);
+  officeCategorySelectClose() {
+    this.showOfficeCategory = false;
+  }
+
+  selected(event) {
+    console.log(event);
+    console.log(event);
+  }
+
+  onCheckboxChange(event, purposeCheckbox: RealtyPurposeCheckbox) {
+    if (purposeCheckbox.value === RealtyPurpose.office) {
+      purposeCheckbox.checked = event.checked;
+      this.showOfficeCategory = event.checked;
     }
-    this.applyFilters();
+    // if (event.checked) {
+    //   this.checkBoxFilters.push(event.source.value);
+    // } else {
+    //   this.checkBoxFilters.splice(this.checkBoxFilters.indexOf(event.source.value), 1);
+    // }
+    // this.applyFilters();
   }
 
   onRadioChange(event) {

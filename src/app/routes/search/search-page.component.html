@@ -1,20 +1,20 @@
+<ng-template #officeCategory>
+  <fieldset class="bx--fieldset">
+    <legend class="bx--label">{{tr.realty.categoryTitle}}</legend>
+
+    <ibm-content-switcher (selected)="selected($event)"
+                          class="bx--content-switcher--fit-content">
+      <button ibmContentOption
+              (click)="radio.checked = !radio.checked"
+              *ngFor="let radio of radios">
+        {{tr.realty.officeCategory[radio.category]}}
+      </button>
+    </ibm-content-switcher>
+  </fieldset>
+</ng-template>
+
 <div ibmRow>
   <div ibmCol [columnNumbers]="{'lg': 2, 'md': 2, 'sm': 1}" class="multi-selection">
-    <fieldset class="bx--fieldset">
-      <legend class="bx--label">{{tr.realty.categoryTitle}}</legend>
-      <ibm-radio-group
-        aria-label="radiogroup"
-        orientation="vertical"
-        labelPlacement="right"
-        [(ngModel)]="radio"
-        (change)="onRadioChange($event)">
-        <ibm-radio *ngFor="let radio of radios"
-                   [value]="radio.category"
-                   [disabled]="radio.disabled">
-          {{tr.realty.category[radio.category]}}
-        </ibm-radio>
-      </ibm-radio-group>
-    </fieldset>
     <fieldset class="bx--fieldset">
       <div ibmRow>
         <div ibmCol [columnNumbers]="{'lg': 2, 'md': 2, 'sm': 1}">
@@ -28,14 +28,25 @@
           </ibm-tag-filter>
         </div>
       </div>
-      <ibm-checkbox
-        *ngFor="let listItem of checkboxList"
-        [hideLabel]="hideLabel"
-        [checked]="listItem.checked"
-        [value]="listItem.value"
-        (change)="onCheckboxChange($event)">
-        {{ tr.realty.purpose[listItem.value] }}
-      </ibm-checkbox>
+      <ng-container *ngFor="let listItem of checkboxList">
+        <ibm-checkbox
+          [hideLabel]="hideLabel"
+          [checked]="listItem.checked"
+          [value]="listItem.value"
+          (change)="onCheckboxChange($event, listItem)">
+          {{ tr.realty.purpose[listItem.value] }}
+        </ibm-checkbox>
+
+        <ibm-notification
+          *ngIf="listItem.value === RealtyPurpose.office && showOfficeCategory"
+          (close)="officeCategorySelectClose()"
+          [notificationObj]="{
+            lowContrast: true,
+            template: officeCategory,
+            showClose: true
+				  }">
+        </ibm-notification>
+      </ng-container>
     </fieldset>
 
     <button ibmButton

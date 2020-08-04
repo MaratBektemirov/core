@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
-import { IRealty, RealtyCategory, RealtyPurpose, RealtySpaceItem } from '@interfaces/realty';
+import { IRealty, RealtyOfficeCategory, RealtyPurpose, RealtySpaceItem } from '@interfaces/realty';
 
 @Entity()
 export class Realty implements IRealty {
@@ -10,7 +10,7 @@ export class Realty implements IRealty {
   address: string;
 
   @Column()
-  category: RealtyCategory;
+  officeCategory: RealtyOfficeCategory;
 
   @Column()
   cityId: number;

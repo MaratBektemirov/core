@@ -2,7 +2,7 @@ export enum RealtyPurpose {
   default,
   cafe,
   manufacture,
-  commercial,
+  office,
   retail,
   store,
 }
@@ -11,7 +11,7 @@ export enum RealtySpaceItem {
   squareFoot
 }
 
-export enum RealtyCategory {
+export enum RealtyOfficeCategory {
   A = 'A',
   B = 'B',
 }
@@ -25,7 +25,7 @@ export interface IRealty {
   pricePerSpaceItem: number;
   spaceItem: RealtySpaceItem;
   cityId: number;
-  category: RealtyCategory;
+  officeCategory: RealtyOfficeCategory;
   districtId: number;
   floor: number;
   conference: boolean;

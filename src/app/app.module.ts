@@ -27,7 +27,7 @@ import { CabinetComponent } from '@app/routes/cabinet/cabinet.component';
 import { NoContentComponent } from '@app/routes/no-content/no-content.component';
 import { PageComponent } from '@app/components/page/page.component';
 import {
-  ButtonModule, CheckboxModule,
+  ButtonModule, CheckboxModule, ContentSwitcherModule,
   GridModule,
   InputModule,
   LinkModule,
@@ -105,7 +105,8 @@ const Directives = [
     GridModule,
     TagModule,
     CheckboxModule,
-    TableModule
+    TableModule,
+    ContentSwitcherModule
   ],
   providers: [
     environment.ENV_PROVIDERS,

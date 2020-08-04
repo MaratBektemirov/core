@@ -27,3 +27,9 @@ ibm-label ~ ibm-label {
   padding-top: 5rem;
   height: calc(100vh - 0rem - #{$footer-height});
 }
+
+.bx--content-switcher--fit-content {
+  button {
+    width: fit-content;
+  }
+}
