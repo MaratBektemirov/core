@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 export const ROOT_SELECTOR = 'app-root';
 
@@ -11,7 +11,8 @@ export const ROOT_SELECTOR = 'app-root';
     './styles/carbon-override.scss',
     './styles/flex.scss',
     './styles/common.scss',
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
 }
