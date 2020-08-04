@@ -1,47 +1,36 @@
-<ng-template #officeCategory>
-  <fieldset class="bx--fieldset bx--fieldset--internal">
-    <legend class="bx--label">{{tr.realty.categoryTitle}}</legend>
-
-    <ibm-content-switcher (selected)="selected($event)"
-                          [ariaLabel]="'office-category'"
-                          class="bx--content-switcher--filter">
-      <button ibmContentOption
-              (click)="radio.checked = !radio.checked"
-              *ngFor="let radio of radios">
-        {{tr.realty.officeCategory[radio.category]}}
-      </button>
-    </ibm-content-switcher>
-  </fieldset>
-</ng-template>
-
 <div ibmRow>
   <div ibmCol [columnNumbers]="{'lg': 2, 'md': 2, 'sm': 1}">
     <fieldset class="bx--fieldset">
       <div ibmRow>
         <div ibmCol [columnNumbers]="{'lg': 2, 'md': 2, 'sm': 1}">
           <legend class="bx--label">{{tr.realty.purposeTitle}}</legend>
-        </div>
-<!--        <div ibmCol [columnNumbers]="{'lg': 2, 'md': 2, 'sm': 1}">-->
-<!--          <ibm-tag-filter-->
-<!--            *ngIf="checkBoxFilters.size > 0"-->
-<!--            (close)="resetCheckboxList()">-->
-<!--            {{checkBoxFilters.size}}-->
-<!--          </ibm-tag-filter>-->
-<!--        </div>-->
-      </div>
-      <ng-container *ngFor="let listItem of checkboxList">
-        <ibm-checkbox
-          [checked]="listItem.checked"
-          [value]="listItem.value"
-          (change)="onCheckboxChange($event, listItem)">
-          {{ tr.realty.purpose[listItem.value] }}
-        </ibm-checkbox>
 
-        <ng-container *ngIf="listItem.value === RealtyPurpose.office && showOfficeCategory">
-          <ng-container *ngTemplateOutlet="officeCategory;">
+          <ng-container *ngFor="let listItem of checkboxList">
+            <ibm-checkbox
+              [checked]="listItem.checked"
+              [value]="listItem.value"
+              (change)="onCheckboxChange($event, listItem)">
+              {{ tr.realty.purpose[listItem.value] }}
+            </ibm-checkbox>
+
+            <ng-container *ngIf="listItem.value === RealtyPurpose.office && listItem.checked">
+              <fieldset class="bx--fieldset bx--fieldset--internal">
+                <legend class="bx--label">{{tr.realty.categoryTitle}}</legend>
+
+                <ibm-content-switcher (selected)="selected($event)"
+                                      [ariaLabel]="'office-category'"
+                                      class="bx--content-switcher--filter">
+                  <button ibmContentOption
+                          (click)="radio.checked = !radio.checked"
+                          *ngFor="let radio of radios">
+                    {{tr.realty.officeCategory[radio.category]}}
+                  </button>
+                </ibm-content-switcher>
+              </fieldset>
+            </ng-container>
           </ng-container>
-        </ng-container>
-      </ng-container>
+        </div>
+      </div>
     </fieldset>
 
     <button ibmButton
