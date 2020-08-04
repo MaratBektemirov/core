@@ -1,13 +1,3 @@
 @import '../../styles/variables';
 @import '../../styles/mixins';
 
-no-content, .no-content-block {
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
-no-content main {
-  height: calc(100% - #{$main-minus-height});
-}
-

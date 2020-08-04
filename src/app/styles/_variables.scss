@@ -1,21 +1,4 @@
-$font-family: 'Source Sans Pro, Arial, Helvetica, sans-serif';
-
-$nav-height: 65px;
-$nav-height-mobile: 100px;
 $footer-height: 130px;
-$main-minus-height: $nav-height + $footer-height;
-$main-minus-height-mobile: $nav-height-mobile + $footer-height;
-
-$nav-height-cabinet: 48px;
-$footer-height-cabinet: 30px;
-$mobile-footer-height-cabinet: 0;
-
-$cabinet-minus-height: $nav-height-cabinet + $footer-height-cabinet;
-$cabinet-minus-height-mobile: $nav-height-cabinet + $mobile-footer-height-cabinet;
-
-$control-line-height: 34px;
-$mobile-ratio: 3.5;
-$mobile-control-line-height: $control-line-height * $mobile-ratio;
 
 $charcoal-grey: #424650;
 $bluey-grey: #afbcc6;

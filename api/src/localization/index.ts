@@ -1,10 +1,10 @@
-import { RealtySpaceItem } from '@interfaces/realty';
+import { RealtyCategory, RealtyPurpose, RealtySpaceItem } from '@interfaces/realty';
 
 export const TR = {
   RU: {
+    brand: 'InvestHub',
+    description: 'Инвестиционная площадка нового поколения',
     auth: {
-      title: 'InvestHub',
-      description: 'Инвестиционная площадка нового поколения',
       error: 'Неверный телефон или пароль',
     },
     common: {
@@ -18,6 +18,27 @@ export const TR = {
       error: 'Ошибка',
       logout: 'Выход',
       profile: 'Профиль',
+      search: 'Поиск',
+    },
+    realty: {
+      purposeTitle: 'Назначение',
+      categoryTitle: 'Класс',
+      category: {
+        [RealtyCategory.A]: 'A',
+        [RealtyCategory.B]: 'B',
+        OTHER: 'Другое',
+      },
+      purpose: {
+        [RealtyPurpose.store]: 'склад',
+        [RealtyPurpose.retail]: 'магазин',
+        [RealtyPurpose.default]: 'свободное',
+        [RealtyPurpose.manufacture]: 'производство',
+        [RealtyPurpose.commercial]: 'коммерция',
+        [RealtyPurpose.cafe]: 'кафе',
+      }
+    },
+    search: {
+      resetFilters: 'Сбросить',
     },
     units: {
       [RealtySpaceItem.squareFoot]: 'кв. м',

@@ -9,11 +9,12 @@ import paths from '@paths/client';
 import { AuthGuard } from '@app/guards/auth.guard';
 import { NoAuthGuard } from '@app/guards/no.auth.guard';
 import { PageComponent } from '@app/components/page/page.component';
+import { SearchPageComponent } from '@app/routes/search/search-page.component';
 
 export const routesConfig: Routes = [
   {
     path: '',
-    redirectTo: paths.login.getAbsoluteUrl(),
+    redirectTo: paths.search.getAbsoluteUrl(),
     pathMatch: 'full'
   },
   {
@@ -33,6 +34,13 @@ export const routesConfig: Routes = [
     children: [
       {path: '', redirectTo: paths.account.getAbsoluteUrl(), pathMatch: 'full'},
       {path: paths.account.url, component: CabinetComponent},
+    ]
+  },
+  {
+    path: paths.search.url,
+    component: PageComponent,
+    children: [
+      {path: '', component: SearchPageComponent},
     ]
   },
   {path: '**', component: NoContentComponent},

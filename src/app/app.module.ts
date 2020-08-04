@@ -26,8 +26,16 @@ import { AuthRestoreComponent } from '@app/routes/auth-restore/auth-restore.comp
 import { CabinetComponent } from '@app/routes/cabinet/cabinet.component';
 import { NoContentComponent } from '@app/routes/no-content/no-content.component';
 import { PageComponent } from '@app/components/page/page.component';
-import { ButtonModule, InputModule, LinkModule, NotificationModule } from 'carbon-components-angular/index';
-import { InfoPageComponent } from '@app/routes/info/info-page.component';
+import {
+  ButtonModule, CheckboxModule,
+  GridModule,
+  InputModule,
+  LinkModule,
+  NotificationModule,
+  RadioModule, TableModule,
+  TagModule
+} from 'carbon-components-angular/index';
+import { SearchPageComponent } from '@app/routes/search/search-page.component';
 import { AuthGuard } from '@app/guards/auth.guard';
 import { NoAuthGuard } from '@app/guards/no.auth.guard';
 import { PasswordRegistrationDirective } from '@app/directives/password-registration.directive';
@@ -56,7 +64,7 @@ const CabinetModule = [
 ];
 
 const InfoModule = [
-  InfoPageComponent,
+  SearchPageComponent,
 ];
 
 const Directives = [
@@ -92,7 +100,12 @@ const Directives = [
     ButtonModule,
     LinkModule,
     NotificationModule,
-    Logout20Module
+    Logout20Module,
+    RadioModule,
+    GridModule,
+    TagModule,
+    CheckboxModule,
+    TableModule
   ],
   providers: [
     environment.ENV_PROVIDERS,

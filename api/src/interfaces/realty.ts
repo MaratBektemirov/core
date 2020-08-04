@@ -14,7 +14,6 @@ export enum RealtySpaceItem {
 export enum RealtyCategory {
   A = 'A',
   B = 'B',
-  OTHER = 'OTHER'
 }
 
 export interface IRealty {

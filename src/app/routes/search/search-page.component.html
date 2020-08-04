@@ -1,0 +1,56 @@
+<div ibmRow>
+  <div ibmCol [columnNumbers]="{'lg': 2, 'md': 2, 'sm': 1}" class="multi-selection">
+    <fieldset class="bx--fieldset">
+      <legend class="bx--label">{{tr.realty.categoryTitle}}</legend>
+      <ibm-radio-group
+        aria-label="radiogroup"
+        orientation="vertical"
+        labelPlacement="right"
+        [(ngModel)]="radio"
+        (change)="onRadioChange($event)">
+        <ibm-radio *ngFor="let radio of radios"
+                   [value]="radio.category"
+                   [disabled]="radio.disabled">
+          {{tr.realty.category[radio.category]}}
+        </ibm-radio>
+      </ibm-radio-group>
+    </fieldset>
+    <fieldset class="bx--fieldset">
+      <div ibmRow>
+        <div ibmCol [columnNumbers]="{'lg': 2, 'md': 2, 'sm': 1}">
+          <legend class="bx--label">{{tr.realty.purposeTitle}}</legend>
+        </div>
+        <div ibmCol [columnNumbers]="{'lg': 2, 'md': 2, 'sm': 1}">
+          <ibm-tag-filter
+            *ngIf="checkBoxFilters.size > 0"
+            (close)="resetCheckboxList()">
+            {{checkBoxFilters.size}}
+          </ibm-tag-filter>
+        </div>
+      </div>
+      <ibm-checkbox
+        *ngFor="let listItem of checkboxList"
+        [hideLabel]="hideLabel"
+        [checked]="listItem.checked"
+        [value]="listItem.value"
+        (change)="onCheckboxChange($event)">
+        {{ tr.realty.purpose[listItem.value] }}
+      </ibm-checkbox>
+    </fieldset>
+
+    <button ibmButton
+            size="field"
+            (click)="resetFilters()">{{tr.search.resetFilters}}</button>
+  </div>
+  <div ibmCol [columnNumbers]="{'lg': 10, 'md': 10, 'sm': 3}" class="data-table">
+    <ibm-table-container>
+      <ibm-table
+        class="data-table"
+        [model]="model"
+        size="lg"
+        [showSelectionColumn]="false">
+        <ng-content></ng-content>
+      </ibm-table>
+    </ibm-table-container>
+  </div>
+</div>

@@ -1,4 +1,7 @@
 // forces the navigation items to be displayed at all viewport sizes
+@import 'variables';
+@import 'mixins';
+
 .bx--header__nav {
 	display: block;
 }
@@ -18,4 +21,9 @@ ibm-label ~ ibm-label {
 
 .form-buttons {
   margin-top: 8px;
+}
+
+.bx--content--main {
+  padding-top: 5rem;
+  height: calc(100vh - 0rem - #{$footer-height});
 }

@@ -22,9 +22,9 @@ export class RouterPath {
 
   public getAbsoluteUrl() {
     if (this.parent) {
-      return `/${this.parent.getAbsoluteUrl()}/${this.url}`;
+      return `${this.parent.getAbsoluteUrl()}/${this.url}`;
     } else {
-      return this.url;
+      return '/' + this.url;
     }
   }
 }

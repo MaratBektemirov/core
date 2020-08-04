@@ -1,14 +1,20 @@
-<ibm-header name="[Platform]" *ngIf="baseComponentService.userService.isAuth()">
+<ibm-header
+  [brand]="tr.brand"
+  *ngIf="{isAuth: baseComponentService.userService.isAuth()} as state">
   <ibm-header-navigation>
-    <a [routerLink]="paths.account.getAbsoluteUrl()">
-      <ibm-header-item>{{tr.common.profile}}</ibm-header-item>
+    <a [routerLink]="[paths.login.getAbsoluteUrl()]"
+       *ngIf="!state.isAuth">
+      <ibm-header-item>{{tr.common.login}}</ibm-header-item>
+    </a>
+    <a [routerLink]="[paths.search.getAbsoluteUrl()]">
+      <ibm-header-item>{{tr.common.search}}</ibm-header-item>
     </a>
   </ibm-header-navigation>
-  <ibm-header-global>
+  <ibm-header-global *ngIf="state.isAuth">
     <ibm-header-action title="action">
       <svg ibmIconNotification20></svg>
     </ibm-header-action>
-    <ibm-header-action title="action">
+    <ibm-header-action title="action" [routerLink]="[paths.account.getAbsoluteUrl()]">
       <svg ibmIconUserAvatar20></svg>
     </ibm-header-action>
     <ibm-header-action title="action"
@@ -18,22 +24,22 @@
   </ibm-header-global>
 </ibm-header>
 
-<main class="bx--content">
+<main class="bx--content bx--content--main">
   <router-outlet></router-outlet>
   <ng-content select="[main]"></ng-content>
 </main>
 
-<footer class="bx--content fx fx-jc-between">
+<footer class="fx fx-jc-between">
   <div class="logo-symbol-footer-wrapper">
-    <img src="/assets/img/logo-symbol.svg">
+    IH
   </div>
 
   <div class="footer-copyright">
-    <div>© 2020 App. Все права защищены</div>
-    <div>“App” являются зарегистрированным торговыми знаками App.</div>
+    <div>© 2020 {{tr.brand}}. Все права защищены</div>
+    <div>“{{tr.brand}}” являются зарегистрированным торговыми знаками {{tr.brand}}.</div>
 
     <div>Весь текст, графика, аудио файлы, код, скачиваемые материалы и другие работы на этом сайте защищены авторским
-      правом компании App. Все права защищены.</div>
+      правом компании {{tr.brand}}. Все права защищены.</div>
     <div>Любое несанкционированное перераспределение или воспроизведение любого материала, защищенного авторским правом
       на этом сайте строго запрещено.</div>
     <div>Другие названия продуктов и компаний являются товарными знаками
