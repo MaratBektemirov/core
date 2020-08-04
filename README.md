@@ -1,12 +1,11 @@
-*** client ***
+**client**
+* npm install
+* npm run server:dev:hmr
 
-npm install
-npm run server:dev:hmr
+**server**
 
-*** server ***
-
-install postgres
-cd api
-ormconfig.json for postgres db
-npm install
-npm run start:dev
+* install postgres
+* cd api
+* ormconfig.json for postgres db
+* npm install
+* npm run start:dev
