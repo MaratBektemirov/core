@@ -1,3 +1,5 @@
+import { RealtySpaceItem } from '@interfaces/realty';
+
 export const TR = {
   RU: {
     auth: {
@@ -15,6 +17,9 @@ export const TR = {
       error: 'Ошибка',
       logout: 'Выход',
       profile: 'Профиль',
+    },
+    units: {
+      [RealtySpaceItem.squareFoot]: 'кв. м',
     }
   },
   EN: {
