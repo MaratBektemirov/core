@@ -25,7 +25,8 @@
       "@localization/*": ["api/src/localization/*"],
       "@classes/*": ["api/src/classes/*"],
       "@paths/*": ["api/src/paths/*"],
-      "@endpoints/*": ["api/src/endpoints/*"]
+      "@endpoints/*": ["api/src/endpoints/*"],
+      "@utils/*": ["api/src/utils/*"]
     },
     "typeRoots": [
       "node_modules/@types"

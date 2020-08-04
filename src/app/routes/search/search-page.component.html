@@ -5,10 +5,9 @@
         <div ibmCol [columnNumbers]="{'lg': 2, 'md': 2, 'sm': 1}">
           <legend class="bx--label">{{tr.realty.purposeTitle}}</legend>
 
-          <ng-container *ngFor="let listItem of checkboxList">
+          <ng-container *ngFor="let listItem of realtyPurpose">
             <ibm-checkbox
-              [checked]="listItem.checked"
-              [value]="listItem.value"
+              [(ngModel)]="listItem.checked"
               (change)="onCheckboxChange($event, listItem)">
               {{ tr.realty.purpose[listItem.value] }}
             </ibm-checkbox>
@@ -21,9 +20,10 @@
                                       [ariaLabel]="'office-category'"
                                       class="bx--content-switcher--filter">
                   <button ibmContentOption
+                          [active]="radio.checked"
                           (click)="radio.checked = !radio.checked"
-                          *ngFor="let radio of radios">
-                    {{tr.realty.officeCategory[radio.category]}}
+                          *ngFor="let radio of officeCategories">
+                    {{tr.realty.officeCategory[radio.value]}}
                   </button>
                 </ibm-content-switcher>
               </fieldset>

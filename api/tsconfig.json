@@ -19,7 +19,8 @@
       "@classes/*": ["src/classes/*"],
       "@endpoints/*": ["src/endpoints/*"],
       "@entity/*": ["src/entity/*"],
-      "@tables/*": ["src/tables/*"]
+      "@tables/*": ["src/tables/*"],
+      "@utils/*": ["src/utils/*"]
     },
     "resolveJsonModule": true
   },

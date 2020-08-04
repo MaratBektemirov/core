@@ -1,18 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { BaseComponent } from '@app/base/base.component';
 import { BaseComponentService } from '@app/base/base-component.service';
-import { IRealty, RealtyOfficeCategory, RealtyPurpose } from '@interfaces/realty';
-import { ClientFilter, ClientFilterLogic } from '@classes/client.filter';
-
-interface RealtyCategoryRadio {
-  category: RealtyOfficeCategory;
-  checked: boolean;
-}
-
-interface RealtyPurposeCheckbox {
-  value: RealtyPurpose;
-  checked: boolean;
-}
+import { RealtyOfficeCategory, RealtyPurpose } from '@interfaces/realty';
+import { FormGroup } from '@angular/forms';
+import { IFilterSet } from '@app/intefaces/filter';
 
 @Component({
   selector: 'search-page',
@@ -24,13 +15,13 @@ interface RealtyPurposeCheckbox {
 export class SearchPageComponent extends BaseComponent implements OnInit, OnDestroy {
   subscriptions$ = [];
 
-  public radios: RealtyCategoryRadio[] = [
-    { category: RealtyOfficeCategory.A, checked: false },
-    { category: RealtyOfficeCategory.B, checked: false },
-    { category: null, checked: false },
+  public officeCategories: IFilterSet<RealtyOfficeCategory>[] = [
+    { value: RealtyOfficeCategory.A, checked: false },
+    { value: RealtyOfficeCategory.B, checked: false },
+    { value: null, checked: false },
   ];
 
-  public checkboxList: RealtyPurposeCheckbox[] = [
+  public realtyPurpose: IFilterSet<RealtyPurpose>[] = [
     { value: RealtyPurpose.default, checked: false},
     { value: RealtyPurpose.office, checked: false},
     { value: RealtyPurpose.manufacture, checked: false},
@@ -41,16 +32,12 @@ export class SearchPageComponent extends BaseComponent implements OnInit, OnDest
 
   public RealtyPurpose = RealtyPurpose;
   public showOfficeCategory = false;
-  public filter: ClientFilter<IRealty>;
+  public form: FormGroup;
 
   constructor(baseComponentService: BaseComponentService) {
     super(baseComponentService);
 
-    this.filter = new ClientFilter(
-      {
-        purpose: ClientFilterLogic.or,
-      }
-    );
+    console.log(this);
   }
 
   selected(event) {
@@ -58,7 +45,7 @@ export class SearchPageComponent extends BaseComponent implements OnInit, OnDest
     console.log(event);
   }
 
-  onCheckboxChange(event, purposeCheckbox: RealtyPurposeCheckbox) {
+  onCheckboxChange() {
   }
 
   onRadioChange(event) {
