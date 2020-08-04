@@ -28,8 +28,19 @@ ibm-label ~ ibm-label {
   height: calc(100vh - 0rem - #{$footer-height});
 }
 
-.bx--content-switcher--fit-content {
+.bx--content-switcher--filter {
+  .bx--content-switcher {
+    height: 1.9rem;
+    justify-content: flex-start;
+  }
+
   button {
     width: fit-content;
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
   }
+}
+
+.bx--fieldset--internal {
+  margin-bottom: 1rem;
 }

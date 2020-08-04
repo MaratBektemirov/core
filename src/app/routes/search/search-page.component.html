@@ -1,9 +1,10 @@
 <ng-template #officeCategory>
-  <fieldset class="bx--fieldset">
+  <fieldset class="bx--fieldset bx--fieldset--internal">
     <legend class="bx--label">{{tr.realty.categoryTitle}}</legend>
 
     <ibm-content-switcher (selected)="selected($event)"
-                          class="bx--content-switcher--fit-content">
+                          [ariaLabel]="'office-category'"
+                          class="bx--content-switcher--filter">
       <button ibmContentOption
               (click)="radio.checked = !radio.checked"
               *ngFor="let radio of radios">
@@ -14,38 +15,32 @@
 </ng-template>
 
 <div ibmRow>
-  <div ibmCol [columnNumbers]="{'lg': 2, 'md': 2, 'sm': 1}" class="multi-selection">
+  <div ibmCol [columnNumbers]="{'lg': 2, 'md': 2, 'sm': 1}">
     <fieldset class="bx--fieldset">
       <div ibmRow>
         <div ibmCol [columnNumbers]="{'lg': 2, 'md': 2, 'sm': 1}">
           <legend class="bx--label">{{tr.realty.purposeTitle}}</legend>
         </div>
-        <div ibmCol [columnNumbers]="{'lg': 2, 'md': 2, 'sm': 1}">
-          <ibm-tag-filter
-            *ngIf="checkBoxFilters.size > 0"
-            (close)="resetCheckboxList()">
-            {{checkBoxFilters.size}}
-          </ibm-tag-filter>
-        </div>
+<!--        <div ibmCol [columnNumbers]="{'lg': 2, 'md': 2, 'sm': 1}">-->
+<!--          <ibm-tag-filter-->
+<!--            *ngIf="checkBoxFilters.size > 0"-->
+<!--            (close)="resetCheckboxList()">-->
+<!--            {{checkBoxFilters.size}}-->
+<!--          </ibm-tag-filter>-->
+<!--        </div>-->
       </div>
       <ng-container *ngFor="let listItem of checkboxList">
         <ibm-checkbox
-          [hideLabel]="hideLabel"
           [checked]="listItem.checked"
           [value]="listItem.value"
           (change)="onCheckboxChange($event, listItem)">
           {{ tr.realty.purpose[listItem.value] }}
         </ibm-checkbox>
 
-        <ibm-notification
-          *ngIf="listItem.value === RealtyPurpose.office && showOfficeCategory"
-          (close)="officeCategorySelectClose()"
-          [notificationObj]="{
-            lowContrast: true,
-            template: officeCategory,
-            showClose: true
-				  }">
-        </ibm-notification>
+        <ng-container *ngIf="listItem.value === RealtyPurpose.office && showOfficeCategory">
+          <ng-container *ngTemplateOutlet="officeCategory;">
+          </ng-container>
+        </ng-container>
       </ng-container>
     </fieldset>
 
@@ -53,15 +48,7 @@
             size="field"
             (click)="resetFilters()">{{tr.search.resetFilters}}</button>
   </div>
-  <div ibmCol [columnNumbers]="{'lg': 10, 'md': 10, 'sm': 3}" class="data-table">
-    <ibm-table-container>
-      <ibm-table
-        class="data-table"
-        [model]="model"
-        size="lg"
-        [showSelectionColumn]="false">
-        <ng-content></ng-content>
-      </ibm-table>
-    </ibm-table-container>
+  <div ibmCol [columnNumbers]="{'lg': 10, 'md': 10, 'sm': 3}">
+    <div></div>
   </div>
 </div>
