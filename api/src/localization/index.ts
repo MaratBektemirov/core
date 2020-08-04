@@ -3,7 +3,8 @@ import { RealtySpaceItem } from '@interfaces/realty';
 export const TR = {
   RU: {
     auth: {
-      title: 'Авторизация',
+      title: 'InvestHub',
+      description: 'Инвестиционная площадка нового поколения',
       error: 'Неверный телефон или пароль',
     },
     common: {

@@ -29,10 +29,24 @@ auth {
   position: relative;
 }
 
-.auth-one-side-text {
-  width: 292px;
-  font-size: 16px;
+.auth-one-side-caption-block {
+  position: relative;
+  margin-bottom: 4rem;
+}
+
+.auth-one-side-caption {
+  font-size: 2.5rem;
   text-align: center;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.auth-one-side-text {
+  position: absolute;
+  font-size: 1rem;
+  text-align: center;
+  bottom: calc(-100% - 0.75rem);
+  left: 0;
 }
 
 .auth-one-side-version {
