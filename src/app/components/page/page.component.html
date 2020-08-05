@@ -6,6 +6,10 @@
        *ngIf="!state.isAuth">
       <ibm-header-item>{{tr.common.login}}</ibm-header-item>
     </a>
+    <a [routerLink]="[paths.cabinetRealty.getAbsoluteUrl()]"
+       *ngIf="state.isAuth">
+      <ibm-header-item>{{tr.cabinet.myRealty}}</ibm-header-item>
+    </a>
     <a [routerLink]="[paths.search.getAbsoluteUrl()]">
       <ibm-header-item>{{tr.common.search}}</ibm-header-item>
     </a>
@@ -14,7 +18,7 @@
     <ibm-header-action title="action">
       <svg ibmIconNotification20></svg>
     </ibm-header-action>
-    <ibm-header-action title="action" [routerLink]="[paths.account.getAbsoluteUrl()]">
+    <ibm-header-action title="action" [routerLink]="[paths.profile.getAbsoluteUrl()]">
       <svg ibmIconUserAvatar20></svg>
     </ibm-header-action>
     <ibm-header-action title="action"

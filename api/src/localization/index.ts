@@ -19,6 +19,10 @@ export const TR = {
       logout: 'Выход',
       profile: 'Профиль',
       search: 'Поиск',
+      perMonth: 'в месяц',
+    },
+    cabinet: {
+      myRealty: 'Моя недвижимость',
     },
     realty: {
       purposeTitle: 'Назначение',

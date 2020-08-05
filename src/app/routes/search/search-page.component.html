@@ -38,6 +38,10 @@
             (click)="resetFilters()">{{tr.search.resetFilters}}</button>
   </div>
   <div ibmCol [columnNumbers]="{'lg': 10, 'md': 10, 'sm': 3}">
-    <div></div>
+    <div class="fx fx-wrap">
+      <ng-container *ngFor="let item of realties">
+        <realty-card [realty]="item"></realty-card>
+      </ng-container>
+    </div>
   </div>
 </div>

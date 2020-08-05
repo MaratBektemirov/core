@@ -1,9 +1,11 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { BaseComponent } from '@app/base/base.component';
 import { BaseComponentService } from '@app/base/base-component.service';
 import { RealtyOfficeCategory, RealtyPurpose } from '@interfaces/realty';
 import { FormGroup } from '@angular/forms';
 import { IFilterSet } from '@app/intefaces/filter';
+import { RealtyUI } from '@interfaces/ui';
+import { RealtyService } from '@app/services/realty.service';
 
 @Component({
   selector: 'search-page',
@@ -14,6 +16,7 @@ import { IFilterSet } from '@app/intefaces/filter';
 })
 export class SearchPageComponent extends BaseComponent implements OnInit, OnDestroy {
   subscriptions$ = [];
+  public realties: RealtyUI[] = [];
 
   public officeCategories: IFilterSet<RealtyOfficeCategory>[] = [
     { value: RealtyOfficeCategory.A, checked: false },
@@ -34,10 +37,18 @@ export class SearchPageComponent extends BaseComponent implements OnInit, OnDest
   public showOfficeCategory = false;
   public form: FormGroup;
 
-  constructor(baseComponentService: BaseComponentService) {
+  constructor(baseComponentService: BaseComponentService,
+              private realtyService: RealtyService,
+              private cdr: ChangeDetectorRef) {
     super(baseComponentService);
 
     console.log(this);
+  }
+
+  async ngOnInit() {
+    this.realties = await this.realtyService.all();
+    this.cdr.detectChanges();
+    console.log(this.realties);
   }
 
   selected(event) {
@@ -63,9 +74,6 @@ export class SearchPageComponent extends BaseComponent implements OnInit, OnDest
   }
 
   applyFilters() {
-  }
-
-  ngOnInit() {
   }
 
   ngOnDestroy() {

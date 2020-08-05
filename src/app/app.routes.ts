@@ -4,12 +4,13 @@ import { NoContentComponent } from '@app/routes/no-content/no-content.component'
 import { AuthRegistrationComponent } from '@app/routes/auth-registration/auth-registration.component';
 import { AuthRestoreComponent } from '@app/routes/auth-restore/auth-restore.component';
 import { AuthLoginComponent } from '@app/routes/auth-login/auth-login.component';
-import { CabinetComponent } from '@app/routes/cabinet/cabinet.component';
+import { CabinetRealtyComponent } from '@app/routes/cabinet-realty/cabinet-realty.component';
 import paths from '@paths/client';
 import { AuthGuard } from '@app/guards/auth.guard';
 import { NoAuthGuard } from '@app/guards/no.auth.guard';
 import { PageComponent } from '@app/components/page/page.component';
 import { SearchPageComponent } from '@app/routes/search/search-page.component';
+import { CabinetProfileComponent } from '@app/routes/cabinet-profile/cabinet-profile.component';
 
 export const routesConfig: Routes = [
   {
@@ -32,8 +33,9 @@ export const routesConfig: Routes = [
     canActivate: [AuthGuard],
     component: PageComponent,
     children: [
-      {path: '', redirectTo: paths.account.getAbsoluteUrl(), pathMatch: 'full'},
-      {path: paths.account.url, component: CabinetComponent},
+      {path: '', redirectTo: paths.cabinetRealty.getAbsoluteUrl(), pathMatch: 'full'},
+      {path: paths.cabinetRealty.url, component: CabinetRealtyComponent},
+      {path: paths.profile.url, component: CabinetProfileComponent},
     ]
   },
   {

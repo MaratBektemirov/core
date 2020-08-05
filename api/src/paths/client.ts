@@ -7,7 +7,8 @@ class Paths {
   public restore = this.auth.createChildren({url: 'restore'});
 
   public cabinet = new RouterPath({url: 'cabinet'});
-  public account = this.cabinet.createChildren({url: 'account'});
+  public cabinetRealty = this.cabinet.createChildren({url: 'realty'});
+  public profile = this.cabinet.createChildren({url: 'profile'});
 
   public search = new RouterPath({url: 'search'});
 }

@@ -23,7 +23,7 @@ import { AuthComponent } from '@app/routes/auth/auth.component';
 import { AuthLoginComponent } from '@app/routes/auth-login/auth-login.component';
 import { AuthRegistrationComponent } from '@app/routes/auth-registration/auth-registration.component';
 import { AuthRestoreComponent } from '@app/routes/auth-restore/auth-restore.component';
-import { CabinetComponent } from '@app/routes/cabinet/cabinet.component';
+import { CabinetRealtyComponent } from '@app/routes/cabinet-realty/cabinet-realty.component';
 import { NoContentComponent } from '@app/routes/no-content/no-content.component';
 import { PageComponent } from '@app/components/page/page.component';
 import {
@@ -41,6 +41,10 @@ import { NoAuthGuard } from '@app/guards/no.auth.guard';
 import { PasswordRegistrationDirective } from '@app/directives/password-registration.directive';
 import { AppComponent } from '@app/app.component';
 import { Logout20Module } from '@carbon/icons-angular/lib/logout/20';
+import { CabinetProfileComponent } from '@app/routes/cabinet-profile/cabinet-profile.component';
+import { RealtyCardComponent } from '@app/components/realty-card/realty-card.component';
+import { RealtyService } from '@app/services/realty.service';
+import { CommonModule } from '@angular/common';
 
 const Providers = [
   RegionService,
@@ -50,6 +54,7 @@ const Providers = [
   BaseComponentService,
   AuthGuard,
   NoAuthGuard,
+  RealtyService,
 ];
 
 const AuthModule = [
@@ -60,10 +65,11 @@ const AuthModule = [
 ];
 
 const CabinetModule = [
-  CabinetComponent,
+  CabinetRealtyComponent,
+  CabinetProfileComponent,
 ];
 
-const InfoModule = [
+const PublicModule = [
   SearchPageComponent,
 ];
 
@@ -76,13 +82,15 @@ const Directives = [
     AppComponent,
     NoContentComponent,
     PageComponent,
+    RealtyCardComponent,
 
     ...AuthModule,
     ...CabinetModule,
-    ...InfoModule,
+    ...PublicModule,
     ...Directives,
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
