@@ -39,9 +39,9 @@
   </div>
   <div ibmCol [columnNumbers]="{'lg': 10, 'md': 10, 'sm': 3}">
     <div class="fx fx-wrap">
-      <ng-container *ngFor="let item of realties">
+      <div *ngFor="let item of realties" class="card-link-container">
         <realty-card [realty]="item"></realty-card>
-      </ng-container>
+      </div>
     </div>
   </div>
 </div>

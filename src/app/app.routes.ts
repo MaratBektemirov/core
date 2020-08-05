@@ -11,6 +11,7 @@ import { NoAuthGuard } from '@app/guards/no.auth.guard';
 import { PageComponent } from '@app/components/page/page.component';
 import { SearchPageComponent } from '@app/routes/search/search-page.component';
 import { CabinetProfileComponent } from '@app/routes/cabinet-profile/cabinet-profile.component';
+import { CabinetRealtyCardComponent } from '@app/routes/cabinet-realty-card/cabinet-realty-card.component';
 
 export const routesConfig: Routes = [
   {
@@ -33,8 +34,9 @@ export const routesConfig: Routes = [
     canActivate: [AuthGuard],
     component: PageComponent,
     children: [
-      {path: '', redirectTo: paths.cabinetRealty.getAbsoluteUrl(), pathMatch: 'full'},
-      {path: paths.cabinetRealty.url, component: CabinetRealtyComponent},
+      {path: '', redirectTo: paths.cabinetRealtyList.getAbsoluteUrl(), pathMatch: 'full'},
+      {path: paths.cabinetRealtyList.url, component: CabinetRealtyComponent},
+      {path: paths.cabinetRealtyCard.url + '/:id', component: CabinetRealtyCardComponent},
       {path: paths.profile.url, component: CabinetProfileComponent},
     ]
   },

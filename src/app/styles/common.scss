@@ -1,4 +1,31 @@
+@import 'variables';
+@import 'mixins';
+
 body, html {
   height: 100%;
   width: 100%;
+}
+
+.card-link-container {
+  text-decoration: none;
+  color: unset;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  border: 1px solid $ice-blue;
+  &:hover {
+    background-color: $very-pale-blue;
+  }
+}
+
+.card-container {
+  position: relative;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 1rem;
+}
+
+.card-container--m {
+  width: 450px;
 }

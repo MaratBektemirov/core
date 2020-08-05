@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit, ViewEncap
 import { BaseComponent } from '@app/base/base.component';
 import { BaseComponentService } from '@app/base/base-component.service';
 import { RealtyUI, UserRealtyUI } from '@interfaces/ui';
+import { RealtyService } from '@app/services/realty.service';
 
 @Component({
   selector: 'realty-card',
@@ -16,14 +17,8 @@ export class RealtyCardComponent extends BaseComponent implements OnInit, OnDest
 
   subscriptions$ = [];
 
-  constructor(baseComponentsService: BaseComponentService) {
+  constructor(baseComponentsService: BaseComponentService, public realtyService: RealtyService,) {
     super(baseComponentsService);
-  }
-
-  getUserProfitPerMonth(userSpace: number) {
-    const rentRatePerPriceSpace = this.realty.rentRate / this.realty.space;
-
-    return Math.floor(rentRatePerPriceSpace * userSpace);
   }
 
   public ngOnInit() {

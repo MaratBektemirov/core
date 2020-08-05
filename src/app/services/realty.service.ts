@@ -21,4 +21,14 @@ export class RealtyService {
 
     return await this.http.get<RealtyUI[]>(url).toPromise();
   }
+
+  getUserProfitPerMonth(realty: UserRealtyUI): number {
+    const rentRatePerPriceSpace = realty.rentRate / realty.space;
+
+    return Math.floor(rentRatePerPriceSpace * realty.userSpace);
+  }
+
+  remaining(realty: UserRealtyUI): number {
+    return Math.floor((realty.userInvestments - realty.profitAllTime) / this.getUserProfitPerMonth(realty));
+  }
 }

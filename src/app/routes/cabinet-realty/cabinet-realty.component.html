@@ -1,5 +1,7 @@
 <div class="fx fx-wrap">
-  <ng-container *ngFor="let item of realties">
+  <a *ngFor="let item of realties"
+     class="card-link-container"
+     [routerLink]="[paths.cabinetRealtyCard.getAbsoluteUrl(), item.id]">
     <realty-card [realty]="item" [userRealty]="true"></realty-card>
-  </ng-container>
+  </a>
 </div>

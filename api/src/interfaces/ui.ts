@@ -19,12 +19,14 @@ export interface RealtyUI extends IRealty {
   district: IDistrict;
   photo: IPhoto;
   metros: MetroUI[];
+  priceIncreasePerMonth: number;
 }
 
 export interface UserRealtyUI extends RealtyUI {
   userSpace: number;
   userInvestments: number;
   profitAllTime: number;
+  startOwner: Date;
 }
 
 export interface MessageUI extends Message {

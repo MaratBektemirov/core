@@ -16,6 +16,8 @@ export class RealtyController {
   @Get(realtyApiEndpoints.api.user)
   public async user(@Body() body: any): Promise<UserRealtyUI[]> {
     const realties: UserRealtyUI[] = [{
+      priceIncreasePerMonth: 1,
+      startOwner: new Date('2020.01'),
       address: 'г. Казань, ул. Пушкина д.105',
       city: {id: 1, name: 'Казань'},
       cityId: 0,
@@ -42,6 +44,8 @@ export class RealtyController {
       profitAllTime: 120000,
       rentRate: 40000,
     }, {
+      priceIncreasePerMonth: 1,
+      startOwner: new Date('2019.12'),
       address: 'г. Казань, ул. Пушкина д.25',
       city: {id: 1, name: 'Казань'},
       cityId: 0,
@@ -51,7 +55,7 @@ export class RealtyController {
       districtId: 0,
       floor: 0,
       freeSpace: 0,
-      id: 0,
+      id: 1,
       metros: [{id: 1, time: 10, metroId: null, metro: {name: 'Кремлевская', color: '#ff2f2f', id: 1, cityId: 1}, realtyId: 0}],
       officeCategory: RealtyOfficeCategory.A,
       phone: '+7 900 000 00 02',
@@ -68,6 +72,8 @@ export class RealtyController {
       profitAllTime: 150000,
       rentRate: 60000,
     }, {
+      priceIncreasePerMonth: 1,
+      startOwner: new Date('2020.3'),
       address: 'г. Казань, ул. Пушкина д.33',
       city: {id: 1, name: 'Казань'},
       cityId: 0,
@@ -77,7 +83,7 @@ export class RealtyController {
       districtId: 0,
       floor: 0,
       freeSpace: 20,
-      id: 0,
+      id: 2,
       metros: [{id: 1, time: 10, metroId: null, metro: {name: 'Кремлевская', color: '#ff2f2f', id: 1, cityId: 1}, realtyId: 0}],
       officeCategory: RealtyOfficeCategory.A,
       phone: '+7 900 000 00 03',
@@ -101,6 +107,7 @@ export class RealtyController {
   @Get(realtyApiEndpoints.api.all)
   public async all(@Body() body: any): Promise<RealtyUI[]> {
     const realties: RealtyUI[] = [{
+      priceIncreasePerMonth: 1,
       rentRate: 50000,
       address: 'г. Казань, ул. Пушкина д.55',
       city: {id: 1, name: 'Казань'},
@@ -124,6 +131,7 @@ export class RealtyController {
       updatedAt: undefined,
       utilityBillCost: 5200,
     }, {
+      priceIncreasePerMonth: 1,
       rentRate: 55000,
       address: 'г. Казань, ул. Пушкина д.78',
       city: {id: 1, name: 'Казань'},
@@ -147,6 +155,7 @@ export class RealtyController {
       updatedAt: undefined,
       utilityBillCost: 4800,
     }, {
+      priceIncreasePerMonth: 1,
       rentRate: 35000,
       address: 'г. Казань, ул. Пушкина д.22',
       city: {id: 1, name: 'Казань'},
@@ -170,6 +179,7 @@ export class RealtyController {
       updatedAt: undefined,
       utilityBillCost: 4500,
     }, {
+      priceIncreasePerMonth: 1,
       rentRate: 45000,
       address: 'г. Казань, ул. Баумана д.100',
       city: {id: 1, name: 'Казань'},
@@ -193,6 +203,7 @@ export class RealtyController {
       updatedAt: undefined,
       utilityBillCost: 2300,
     }, {
+      priceIncreasePerMonth: 1,
       rentRate: 60000,
       address: 'г. Казань, ул. Ершова д.37',
       city: {id: 1, name: 'Казань'},

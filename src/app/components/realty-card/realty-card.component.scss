@@ -2,15 +2,6 @@
 @import '../../styles/mixins';
 
 realty-card {
-  position: relative;
-  border: 1px solid $ice-blue;
-  width: 320px;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  padding: 1rem;
-  margin-right: 20px;
-  margin-bottom: 20px;
 }
 
 .realty-card-address {

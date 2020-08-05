@@ -45,6 +45,9 @@ import { CabinetProfileComponent } from '@app/routes/cabinet-profile/cabinet-pro
 import { RealtyCardComponent } from '@app/components/realty-card/realty-card.component';
 import { RealtyService } from '@app/services/realty.service';
 import { CommonModule } from '@angular/common';
+import { CabinetRealtyCardComponent } from '@app/routes/cabinet-realty-card/cabinet-realty-card.component';
+import { MomentPipe } from '@app/pipes/moment.pipe';
+import { ChartsModule } from '@carbon/charts-angular';
 
 const Providers = [
   RegionService,
@@ -67,6 +70,7 @@ const AuthModule = [
 const CabinetModule = [
   CabinetRealtyComponent,
   CabinetProfileComponent,
+  CabinetRealtyCardComponent,
 ];
 
 const PublicModule = [
@@ -75,6 +79,10 @@ const PublicModule = [
 
 const Directives = [
   PasswordRegistrationDirective,
+];
+
+const Pipes = [
+  MomentPipe,
 ];
 
 @NgModule({
@@ -88,6 +96,7 @@ const Directives = [
     ...CabinetModule,
     ...PublicModule,
     ...Directives,
+    ...Pipes,
   ],
   imports: [
     CommonModule,
@@ -114,7 +123,8 @@ const Directives = [
     TagModule,
     CheckboxModule,
     TableModule,
-    ContentSwitcherModule
+    ContentSwitcherModule,
+    ChartsModule
   ],
   providers: [
     environment.ENV_PROVIDERS,
