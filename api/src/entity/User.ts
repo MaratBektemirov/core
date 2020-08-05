@@ -26,6 +26,9 @@ export class User implements IUser {
     @Column({nullable: true})
     regionId: Regions;
 
+    @Column('int', { array: true })
+    deals: number[];
+
     @CreateDateColumn({type: 'timestamp'})
     createdAt: Date;
 

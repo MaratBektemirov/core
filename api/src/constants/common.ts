@@ -3,7 +3,7 @@ import { Regions } from '@constants/regions';
 import { UserUI } from '@interfaces/ui';
 
 export const SYSTEM_USER = 0;
-export const API_PORT = 80;
+export const API_PORT = 1025;
 export const GUEST_USER: UserUI = {
   language: Languages.RU,
   id: null,
@@ -11,6 +11,7 @@ export const GUEST_USER: UserUI = {
   balanceId: null,
   regionId: Regions.RU,
   phone: null,
+  deals: null,
   createdAt: null,
   updatedAt: null
 };

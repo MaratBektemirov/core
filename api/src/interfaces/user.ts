@@ -22,6 +22,7 @@ export interface IUser {
   password: number;
   phone: string;
   language: Languages;
+  deals: number[];
   createdAt: Date;
   updatedAt: Date;
 }
