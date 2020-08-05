@@ -7,6 +7,7 @@ import { DbService } from '@api/services/db.service';
 import { MessagesService } from '@api/services/messages.service';
 import { TokenService } from '@api/services/token.service';
 import { MessagesController } from '@api/controllers/messages.controller';
+import { RealtyController } from '@api/controllers/realty.controller';
 
 @Module({
   imports: [],
@@ -22,7 +23,8 @@ import { MessagesController } from '@api/controllers/messages.controller';
   ],
   controllers: [
     UsersController,
-    MessagesController
+    MessagesController,
+    RealtyController
   ]
 })
 export class AppModule {}

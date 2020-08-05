@@ -1,0 +1,16 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+
+.cabinet-realty-card-property {
+  margin-bottom: 5px;
+}
+
+.cabinet-realty-card-property-name {
+  color: $steel;
+  font-size: 1.1rem;
+}
+
+.cabinet-realty-card-property-value {
+  font-size: 1.2rem;
+}

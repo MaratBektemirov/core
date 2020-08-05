@@ -53,4 +53,7 @@ export class Realty implements IRealty {
 
   @Column()
   utilityBillCost: number;
+
+  @Column()
+  rentRate: number;
 }

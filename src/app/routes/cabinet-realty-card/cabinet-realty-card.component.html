@@ -1,0 +1,28 @@
+<div class="fx">
+  <div class="fx fx-dir-col">
+    <realty-card [realty]="realty" [userRealty]="true"></realty-card>
+
+    <div class="fx fx-dir-col card-container card-container--m">
+      <div class="fx fx-jc-between fx-al-items-center cabinet-realty-card-property">
+        <div class="cabinet-realty-card-property-name">Доход (за все время):</div>
+        <div class="cabinet-realty-card-property-value">{{realty.profitAllTime}} ₽</div>
+      </div>
+      <div class="fx fx-jc-between fx-al-items-center cabinet-realty-card-property">
+        <div class="cabinet-realty-card-property-name">Вложения:</div>
+        <div class="cabinet-realty-card-property-value">{{realty.userInvestments}} ₽</div>
+      </div>
+      <div class="fx fx-jc-between fx-al-items-center cabinet-realty-card-property">
+        <div class="cabinet-realty-card-property-name">Месяцев владения:</div>
+        <div class="cabinet-realty-card-property-value">{{(realty.startOwner | moment).fromNow(true)}}</div>
+      </div>
+      <div class="fx fx-jc-between fx-al-items-center cabinet-realty-card-property">
+        <div class="cabinet-realty-card-property-name">Осталось до окупаемости (мес.):</div>
+        <div class="cabinet-realty-card-property-value">{{realtyService.remaining(realty)}}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container theme--white">
+    <ibm-line-chart [data]="data" [options]="options" style="display: block;"></ibm-line-chart>
+  </div>
+</div>

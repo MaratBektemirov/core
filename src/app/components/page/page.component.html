@@ -3,10 +3,18 @@
   *ngIf="{isAuth: baseComponentService.userService.isAuth()} as state">
   <ibm-header-navigation>
     <a [routerLink]="[paths.login.getAbsoluteUrl()]"
+       routerLinkActive="bx--header__menu-item--active"
        *ngIf="!state.isAuth">
       <ibm-header-item>{{tr.common.login}}</ibm-header-item>
     </a>
-    <a [routerLink]="[paths.search.getAbsoluteUrl()]">
+    <a [routerLink]="[paths.cabinetRealtyList.getAbsoluteUrl()]"
+       routerLinkActive="bx--header__menu-item--active"
+       *ngIf="state.isAuth">
+      <ibm-header-item>{{tr.cabinet.myRealty}}</ibm-header-item>
+    </a>
+    <a [routerLink]="[paths.search.getAbsoluteUrl()]"
+       routerLinkActive="bx--header__menu-item--active"
+    >
       <ibm-header-item>{{tr.common.search}}</ibm-header-item>
     </a>
   </ibm-header-navigation>
@@ -14,7 +22,7 @@
     <ibm-header-action title="action">
       <svg ibmIconNotification20></svg>
     </ibm-header-action>
-    <ibm-header-action title="action" [routerLink]="[paths.account.getAbsoluteUrl()]">
+    <ibm-header-action title="action" [routerLink]="[paths.profile.getAbsoluteUrl()]">
       <svg ibmIconUserAvatar20></svg>
     </ibm-header-action>
     <ibm-header-action title="action"

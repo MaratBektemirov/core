@@ -31,6 +31,7 @@ export interface IRealty {
   conference: boolean;
   phone: string;
   utilityBillCost: number;
+  rentRate: number;
   photoId: number;
   createdAt: Date;
   updatedAt: Date;
