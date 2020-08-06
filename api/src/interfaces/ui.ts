@@ -3,6 +3,7 @@ import { Message } from '@interfaces/message';
 import { IRealty, IRealtyMetro } from '@interfaces/realty';
 import { IPhoto } from '@interfaces/photo';
 import { IMetro } from '@interfaces/metro';
+import { IUserRealty } from '@interfaces/userRealty';
 
 export interface UserUI extends Omit<IUser, 'password'> {
 
@@ -20,15 +21,21 @@ export interface RealtyUI extends IRealty {
   // metros: MetroUI[];
 }
 
-export interface UserRealtyUI extends RealtyUI {
+export interface UserRealtyShareUI extends RealtyUI {
   fullPrice: number;
   userSpace: number;
   startOwner: Date;
   phone: string;
   owner: string;
   price: number;
+  percentage: number;
 }
 
 export interface MessageUI extends Message {
   recipientName: string;
+}
+
+export interface CabinetRealtyUICard {
+  realty: RealtyUI;
+  shares: IUserRealty[];
 }

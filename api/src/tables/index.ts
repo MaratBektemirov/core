@@ -9,7 +9,7 @@ export enum Tables {
   userRole = 'public.user_role',
   data = 'public.data',
   userRealty = 'public.user_realty',
-  realty = 'public.realty',
+  realty = 'public.realty'
 }
 
 export interface TablesSpec {

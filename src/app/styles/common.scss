@@ -1,5 +1,7 @@
 @import 'variables';
 @import 'mixins';
+@import 'margin-padding';
+@import 'typography';
 
 body, html {
   height: 100%;
@@ -28,4 +30,26 @@ body, html {
 
 .card-container--m {
   width: 450px;
+}
+
+.promo-block {
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 4px;
+}
+
+.bg_gold-90 {
+  background-color: $gold-90;
+}
+
+.bg_gold-10 {
+  background-color: $gold-10;
+}
+
+.bg_gold-30 {
+  background-color: $gold-30;
+}
+
+.bg_steel {
+  background-color: $steel;
 }

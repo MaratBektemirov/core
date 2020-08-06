@@ -1,11 +1,9 @@
 @import '../../styles/variables';
 @import '../../styles/mixins';
 
-footer {
+.footer-cls {
   height: $footer-height;
   background-color: $primary-color;
-  z-index: 11;
-  position: relative;
   padding-left: 50px;
   padding-top: 15px;
 }

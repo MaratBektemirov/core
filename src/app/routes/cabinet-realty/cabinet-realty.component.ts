@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { BaseComponent } from '@app/base/base.component';
 import { BaseComponentService } from '@app/base/base-component.service';
 import { RealtyService } from '@app/services/realty.service';
-import { UserRealtyUI } from '@interfaces/ui';
+import { UserRealtyShareUI } from '@interfaces/ui';
 
 @Component({
   selector: 'cabinet-realty',
@@ -14,7 +14,7 @@ import { UserRealtyUI } from '@interfaces/ui';
 })
 export class CabinetRealtyComponent extends BaseComponent implements OnInit {
   subscriptions$ = [];
-  public realties: UserRealtyUI[] = [];
+  public realties: UserRealtyShareUI[] = [];
 
   constructor(private router: Router,
               private realtyService: RealtyService,

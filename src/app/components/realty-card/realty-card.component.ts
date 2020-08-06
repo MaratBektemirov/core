@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { BaseComponent } from '@app/base/base.component';
 import { BaseComponentService } from '@app/base/base-component.service';
-import { RealtyUI, UserRealtyUI } from '@interfaces/ui';
+import { RealtyUI, UserRealtyShareUI } from '@interfaces/ui';
 import { RealtyService } from '@app/services/realty.service';
 
 @Component({
@@ -12,12 +12,12 @@ import { RealtyService } from '@app/services/realty.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class RealtyCardComponent extends BaseComponent implements OnInit, OnDestroy {
-  @Input() realty: RealtyUI | UserRealtyUI;
+  @Input() realty: RealtyUI | UserRealtyShareUI;
   @Input() userRealty: boolean;
 
   subscriptions$ = [];
 
-  constructor(baseComponentsService: BaseComponentService, public realtyService: RealtyService,) {
+  constructor(baseComponentsService: BaseComponentService, public realtyService: RealtyService) {
     super(baseComponentsService);
   }
 

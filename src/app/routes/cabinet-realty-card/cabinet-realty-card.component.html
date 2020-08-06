@@ -1,25 +1,99 @@
-<div class="fx">
+<div class="fx" *ngIf="loaded">
+  <ibm-modal [size]="'sm'" *ngIf="shareToReserve" (overlaySelected)="closeReserveModal()">
+    <ibm-modal-header (closeSelect)="closeReserveModal()">
+      <span class="bold fs-1-2">Резервирование доли</span>
+    </ibm-modal-header>
+    <section class="bx--modal-content">
+      <div class="bx--modal-content__text">
+        <div>После нажатия кнопки продолжить вами будет зарезервирована доля <span class="bold">{{shareToReserve.space}} кв.м, {{((shareToReserve.space / realty.space) * 100.0).toFixed(2)}} %</span> в объекте по адресу:</div>
+        <div class="bold mt1">{{realty.address}}</div>
+
+        <div class="mt1">
+          Денежные средства в размере <span class="bold">
+          {{shareToReserve.price | currency:'₽':true:'1.0-0'}}
+        </span>
+          будут удержаны с вашего счета
+        </div>
+      </div>
+    </section>
+    <ibm-modal-footer>
+      <button class="bx--btn bx--btn--secondary" size="sm" (click)="closeReserveModal()">Ещё подумаю</button>
+      <button class="bx--btn bx--btn--primary"
+              (click)="submitReserveShare(shareToReserve)"
+              size="sm"
+              modal-primary-focus>Продолжить</button>
+    </ibm-modal-footer>
+  </ibm-modal>
+
   <div class="fx fx-dir-col">
     <realty-card [realty]="realty" [userRealty]="true"></realty-card>
 
-    <div class="fx fx-dir-col card-container card-container--m">
-      <div class="fx fx-jc-between fx-al-items-center cabinet-realty-card-property">
-        <div class="cabinet-realty-card-property-name">Доход (за все время):</div>
-        <div class="cabinet-realty-card-property-value">{{realty.profitAllTime}} ₽</div>
-      </div>
-      <div class="fx fx-jc-between fx-al-items-center cabinet-realty-card-property">
-        <div class="cabinet-realty-card-property-name">Вложения:</div>
-        <div class="cabinet-realty-card-property-value">{{realty.userInvestments}} ₽</div>
-      </div>
-      <div class="fx fx-jc-between fx-al-items-center cabinet-realty-card-property">
-        <div class="cabinet-realty-card-property-name">Месяцев владения:</div>
-        <div class="cabinet-realty-card-property-value">{{(realty.startOwner | moment).fromNow(true)}}</div>
-      </div>
-      <div class="fx fx-jc-between fx-al-items-center cabinet-realty-card-property">
-        <div class="cabinet-realty-card-property-name">Осталось до окупаемости (мес.):</div>
-        <div class="cabinet-realty-card-property-value">{{realtyService.remaining(realty)}}</div>
-      </div>
+    <div class="pl1">
+      <ng-container *ngIf="myShares.length">
+        <div class="fs-1-4 mb1">Мои доли:</div>
+
+        <ng-container *ngFor="let share of myShares">
+          <div class="fx fx-jc-between fx-al-items-center mb-0-5">
+            <div>
+              <div class="fs-1-2">
+                {{share.space}} кв.м, {{((share.space / realty.space) * 100.0).toFixed(2)}} %
+              </div>
+
+              <div class="fs-1-2 mt-1 bold">
+                {{share.price | currency:'₽':true:'1.0-0'}}
+              </div>
+            </div>
+
+            <div class="fs-1-2">
+              {{share.price | currency:'₽':true:'1.0-0'}}
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+
+      <ng-container *ngIf="shares.length">
+        <div class="fs-1-4 mb1">Доли в продаже:</div>
+
+        <ng-container *ngFor="let share of shares">
+          <div class="fx fx-jc-between fx-al-items-center mb-0-5" (click)="reserveShare(share)">
+            <div>
+              <div class="fs-1-2">
+                {{share.space}} кв.м, {{((share.space / realty.space) * 100.0).toFixed(2)}} %
+              </div>
+
+              <div class="fs-1-2 mt-1 bold">
+                {{share.price | currency:'₽':true:'1.0-0'}}
+              </div>
+            </div>
+
+            <div>
+              <button ibmButton size="sm" class="pr1 fs-0-7">
+                Забронировать
+              </button>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
     </div>
+
+<!--    <div class="fx fx-dir-col card-container card-container&#45;&#45;m">-->
+<!--      <div class="fx fx-jc-between fx-al-items-center cabinet-realty-card-property">-->
+<!--        <div class="cabinet-realty-card-property-name">Доход (за все время):</div>-->
+<!--        <div class="cabinet-realty-card-property-value">{{realty.profitAllTime}} ₽</div>-->
+<!--      </div>-->
+<!--      <div class="fx fx-jc-between fx-al-items-center cabinet-realty-card-property">-->
+<!--        <div class="cabinet-realty-card-property-name">Вложения:</div>-->
+<!--        <div class="cabinet-realty-card-property-value">{{realty.userInvestments}} ₽</div>-->
+<!--      </div>-->
+<!--      <div class="fx fx-jc-between fx-al-items-center cabinet-realty-card-property">-->
+<!--        <div class="cabinet-realty-card-property-name">Месяцев владения:</div>-->
+<!--        <div class="cabinet-realty-card-property-value">{{(realty.startOwner | moment).fromNow(true)}}</div>-->
+<!--      </div>-->
+<!--      <div class="fx fx-jc-between fx-al-items-center cabinet-realty-card-property">-->
+<!--        <div class="cabinet-realty-card-property-name">Осталось до окупаемости (мес.):</div>-->
+<!--        <div class="cabinet-realty-card-property-value">{{realtyService.remaining(realty)}}</div>-->
+<!--      </div>-->
+<!--    </div>-->
   </div>
 
   <div class="container theme--white">
