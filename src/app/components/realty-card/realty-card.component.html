@@ -1,50 +1,41 @@
 <div class="card-container">
-  <div class="fx fx-al-items-center fx-jc-between">
+  <div class="fx fx-jc-between">
     <div class="realty-card-address">{{realty.address}}</div>
     <div *ngIf="realty.officeCategory" class="realty-card-office-category">{{realty.officeCategory}}</div>
   </div>
   <div class="realty-card-phone">{{realty.phone}}</div>
 
-  <ng-container *ngIf="userRealty">
-    <div class="fx fx-jc-between realty-card-property realty-card-property-user">
-      <div class="realty-card-property-name realty-card-property-name-user">Доход (мес):</div>
-      <div class="realty-card-property-value realty-card-property-value-user">{{realtyService.getUserProfitPerMonth(realty)}} ₽</div>
-    </div>
-  </ng-container>
-
-  <div class="fx fx-jc-between realty-card-property realty-card-property-space">
-    <div class="realty-card-property-name realty-card-property-name-space">Общая площадь (кв.м):</div>
-    <div class="realty-card-property-value realty-card-property-name-value">{{realty.space}}</div>
+  <div class="fx fx-jc-between realty-card-property realty-card-property-user">
+    <div class="realty-card-property-name realty-card-property-name-user">Доля (кв.м):</div>
+    <div class="realty-card-property-value realty-card-property-value-user">{{realty.userSpace}}</div>
   </div>
 
-  <div class="fx fx-jc-between realty-card-property" *ngIf="userRealty">
-    <div class="realty-card-property-name">Ваша собственность (кв.м):</div>
-    <div class="realty-card-property-value">{{realty.userSpace}}</div>
+  <div class="fx fx-jc-between realty-card-property realty-card-property-user">
+    <div class="realty-card-property-name realty-card-property-name-user">Стоимость:</div>
+    <div class="realty-card-property-value realty-card-property-value-user">{{realty.price}} ₽</div>
   </div>
 
   <div class="fx fx-dir-col realty-card-property realty-card-property-free-space">
-    <div class="fx fx-jc-between ">
-      <div class="realty-card-property-name">Доступны к покупке (кв.м):</div>
-      <div class="realty-card-property-value">{{realty.freeSpace}}</div>
-    </div>
-
     <div class="realty-card-property-free-space-extra">
-      <button *ngIf="realty.freeSpace > 0"
+      <button *ngIf="realty.space > 0"
               class="realty-card-property-free-space-button bx--btn--secondary-gold"
               [ibmButton]="'secondary'"
-              [size]="'sm'">Купить за {{realty.pricePerSpaceItem}} ₽/кв.м</button>
-
-      <ibm-tag type="cool-gray" *ngIf="realty.freeSpace === 0">Все продано</ibm-tag>
+              [size]="'sm'">Инвестировать</button>
     </div>
+  </div>
+
+  <div class="fx fx-jc-between realty-card-property">
+    <div class="realty-card-property-name">Общая стоимость:</div>
+    <div class="realty-card-property-value">{{realty.fullPrice}} ₽</div>
+  </div>
+
+  <div class="fx fx-jc-between realty-card-property">
+    <div class="realty-card-property-name">Общая площадь (кв.м):</div>
+    <div class="realty-card-property-value">{{realty.space}}</div>
   </div>
 
   <div class="fx fx-jc-between realty-card-property">
     <div class="realty-card-property-name">Комм. услуги (мес.):</div>
     <div class="realty-card-property-value">{{realty.utilityBillCost}}</div>
-  </div>
-
-  <div class="fx fx-jc-between realty-card-property">
-    <div class="realty-card-property-name">Арендная ставка (мес.):</div>
-    <div class="realty-card-property-value">{{realty.rentRate}} ₽</div>
   </div>
 </div>

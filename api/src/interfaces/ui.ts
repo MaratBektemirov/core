@@ -1,8 +1,6 @@
 import { IUser } from '@interfaces/user';
 import { Message } from '@interfaces/message';
 import { IRealty, IRealtyMetro } from '@interfaces/realty';
-import { ICity } from '@interfaces/city';
-import { IDistrict } from '@interfaces/disctrict';
 import { IPhoto } from '@interfaces/photo';
 import { IMetro } from '@interfaces/metro';
 
@@ -14,19 +12,21 @@ export interface MetroUI extends IRealtyMetro {
   metro: IMetro;
 }
 
+// tslint:disable-next-line:no-empty-interface
 export interface RealtyUI extends IRealty {
-  city: ICity;
-  district: IDistrict;
-  photo: IPhoto;
-  metros: MetroUI[];
-  priceIncreasePerMonth: number;
+  // city: ICity;
+  // district: IDistrict;
+  // photo: IPhoto;
+  // metros: MetroUI[];
 }
 
 export interface UserRealtyUI extends RealtyUI {
+  fullPrice: number;
   userSpace: number;
-  userInvestments: number;
-  profitAllTime: number;
   startOwner: Date;
+  phone: string;
+  owner: string;
+  price: number;
 }
 
 export interface MessageUI extends Message {

@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { createConnection, Connection } from 'typeorm';
 import { Tables, TablesSpec } from '@api/tables';
+import { writeAllData } from '@api/init.data';
 
 @Injectable()
 export class DbService {
@@ -86,7 +87,7 @@ export class DbService {
     const { where, values } = this.prepareForGet(data);
 
     return await this.query<TablesSpec[A][]>(
-      `SELECT * FROM ${table} WHERE ${where}`,
+      `SELECT * FROM ${table} WHERE ${where ? where : true}`,
       values,
     );
   }
@@ -104,6 +105,7 @@ export class DbService {
     if (!this.connection) {
       this.connection = await createConnection();
       console.log('Connected PostgreSQL');
+      writeAllData(this.connection);
     }
   }
 }

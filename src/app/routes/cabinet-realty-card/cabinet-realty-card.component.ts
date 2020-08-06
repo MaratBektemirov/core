@@ -63,7 +63,7 @@ export class CabinetRealtyCardComponent extends BaseComponent implements OnInit 
       ]
     };
     this.options = {
-      'title': 'Цена за кв.м по месяцам',
+      'title': 'Вероятная цена за кв.м по месяцам',
       'axes': {
         'left': {},
         'bottom': {

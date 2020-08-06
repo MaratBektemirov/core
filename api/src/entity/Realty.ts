@@ -18,7 +18,7 @@ export class Realty implements IRealty {
   @Column()
   conference: boolean;
 
-  @CreateDateColumn()
+  @CreateDateColumn({type: 'timestamp'})
   createdAt: Date;
 
   @Column()
@@ -26,12 +26,6 @@ export class Realty implements IRealty {
 
   @Column()
   floor: number;
-
-  @Column()
-  freeSpace: number;
-
-  @Column()
-  phone: string;
 
   @Column()
   photoId: number;
@@ -48,7 +42,10 @@ export class Realty implements IRealty {
   @Column()
   spaceItem: RealtySpaceItem;
 
-  @UpdateDateColumn()
+  @Column()
+  priceIncreasePerMonth: number;
+
+  @UpdateDateColumn({type: 'timestamp'})
   updatedAt: Date;
 
   @Column()

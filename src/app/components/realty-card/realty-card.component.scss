@@ -7,11 +7,8 @@ realty-card {
 .realty-card-address {
   color: #0043f2;
   font-size: 1.1rem;
+  height: 35px;
 }
-
-//realty-card ~ realty-card {
-//  margin-left: 2rem;
-//}
 
 .realty-card-office-category {
   color: #0043f2;
@@ -19,6 +16,7 @@ realty-card {
   border: 1px solid;
   border-radius: 3px;
   padding: 3px;
+  height: 23px;
 }
 
 .realty-card-phone {

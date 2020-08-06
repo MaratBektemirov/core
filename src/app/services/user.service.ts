@@ -44,7 +44,7 @@ export class UserService {
   }
 
   public isAuth() {
-    return this.user.userName !== GUEST_USER.userName;
+    return this.user.id;
   }
 
   public async login(data: LoginRequest) {

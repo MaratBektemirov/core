@@ -9,10 +9,13 @@ export class User implements IUser {
     id: number;
 
     @Column({nullable: true})
-    balanceId: number;
+    name: string;
 
-    @Column({nullable: true, unique: true})
-    userName: string;
+    @Column({nullable: true})
+    surname: string;
+
+    @Column({nullable: true})
+    patronymic: string;
 
     @Column()
     password: number;
@@ -25,6 +28,12 @@ export class User implements IUser {
 
     @Column({nullable: true})
     regionId: Regions;
+
+    @Column({default: 0})
+    balance: number;
+
+    @Column({default: 0})
+    onHoldBalance: number;
 
     @CreateDateColumn({type: 'timestamp'})
     createdAt: Date;

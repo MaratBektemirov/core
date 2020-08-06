@@ -21,7 +21,6 @@ export interface IRealty {
   purpose: RealtyPurpose;
   address: string;
   space: number;
-  freeSpace: number;
   pricePerSpaceItem: number;
   spaceItem: RealtySpaceItem;
   cityId: number;
@@ -29,7 +28,7 @@ export interface IRealty {
   districtId: number;
   floor: number;
   conference: boolean;
-  phone: string;
+  priceIncreasePerMonth: number;
   utilityBillCost: number;
   rentRate: number;
   photoId: number;

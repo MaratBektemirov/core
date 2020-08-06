@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { DbService } from '@api/services/db.service';
 import { TokenService } from '@api/services/token.service';
 import { Tables } from '@api/tables';
@@ -13,8 +13,13 @@ export class UsersService {
 
   public async getUserByTokenId(tokenId: string) {
     const token = await this.tokenService.getToken(tokenId);
-    const res = await this.db.find(Tables.user, {id: token.userId});
 
-    return res[0];
+    if (token) {
+      const res = await this.db.find(Tables.user, {id: token.userId});
+
+      return res[0];
+    } else {
+      throw new BadRequestException('User not found');
+    }
   }
 }

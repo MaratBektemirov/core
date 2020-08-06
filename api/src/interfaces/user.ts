@@ -16,14 +16,17 @@ export interface IUserRole {
 
 export interface IUser {
   id: number;
-  balanceId: number;
   regionId: Regions;
-  userName: string;
+  name: string;
+  surname: string;
+  patronymic: string;
   password: number;
   phone: string;
   language: Languages;
   createdAt: Date;
   updatedAt: Date;
+  balance: number;
+  onHoldBalance: number;
 }
 
 export interface IUserAccessToken {

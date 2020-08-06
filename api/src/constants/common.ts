@@ -5,10 +5,13 @@ import { UserUI } from '@interfaces/ui';
 export const SYSTEM_USER = 0;
 export const API_PORT = 80;
 export const GUEST_USER: UserUI = {
+  balance: null,
+  onHoldBalance: null,
   language: Languages.RU,
   id: null,
-  userName: 'guest',
-  balanceId: null,
+  name: 'guest',
+  surname: null,
+  patronymic: null,
   regionId: Regions.RU,
   phone: null,
   createdAt: null,
