@@ -28,6 +28,14 @@ export interface IUser {
   updatedAt: Date;
   balance: number;
   onHoldBalance: number;
+  birthDate: Date;
+  birthPlace: string;
+
+  passportNumber: number;
+  passportSerial: number;
+  passportIssuer: string;
+  passportDate: Date;
+  registrationAddress: string;
 }
 
 export interface IUserAccessToken {
