@@ -35,6 +35,9 @@ export class User implements IUser {
     @Column({default: 0})
     onHoldBalance: number;
 
+    @Column('int', {nullable: true, array: true })
+    deals: number[];
+
     @CreateDateColumn({type: 'timestamp'})
     createdAt: Date;
 
