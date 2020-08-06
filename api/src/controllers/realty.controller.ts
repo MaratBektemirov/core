@@ -17,7 +17,19 @@ export class RealtyController {
   public async reserve(@Body() body, @Req() req) {
     const user = await this.usersService.getUserByTokenId(req.headers['token-id']);
 
-    return await this.db.query<RealtyUI[]>(`UPDATE ${Tables.userRealty}
+    const res = await this.db.query(`SELECT realty."pricePerSpaceItem" * ur."space" AS price
+     FROM ${Tables.userRealty} ur
+		 INNER JOIN ${Tables.realty} realty
+		    ON realty.id = ur."realtyId"
+		 WHERE ur."id" = $1`,
+      [body.userRealtyId]
+    );
+
+    this.db.query(`UPDATE ${Tables.user}
+      SET "onHoldBalance" = "onHoldBalance" + $1
+      WHERE id = $2`, [res[0]]);
+
+    return await this.db.query<any>(`UPDATE ${Tables.userRealty}
       SET "reservedUserId" = $1
       WHERE id = $2`,
       [user.id, body.userRealtyId]
