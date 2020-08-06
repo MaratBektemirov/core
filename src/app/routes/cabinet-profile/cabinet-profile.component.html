@@ -1,1 +1,35 @@
-<router-outlet></router-outlet>
+<div *ngIf="baseComponentService.userService.user as user" class="fx">
+  <div style="width: 400px;">
+    <div class="fx fx-jc-between fx-al-items-center mb-0-5">
+      <div class="fs-1-3 light">Имя:</div>
+      <div class="fs-1-4">
+        {{user.name}}
+      </div>
+    </div>
+    <div class="fx fx-jc-between fx-al-items-center mb-0-5">
+      <div class="fs-1-3 light">Фамилия:</div>
+      <div class="fs-1-4">
+        {{user.surname}}
+      </div>
+    </div>
+    <div class="fx fx-jc-between fx-al-items-center mb1">
+      <div class="fs-1-3 light">Отчество:</div>
+      <div class="fs-1-4">
+        {{user.patronymic}}
+      </div>
+    </div>
+    <div class="fx fx-jc-between fx-al-items-center mb-0-5">
+      <div class="fs-1-3 light">Баланс:</div>
+      <div class="fs-1-4 bold">
+        {{user.balance | currency:'₽':true:'1.0-0'}}
+      </div>
+    </div>
+
+    <div class="fx fx-jc-between fx-al-items-center mb-0-5">
+      <div class="fs-1-3 light">На удержании:</div>
+      <div class="fs-1-4 bold">
+        {{user.onHoldBalance | currency:'₽':true:'1.0-0'}}
+      </div>
+    </div>
+  </div>
+</div>

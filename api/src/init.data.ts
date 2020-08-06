@@ -355,21 +355,23 @@ export async function writeAllData(connection: Connection) {
     ], connection);
 
     const realtiesArr = [
-      {user: users[0], realties: realties0},
-      {user: users[1], realties: realties1},
-      {user: users[2], realties: realties2},
+      {user: users[0], realties: realties0, count: 2},
+      {user: users[1], realties: realties1, count: 3},
+      {user: users[2], realties: realties2, count: 4},
     ];
 
-    for (const {user, realties} of realtiesArr) {
+    for (const {user, realties, count} of realtiesArr) {
       for (const realty of realties) {
-        await saveData(UserRealty, [
-          {
-            realtyId: realty.id,
-            userId: user.id,
-            startOwner: new Date('2019.12'),
-            space: realty.space,
-          }
-        ], connection);
+        for (let i = 0; i < count; i++) {
+          await saveData(UserRealty, [
+            {
+              realtyId: realty.id,
+              userId: user.id,
+              startOwner: new Date('2019.12'),
+              space: realty.space / count,
+            }
+          ], connection);
+        }
       }
     }
   });

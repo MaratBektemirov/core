@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '@app/services/api.service';
 import { HttpClient } from '@angular/common/http';
-import { RealtyUI, UserRealtyUI } from '@interfaces/ui';
+import { CabinetRealtyUICard, RealtyUI, UserRealtyShareUI } from '@interfaces/ui';
 import { realtyApiEndpoints } from '@endpoints/realty';
 
 @Injectable()
@@ -11,9 +11,9 @@ export class RealtyService {
   }
 
   public async user() {
-    const url = this.apiService.host(realtyApiEndpoints.client.user);
+    const url = this.apiService.host(realtyApiEndpoints.client.userObjects);
 
-    return await this.http.get<UserRealtyUI[]>(url).toPromise();
+    return await this.http.get<UserRealtyShareUI[]>(url).toPromise();
   }
 
   public async all() {
@@ -22,13 +22,25 @@ export class RealtyService {
     return await this.http.get<RealtyUI[]>(url).toPromise();
   }
 
-  getUserProfitPerMonth(realty: UserRealtyUI): number {
-    const rentRatePerPriceSpace = realty.rentRate / realty.space;
+  public async byId(id: number) {
+    const url = this.apiService.host(realtyApiEndpoints.client.byId);
 
-    return Math.floor(rentRatePerPriceSpace * realty.userSpace);
+    return await this.http.get<CabinetRealtyUICard>(url, {params: {id: id.toString()}}).toPromise();
   }
 
-  remaining(realty: UserRealtyUI): number {
-    return Math.floor((realty.userInvestments - realty.profitAllTime) / this.getUserProfitPerMonth(realty));
+  public async reserve(userRealtyId: number) {
+    const url = this.apiService.host(realtyApiEndpoints.client.reserve);
+
+    return await this.http.post(url, {userRealtyId}).toPromise();
   }
+
+  // getUserProfitPerMonth(realty: UserRealtyShareUI): number {
+  //   const rentRatePerPriceSpace = realty.rentRate / realty.space;
+  //
+  //   return Math.floor(rentRatePerPriceSpace * realty.userSpace);
+  // }
+  //
+  // remaining(realty: UserRealtyShareUI): number {
+  //   return Math.floor((realty.userInvestments - realty.profitAllTime) / this.getUserProfitPerMonth(realty));
+  // }
 }

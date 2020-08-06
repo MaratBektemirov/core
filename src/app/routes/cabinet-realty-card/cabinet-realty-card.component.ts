@@ -3,14 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BaseComponent } from '@app/base/base.component';
 import { BaseComponentService } from '@app/base/base-component.service';
 import { RealtyService } from '@app/services/realty.service';
-import { UserRealtyUI } from '@interfaces/ui';
-
-function getD(n: number) {
-  const d = new Date();
-  d.setMonth(d.getMonth() + n);
-
-  return d.toISOString();
-}
+import { CabinetRealtyUICard, RealtyUI } from '@interfaces/ui';
+import { IUserRealty } from '@interfaces/userRealty';
 
 @Component({
   selector: 'cabinet-realty-card',
@@ -21,7 +15,11 @@ function getD(n: number) {
 })
 export class CabinetRealtyCardComponent extends BaseComponent implements OnInit {
   subscriptions$ = [];
-  public realty: UserRealtyUI;
+  public realty: RealtyUI;
+  public myShares: IUserRealty[];
+  public shares: IUserRealty[];
+  public loaded = false;
+  public shareToReserve: IUserRealty;
   data: any;
   options: any;
 
@@ -34,8 +32,18 @@ export class CabinetRealtyCardComponent extends BaseComponent implements OnInit 
   }
 
   async ngOnInit() {
-    const realties = await this.realtyService.user();
-    this.realty = realties.find((r) => r.id === (this.route.snapshot.params['id'] * 1));
+    const card = await this.realtyService.byId(this.route.snapshot.params['id'] * 1);
+    this.loaded = true;
+    this.realty = card.realty;
+    this.myShares = card.shares.filter((s) => s.userId === this.baseComponentService.userService.user.id);
+    this.shares = card.shares.filter((s) => s.userId !== this.baseComponentService.userService.user.id);
+
+    function getD(n: number) {
+      const d = new Date();
+      d.setMonth(d.getMonth() + n);
+
+      return d.toISOString();
+    }
 
     const getData = (n) => {
       return {
@@ -72,6 +80,19 @@ export class CabinetRealtyCardComponent extends BaseComponent implements OnInit 
       },
       'height': '500px'
     };
+    this.cdr.detectChanges();
+  }
+
+  submitReserveShare(share: IUserRealty) {
+    this.realtyService.reserve(share.id);
+  }
+
+  reserveShare(share: IUserRealty) {
+    this.shareToReserve = share;
+  }
+
+  closeReserveModal() {
+    this.shareToReserve = null;
     this.cdr.detectChanges();
   }
 }

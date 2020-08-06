@@ -4,4 +4,5 @@ export interface IUserRealty {
   realtyId: number;
   space: number;
   startOwner: Date;
+  reservedUserId: number;
 }

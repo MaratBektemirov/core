@@ -30,7 +30,7 @@ import {
   ButtonModule, CheckboxModule, ContentSwitcherModule,
   GridModule,
   InputModule,
-  LinkModule,
+  LinkModule, ModalModule,
   NotificationModule,
   RadioModule, TableModule,
   TagModule
@@ -48,6 +48,7 @@ import { CommonModule } from '@angular/common';
 import { CabinetRealtyCardComponent } from '@app/routes/cabinet-realty-card/cabinet-realty-card.component';
 import { MomentPipe } from '@app/pipes/moment.pipe';
 import { ChartsModule } from '@carbon/charts-angular';
+import { PhonePipe } from '@app/pipes/phone.pipe';
 
 const Providers = [
   RegionService,
@@ -83,6 +84,7 @@ const Directives = [
 
 const Pipes = [
   MomentPipe,
+  PhonePipe,
 ];
 
 @NgModule({
@@ -124,7 +126,8 @@ const Pipes = [
     CheckboxModule,
     TableModule,
     ContentSwitcherModule,
-    ChartsModule
+    ChartsModule,
+    ModalModule
   ],
   providers: [
     environment.ENV_PROVIDERS,

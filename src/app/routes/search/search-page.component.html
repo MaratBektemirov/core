@@ -39,9 +39,11 @@
   </div>
   <div ibmCol [columnNumbers]="{'lg': 10, 'md': 10, 'sm': 3}">
     <div class="fx fx-wrap">
-      <div *ngFor="let item of realties" class="card-link-container">
+      <a *ngFor="let item of realties"
+         class="card-link-container"
+         [routerLink]="[paths.cabinetRealtyCard.getAbsoluteUrl(), item.id]">
         <realty-card [realty]="item"></realty-card>
-      </div>
+      </a>
     </div>
   </div>
 </div>

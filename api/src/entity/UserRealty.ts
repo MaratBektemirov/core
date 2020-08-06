@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 import { IUserRealty } from '@interfaces/userRealty';
+import { ColumnNumericTransformer } from '@api/transformers/numeric.transformer';
 
 @Entity()
 export class UserRealty implements IUserRealty {
@@ -15,6 +16,13 @@ export class UserRealty implements IUserRealty {
     @Column()
     userId: number;
 
-    @Column()
+    @Column('numeric', {
+      precision: 7,
+      scale: 2,
+      transformer: new ColumnNumericTransformer(),
+    })
     space: number;
+
+    @Column({nullable: true})
+    reservedUserId: number;
 }
