@@ -25,78 +25,131 @@
     </ibm-modal-footer>
   </ibm-modal>
 
-  <div class="fx fx-dir-col">
+  <div class="fx fx-dir-col" style="width: 500px;">
     <realty-card [realty]="realty" [userRealty]="true"></realty-card>
 
     <div class="pl1">
-      <ng-container *ngIf="myShares.length">
-        <div class="fs-1-4 mb1">Мои доли:</div>
-
-        <ng-container *ngFor="let share of myShares">
-          <div class="fx fx-jc-between fx-al-items-center mb-0-5">
-            <div>
-              <div class="fs-1-2">
-                {{share.space}} кв.м, {{((share.space / realty.space) * 100.0).toFixed(2)}} %
-              </div>
-
-              <div class="fs-1-2 mt-1 bold">
-                {{share.price | currency:'₽':true:'1.0-0'}}
-              </div>
-            </div>
-
-            <div class="fs-1-2">
-              {{share.price | currency:'₽':true:'1.0-0'}}
-            </div>
-          </div>
-        </ng-container>
-      </ng-container>
-
       <ng-container *ngIf="shares.length">
-        <div class="fs-1-4 mb1">Доли в продаже:</div>
+        <div class="fs-1-4 mb1">Доли:</div>
 
-        <ng-container *ngFor="let share of shares">
-          <div class="fx fx-jc-between fx-al-items-center mb-0-5" (click)="reserveShare(share)">
-            <div>
-              <div class="fs-1-2">
-                {{share.space}} кв.м, {{((share.space / realty.space) * 100.0).toFixed(2)}} %
-              </div>
+        <ibm-accordion>
+          <ng-container *ngFor="let share of shares">
+            <ng-container *ngIf="{my: share.userId === baseComponentService.userService.user.id,
+            reservedForMe: share.reservedUserId === baseComponentService.userService.user.id} as calc">
+              <ng-template #title>
+                <div style="position: relative;" class="fx fx-jc-between fx-stretch">
+                  <div *ngIf="calc.my" class="bold fs-1-1">
+                    Ваша доля
+                  </div>
 
-              <div class="fs-1-2 mt-1 bold">
-                {{share.price | currency:'₽':true:'1.0-0'}}
-              </div>
-            </div>
+                  <div *ngIf="calc.reservedForMe" class="bold fs-1-1">
+                    Забронировано вами
+                  </div>
 
-            <div>
-              <button ibmButton size="sm" class="pr1 fs-0-7">
-                Забронировать
-              </button>
-            </div>
-          </div>
-        </ng-container>
+                  <div *ngIf="!calc.reservedForMe && share.reservedUserId" class="bold fs-1-1">
+                    Забронировано
+                  </div>
+
+                  <div *ngIf="!calc.my && !share.reservedUserId" class="bold fs-1-1">
+                    В продаже
+                  </div>
+
+                  <div>
+                    <div>
+                      {{share.space + 'кв.м,' + ((share.space / realty.space) * 100.0).toFixed(2) + '%'}}
+                    </div>
+
+                    <div class="fs-1-2 mt-1 bold">
+                      {{share.price | currency:'₽':true:'1.0-0'}}
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+
+              <ibm-accordion-item [title]="title">
+
+                <div>
+                  <div *ngIf="calc.my && !share.reservedUserId">
+                    Ожидайте покупателя...
+                  </div>
+
+                  <div *ngIf="calc.reservedForMe">
+                    Ожидайте совершение сделки...
+                  </div>
+
+                  <div *ngIf="share.reservedUserId && !calc.reservedForMe">
+                    <div class="mb1 fs-1-1">Покупатель</div>
+
+                    <div class="fx fx-jc-between fx-al-items-center mb-0-5">
+                      <div class="fs-0-9 light">Имя:</div>
+                      <div class="fs-0-9">
+                        {{share.reservedName}}
+                      </div>
+                    </div>
+
+                    <div class="fx fx-jc-between fx-al-items-center mb-0-5">
+                      <div class="fs-0-9 light">Фамилия:</div>
+                      <div class="fs-0-9">
+                        {{share.reservedSurname}}
+                      </div>
+                    </div>
+
+                    <div class="fx fx-jc-between fx-al-items-center mb-0-5">
+                      <div class="fs-0-9 light">Телефон:</div>
+                      <div class="fs-0-9">
+                        {{share.reservedPhone}}
+                      </div>
+                    </div>
+                  </div>
+
+                  <button ibmButton size="sm" class="pr1 fs-0-7"
+                          (click)="reserveShare(share)"
+                          *ngIf="!share.reservedUserId && !calc.my">
+                    Забронировать
+                  </button>
+                </div>
+              </ibm-accordion-item>
+            </ng-container>
+          </ng-container>
+        </ibm-accordion>
       </ng-container>
-    </div>
 
-<!--    <div class="fx fx-dir-col card-container card-container&#45;&#45;m">-->
-<!--      <div class="fx fx-jc-between fx-al-items-center cabinet-realty-card-property">-->
-<!--        <div class="cabinet-realty-card-property-name">Доход (за все время):</div>-->
-<!--        <div class="cabinet-realty-card-property-value">{{realty.profitAllTime}} ₽</div>-->
-<!--      </div>-->
-<!--      <div class="fx fx-jc-between fx-al-items-center cabinet-realty-card-property">-->
-<!--        <div class="cabinet-realty-card-property-name">Вложения:</div>-->
-<!--        <div class="cabinet-realty-card-property-value">{{realty.userInvestments}} ₽</div>-->
-<!--      </div>-->
-<!--      <div class="fx fx-jc-between fx-al-items-center cabinet-realty-card-property">-->
-<!--        <div class="cabinet-realty-card-property-name">Месяцев владения:</div>-->
-<!--        <div class="cabinet-realty-card-property-value">{{(realty.startOwner | moment).fromNow(true)}}</div>-->
-<!--      </div>-->
-<!--      <div class="fx fx-jc-between fx-al-items-center cabinet-realty-card-property">-->
-<!--        <div class="cabinet-realty-card-property-name">Осталось до окупаемости (мес.):</div>-->
-<!--        <div class="cabinet-realty-card-property-value">{{realtyService.remaining(realty)}}</div>-->
-<!--      </div>-->
-<!--    </div>-->
+      <div *ngIf="isDealTime()" class="mt2">
+        <div class="fs-1-3 bold mb1">Финальная стадия сделки</div>
+
+        <div class="fs-1-1 mb1">Сейчас участники сделки знакомятся с договором.
+          Доступ к нему можно получить в карточке объекта</div>
+
+        <button ibmButton size="normal" class="fs-1-1">
+          Совершить сделку
+        </button>
+      </div>
+    </div>
   </div>
+
+  <!--    <div class="fx fx-dir-col card-container card-container&#45;&#45;m">-->
+  <!--      <div class="fx fx-jc-between fx-al-items-center cabinet-realty-card-property">-->
+  <!--        <div class="cabinet-realty-card-property-name">Доход (за все время):</div>-->
+  <!--        <div class="cabinet-realty-card-property-value">{{realty.profitAllTime}} ₽</div>-->
+  <!--      </div>-->
+  <!--      <div class="fx fx-jc-between fx-al-items-center cabinet-realty-card-property">-->
+  <!--        <div class="cabinet-realty-card-property-name">Вложения:</div>-->
+  <!--        <div class="cabinet-realty-card-property-value">{{realty.userInvestments}} ₽</div>-->
+  <!--      </div>-->
+  <!--      <div class="fx fx-jc-between fx-al-items-center cabinet-realty-card-property">-->
+  <!--        <div class="cabinet-realty-card-property-name">Месяцев владения:</div>-->
+  <!--        <div class="cabinet-realty-card-property-value">{{(realty.startOwner | moment).fromNow(true)}}</div>-->
+  <!--      </div>-->
+  <!--      <div class="fx fx-jc-between fx-al-items-center cabinet-realty-card-property">-->
+  <!--        <div class="cabinet-realty-card-property-name">Осталось до окупаемости (мес.):</div>-->
+  <!--        <div class="cabinet-realty-card-property-value">{{realtyService.remaining(realty)}}</div>-->
+  <!--      </div>-->
+  <!--    </div>-->
 
   <div class="container theme--white">
     <ibm-line-chart [data]="data" [options]="options" style="display: block;"></ibm-line-chart>
+  </div>
+
+  <div class="fx" *ngIf="{sub: updateObs | async}">
   </div>
 </div>

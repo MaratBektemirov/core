@@ -66,9 +66,14 @@ export class RealtyController {
     if (realty) {
       const shares = await this.db.query(`SELECT
         ur.*,
+        u.name AS "reservedName",
+        u.surname AS "reservedSurname",
+        u.phone AS "reservedPhone",
         ($1 * ur.space) AS "price"
       FROM
         ${Tables.userRealty} ur
+      LEFT JOIN ${Tables.user} u
+        ON u.id = ur."reservedUserId"
       WHERE ur."realtyId" = $2`, [realty.pricePerSpaceItem, realty.id]);
 
       return {

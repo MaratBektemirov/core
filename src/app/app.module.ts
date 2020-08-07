@@ -27,6 +27,7 @@ import { CabinetRealtyComponent } from '@app/routes/cabinet-realty/cabinet-realt
 import { NoContentComponent } from '@app/routes/no-content/no-content.component';
 import { PageComponent } from '@app/components/page/page.component';
 import {
+  AccordionModule,
   ButtonModule, CheckboxModule, ContentSwitcherModule,
   GridModule,
   InputModule,
@@ -49,6 +50,7 @@ import { CabinetRealtyCardComponent } from '@app/routes/cabinet-realty-card/cabi
 import { MomentPipe } from '@app/pipes/moment.pipe';
 import { ChartsModule } from '@carbon/charts-angular';
 import { PhonePipe } from '@app/pipes/phone.pipe';
+import { Renew20Module } from '@carbon/icons-angular/lib/renew/20';
 
 const Providers = [
   RegionService,
@@ -127,7 +129,9 @@ const Pipes = [
     TableModule,
     ContentSwitcherModule,
     ChartsModule,
-    ModalModule
+    ModalModule,
+    Renew20Module,
+    AccordionModule
   ],
   providers: [
     environment.ENV_PROVIDERS,

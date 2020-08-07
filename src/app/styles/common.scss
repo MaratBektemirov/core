@@ -38,6 +38,14 @@ body, html {
   border-radius: 4px;
 }
 
+.mini-block {
+  font-weight: 400;
+  line-height: 1.125rem;
+  letter-spacing: 0.16px;
+  padding: 0.5rem;
+  font-size: 0.6rem;
+}
+
 .bg_gold-90 {
   background-color: $gold-90;
 }
@@ -52,4 +60,20 @@ body, html {
 
 .bg_steel {
   background-color: $steel;
+}
+
+.bg_green-50 {
+  background-color: $green-50;
+}
+
+.bg_sky-blue-70 {
+  background-color: $sky-blue-70
+}
+
+.bg_cherry {
+  background-color: $cherry
+}
+
+.text_white {
+  color: #fff;
 }

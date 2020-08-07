@@ -5,6 +5,7 @@ import { BaseComponentService } from '@app/base/base-component.service';
 import { RealtyService } from '@app/services/realty.service';
 import { CabinetRealtyUICard, RealtyUI } from '@interfaces/ui';
 import { IUserRealty } from '@interfaces/userRealty';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'cabinet-realty-card',
@@ -16,27 +17,37 @@ import { IUserRealty } from '@interfaces/userRealty';
 export class CabinetRealtyCardComponent extends BaseComponent implements OnInit {
   subscriptions$ = [];
   public realty: RealtyUI;
-  public myShares: IUserRealty[];
   public shares: IUserRealty[];
   public loaded = false;
   public shareToReserve: IUserRealty;
+  public updateObs;
   data: any;
   options: any;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
               public realtyService: RealtyService,
-              private cdr: ChangeDetectorRef,
+              public cdr: ChangeDetectorRef,
               baseComponentService: BaseComponentService) {
     super(baseComponentService);
+
+    this.updateObs = this.baseComponentService.update.pipe(
+      map(async () => {
+        await this.updateCard();
+        this.cdr.detectChanges();
+      })
+    );
   }
 
-  async ngOnInit() {
+  async updateCard() {
     const card = await this.realtyService.byId(this.route.snapshot.params['id'] * 1);
     this.loaded = true;
     this.realty = card.realty;
-    this.myShares = card.shares.filter((s) => s.userId === this.baseComponentService.userService.user.id);
-    this.shares = card.shares.filter((s) => s.userId !== this.baseComponentService.userService.user.id);
+    this.shares = card.shares;
+  }
+
+  async ngOnInit() {
+    await this.updateCard();
 
     function getD(n: number) {
       const d = new Date();
@@ -94,5 +105,11 @@ export class CabinetRealtyCardComponent extends BaseComponent implements OnInit 
   closeReserveModal() {
     this.shareToReserve = null;
     this.cdr.detectChanges();
+  }
+
+  isDealTime() {
+    return this.shares.every((s) => {
+      return s.reservedUserId && s.userId === this.baseComponentService.userService.user.id;
+    });
   }
 }

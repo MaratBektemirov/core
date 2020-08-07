@@ -19,6 +19,9 @@
     </a>
   </ibm-header-navigation>
   <ibm-header-global *ngIf="state.isAuth">
+    <ibm-header-action title="action" (click)="baseComponentService.update.next()">
+      <svg ibmIconRenew20></svg>
+    </ibm-header-action>
     <ibm-header-action title="action">
       <svg ibmIconNotification20></svg>
     </ibm-header-action>
