@@ -39,7 +39,7 @@
               <ng-template #title>
                 <div style="position: relative;" class="fx fx-jc-between fx-stretch">
                   <div *ngIf="calc.my" class="bold fs-1-1">
-                    Ваша доля
+                    Вы продавец
                   </div>
 
                   <div *ngIf="calc.reservedForMe" class="bold fs-1-1">
@@ -69,6 +69,16 @@
               <ibm-accordion-item [title]="title">
 
                 <div>
+                  <div class="fx fx-jc-between fx-al-items-center cabinet-realty-card-property">
+                    <div class="cabinet-realty-card-property-name">Предположительный доход с аренды (мес.):</div>
+                    <div class="cabinet-realty-card-property-value">{{((realty.rentRate / realty.space) * share.space) | currency:'₽':true:'1.0-0'}}</div>
+                  </div>
+
+                  <div class="fx fx-jc-between fx-al-items-center cabinet-realty-card-property">
+                    <div class="cabinet-realty-card-property-name">Срок окупаемости (мес.):</div>
+                    <div class="cabinet-realty-card-property-value">{{share.remaining}}</div>
+                  </div>
+
                   <div *ngIf="calc.my && !share.reservedUserId">
                     Ожидайте покупателя...
                   </div>
@@ -139,7 +149,11 @@
         </div>
 
         <div *ngIf="allIsOk()">
-          <span class="fs-1-4 bold">Сделка совершена. Поздравляем вас с приобретением недвижимости</span>
+          <span class="fs-1-4 bold" *ngIf="isOwner()">Сделка совершена.
+            Поздравляем вас с продажей недвижимости</span>
+
+          <span class="fs-1-4 bold" *ngIf="!isOwner()">Сделка совершена.
+            Поздравляем вас с приобретением недвижимости</span>
 
           <div class="realty-icon-container">
             <svg ibmIconCertificateCheck20></svg>

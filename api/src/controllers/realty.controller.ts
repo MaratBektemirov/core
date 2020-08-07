@@ -76,17 +76,20 @@ export class RealtyController {
     const realty = res[0];
 
     if (realty) {
+      const rentRatePerSpaceItem = realty.rentRate / realty.space;
+
       const shares = await this.db.query(`SELECT
         ur.*,
         u.name AS "reservedName",
         u.surname AS "reservedSurname",
         u.phone AS "reservedPhone",
-        ($1 * ur.space) AS "price"
+        ($1 * ur.space) AS "price",
+        ROUND((($1 * ur.space)::float / ($3 * ur.space))::numeric,2)::float AS "remaining"
       FROM
         ${Tables.userRealty} ur
       LEFT JOIN ${Tables.user} u
         ON u.id = ur."reservedUserId"
-      WHERE ur."realtyId" = $2`, [realty.pricePerSpaceItem, realty.id]);
+      WHERE ur."realtyId" = $2`, [realty.pricePerSpaceItem, realty.id, rentRatePerSpaceItem]);
 
       const deals = await this.db.find(Tables.userDeal, {realtyId: realty.id});
 
