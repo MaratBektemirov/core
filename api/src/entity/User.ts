@@ -64,4 +64,7 @@ export class User implements IUser {
 
     @Column({nullable: true})
     registrationAddress: string;
+
+    @Column({nullable: true})
+    publicKey: string;
 }
