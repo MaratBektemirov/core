@@ -53,4 +53,7 @@ export class Realty implements IRealty {
 
   @Column()
   rentRate: number;
+
+  @Column({nullable: true})
+  cadastralNumber: string;
 }

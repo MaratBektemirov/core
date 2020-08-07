@@ -43,4 +43,25 @@ export class User implements IUser {
 
     @UpdateDateColumn({type: 'timestamp'})
     updatedAt: Date;
+
+    @Column({nullable: true})
+    birthDate: Date;
+
+    @Column({nullable: true})
+    birthPlace: string;
+
+    @Column({nullable: true})
+    passportDate: Date;
+
+    @Column({nullable: true})
+    passportIssuer: string;
+
+    @Column({nullable: true})
+    passportNumber: number;
+
+    @Column({nullable: true})
+    passportSerial: number;
+
+    @Column({nullable: true})
+    registrationAddress: string;
 }

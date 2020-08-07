@@ -16,5 +16,12 @@ export const GUEST_USER: UserUI = {
   phone: null,
   deals: null,
   createdAt: null,
-  updatedAt: null
+  updatedAt: null,
+  birthDate: null,
+  birthPlace: null,
+  passportNumber: null,
+  passportSerial: null,
+  passportIssuer: null,
+  passportDate: null,
+  registrationAddress: null
 };
