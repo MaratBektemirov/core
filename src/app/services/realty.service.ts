@@ -34,6 +34,18 @@ export class RealtyService {
     return await this.http.post(url, {userRealtyId}).toPromise();
   }
 
+  public pdfGetLink(realtyId: number) {
+    const url = this.apiService.host(realtyApiEndpoints.client.pdf);
+
+    return url + `?realtyId=${realtyId}`;
+  }
+
+  public async sign(realtyId: number) {
+    const url = this.apiService.host(realtyApiEndpoints.client.sign);
+
+    return await this.http.post(url, {realtyId}).toPromise();
+  }
+
   // getUserProfitPerMonth(realty: UserRealtyShareUI): number {
   //   const rentRatePerPriceSpace = realty.rentRate / realty.space;
   //

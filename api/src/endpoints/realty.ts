@@ -5,4 +5,6 @@ export const realtyApiEndpoints = new ApiEndpoint('realty', {
   all: 'all',
   byId: 'byId',
   reserve: 'reserve',
+  pdf: 'pdf',
+  sign: 'sign',
 });

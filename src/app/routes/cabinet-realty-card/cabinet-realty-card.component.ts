@@ -6,6 +6,7 @@ import { RealtyService } from '@app/services/realty.service';
 import { CabinetRealtyUICard, RealtyUI } from '@interfaces/ui';
 import { IUserRealty } from '@interfaces/userRealty';
 import { map } from 'rxjs/operators';
+import { IUserDeal } from '@interfaces/userDeal';
 
 @Component({
   selector: 'cabinet-realty-card',
@@ -18,9 +19,12 @@ export class CabinetRealtyCardComponent extends BaseComponent implements OnInit 
   subscriptions$ = [];
   public realty: RealtyUI;
   public shares: IUserRealty[];
+  public deals: IUserDeal[];
   public loaded = false;
   public shareToReserve: IUserRealty;
   public updateObs;
+  public agreement = false;
+  public disabledSign = false;
   data: any;
   options: any;
 
@@ -44,6 +48,7 @@ export class CabinetRealtyCardComponent extends BaseComponent implements OnInit 
     this.loaded = true;
     this.realty = card.realty;
     this.shares = card.shares;
+    this.deals = card.deals;
   }
 
   async ngOnInit() {
@@ -107,9 +112,25 @@ export class CabinetRealtyCardComponent extends BaseComponent implements OnInit 
     this.cdr.detectChanges();
   }
 
+  allIsOk(): boolean {
+    return (this.shares.length + 1) === this.deals.length;
+  }
+
   isDealTime() {
-    return this.shares.every((s) => {
-      return s.reservedUserId && s.userId === this.baseComponentService.userService.user.id;
-    });
+    return this.shares.every((s) => s.reservedUserId);
+  }
+
+  isOwner() {
+    return this.shares.every((s) => s.userId === this.baseComponentService.userService.user.id);
+  }
+
+  download(): string {
+    return this.realtyService.pdfGetLink(this.realty.id);
+  }
+
+  sign() {
+    this.realtyService.sign(this.realty.id);
+    this.disabledSign = true;
+    this.cdr.detectChanges();
   }
 }

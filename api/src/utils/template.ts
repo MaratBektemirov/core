@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+export function template() {
+  return `<!DOCTYPE html>
 <html>
 <head>
   <mate charest="utf-8" />
@@ -71,3 +72,5 @@
 {{/each}}
 </body>
 </html>
+`;
+}

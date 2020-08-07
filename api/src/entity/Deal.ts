@@ -13,5 +13,5 @@ export class Deal implements IDeal {
   date: Date;
 
   @Column()
-  userRealtyId: number;
+  realtyId: number;
 }

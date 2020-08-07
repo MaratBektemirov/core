@@ -1,6 +1,6 @@
 export interface IDeal {
   id: number;
-  userRealtyId: number;
+  realtyId: number;
   agreementId: number; /**< reference to agreement document */
   date: Date;
 }

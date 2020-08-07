@@ -2,6 +2,7 @@ import { IUser, IUserAccessToken, IUserRole } from '@interfaces/user';
 import { IData } from '@interfaces/data';
 import { IUserRealty } from '@interfaces/userRealty';
 import { IRealty } from '@interfaces/realty';
+import { IUserDeal } from '@interfaces/userDeal';
 
 export enum Tables {
   user = 'public.user',
@@ -9,7 +10,8 @@ export enum Tables {
   userRole = 'public.user_role',
   data = 'public.data',
   userRealty = 'public.user_realty',
-  realty = 'public.realty'
+  realty = 'public.realty',
+  userDeal = 'public.user_deal',
 }
 
 export interface TablesSpec {
@@ -19,4 +21,5 @@ export interface TablesSpec {
   [Tables.data]: IData;
   [Tables.userRealty]: IUserRealty;
   [Tables.realty]: IRealty;
+  [Tables.userDeal]: IUserDeal;
 }

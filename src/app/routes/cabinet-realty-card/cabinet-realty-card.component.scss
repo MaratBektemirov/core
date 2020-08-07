@@ -14,3 +14,13 @@
 .cabinet-realty-card-property-value {
   font-size: 1.2rem;
 }
+
+.realty-icon-container {
+  svg {
+    will-change: transform;
+    width: 100%;
+    height: 100px;
+    fill: #2bca7d;
+    display: block;
+  }
+}

@@ -30,7 +30,7 @@
 // import 'core-js/features/number';
 // import 'core-js/features/math';
 // import 'core-js/features/string';
-// import 'core-js/features/date';
+// import 'core-js/features/createdAt';
 // import 'core-js/features/array';
 // import 'core-js/features/regexp';
 // import 'core-js/features/map';

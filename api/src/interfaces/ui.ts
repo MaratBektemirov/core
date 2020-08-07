@@ -4,6 +4,7 @@ import { IRealty, IRealtyMetro } from '@interfaces/realty';
 import { IPhoto } from '@interfaces/photo';
 import { IMetro } from '@interfaces/metro';
 import { IUserRealty } from '@interfaces/userRealty';
+import { IUserDeal } from '@interfaces/userDeal';
 
 export interface UserUI extends Omit<IUser, 'password'> {
 
@@ -38,4 +39,5 @@ export interface MessageUI extends Message {
 export interface CabinetRealtyUICard {
   realty: RealtyUI;
   shares: IUserRealty[];
+  deals: IUserDeal[];
 }

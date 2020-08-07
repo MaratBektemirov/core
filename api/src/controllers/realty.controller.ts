@@ -1,16 +1,28 @@
-import { BadRequestException, Body, Controller, Get, Post, Query, Req } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Get, Header, HttpCode, HttpStatus, Post, Query, Req, Res } from '@nestjs/common';
 import { DbService } from '@api/services/db.service';
 import { UsersService } from '@api/services/users.service';
 import { TokenService } from '@api/services/token.service';
 import { realtyApiEndpoints } from '@endpoints/realty';
 import { RealtyUI, UserRealtyShareUI } from '@interfaces/ui';
 import { Tables } from '@api/tables';
+import { IUser } from '@interfaces/user';
 
 @Controller(realtyApiEndpoints.prefix)
 export class RealtyController {
   constructor(private db: DbService,
               private tokenService: TokenService,
               private usersService: UsersService) {
+  }
+
+  @Post(realtyApiEndpoints.api.sign)
+  public async sign(@Body() body, @Req() req) {
+    const user = await this.usersService.getUserByTokenId(req.headers['token-id']);
+
+    const res = await this.db.insert(Tables.userDeal, {
+      userId: user.id, realtyId: body.realtyId, checksum: 'e53815e8c095e270c6560be1bb76a65d',
+    });
+
+    return res[0];
   }
 
   @Post(realtyApiEndpoints.api.reserve)
@@ -27,7 +39,7 @@ export class RealtyController {
 
     this.db.query(`UPDATE ${Tables.user}
       SET "onHoldBalance" = "onHoldBalance" + $1
-      WHERE id = $2`, [res[0]]);
+      WHERE id = $2`, [res[0].price]);
 
     return await this.db.query<any>(`UPDATE ${Tables.userRealty}
       SET "reservedUserId" = $1
@@ -76,9 +88,12 @@ export class RealtyController {
         ON u.id = ur."reservedUserId"
       WHERE ur."realtyId" = $2`, [realty.pricePerSpaceItem, realty.id]);
 
+      const deals = await this.db.find(Tables.userDeal, {realtyId: realty.id});
+
       return {
         realty: res[0],
         shares,
+        deals,
       };
     } else {
       throw new BadRequestException('Realty not found');
@@ -117,5 +132,23 @@ export class RealtyController {
     }
 
     return await this.db.query<UserRealtyShareUI[]>(query, queryParams);
+  }
+
+  @Get(realtyApiEndpoints.api.pdf)
+  @HttpCode(HttpStatus.OK)
+  @Header('Content-Type', 'application/pdf')
+  @Header('Content-Disposition', 'attachment; filename=document.pdf')
+  async pdf(
+    @Query('realtyId') realtyId,
+    @Res() res,
+  ) {
+    const realty = await this.db.find(Tables.realty, {id: realtyId});
+    const userRealtyList = await this.db.find(Tables.userRealty, {realtyId});
+    const owner = await this.db.find(Tables.user, {id: userRealtyList[0].userId});
+
+    const customersWhere = userRealtyList.map((ur) => 'u.id = ' + ur.reservedUserId).join(' OR ');
+    const customers = await this.db.query<IUser[]>(`SELECT * FROM ${Tables.user} u WHERE ${customersWhere}`, []);
+
+    this.usersService.createAgreement(owner[0], customers, realty[0], res);
   }
 }

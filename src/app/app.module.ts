@@ -51,6 +51,8 @@ import { MomentPipe } from '@app/pipes/moment.pipe';
 import { ChartsModule } from '@carbon/charts-angular';
 import { PhonePipe } from '@app/pipes/phone.pipe';
 import { Renew20Module } from '@carbon/icons-angular/lib/renew/20';
+import { CertificateCheckModule } from '@carbon/icons-angular/lib';
+import { CertificateCheck20Module } from '@carbon/icons-angular/lib/certificate--check/20';
 
 const Providers = [
   RegionService,
@@ -131,7 +133,9 @@ const Pipes = [
     ChartsModule,
     ModalModule,
     Renew20Module,
-    AccordionModule
+    AccordionModule,
+    CertificateCheckModule,
+    CertificateCheck20Module
   ],
   providers: [
     environment.ENV_PROVIDERS,
