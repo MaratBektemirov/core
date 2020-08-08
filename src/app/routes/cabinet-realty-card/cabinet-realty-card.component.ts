@@ -25,7 +25,8 @@ export class CabinetRealtyCardComponent extends BaseComponent implements OnInit 
   public shareToReserve: IUserRealty;
   public updateObs;
   public agreement = false;
-  public disabledSign = false;
+  public signIsSended = false;
+  public signIsNotValid = false;
   data: any;
   options: any;
 
@@ -131,7 +132,7 @@ export class CabinetRealtyCardComponent extends BaseComponent implements OnInit 
 
   sign() {
     this.realtyService.sign(this.realty.id);
-    this.disabledSign = true;
+    this.signIsSended = true;
     this.cdr.detectChanges();
   }
 }

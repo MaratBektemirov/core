@@ -133,6 +133,19 @@
           <div class="fx fx-dir-col">
             <a ibmLink [href]="download()" class="fs-1-1">Получить договор</a>
 
+            <ibm-label
+              class="mb1"
+              [helperText]=""
+              [invalid]="signIsNotValid"
+              [invalidText]="'Ваша подпись не прошла проверку'">
+              Электронно-цифровая подпись
+              <textarea
+                ibmTextArea
+                [invalid]="signIsNotValid"
+                [disabled]="signIsSended"
+                aria-label="textarea"></textarea>
+            </ibm-label>
+
             <div class="mb2">
               <ibm-checkbox [(ngModel)]="agreement">
                 Я прочитал договор и полностью согласен с ним
@@ -142,7 +155,7 @@
             <button ibmButton size="normal"
                     class="fs-1-1"
                     (click)="sign()"
-                    [disabled]="!agreement || disabledSign">
+                    [disabled]="!agreement || signIsSended">
               <span>Совершить сделку</span>
             </button>
           </div>

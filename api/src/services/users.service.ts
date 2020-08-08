@@ -7,10 +7,11 @@ import { IUser } from '@interfaces/user';
 import * as moment from 'moment';
 import * as Handlebars from 'handlebars';
 import * as pdf from 'html-pdf';
-import * as NodeRSA from 'node-rsa';
+import NodeRSA from 'node-rsa';
 import { IRealty } from '@interfaces/realty';
 import { template } from '@utils/template';
 
+// tslint:disable-next-line:no-require-imports
 const fs = require('fs').promises;
 
 

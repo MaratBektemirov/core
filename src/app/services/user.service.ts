@@ -12,7 +12,7 @@ import paths from '@paths/client';
 @Injectable()
 export class UserService {
   get user(): UserUI {
-    const user = localStorage.getItem('user');
+    const user = sessionStorage.getItem('user');
 
     return JSON.parse(user);
   }
@@ -20,11 +20,11 @@ export class UserService {
   set user(user: UserUI) {
     const $user = JSON.stringify(user);
 
-    localStorage.setItem('user', $user);
+    sessionStorage.setItem('user', $user);
   }
 
   get token(): IUserAccessToken {
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
 
     return JSON.parse(token);
   }
@@ -32,7 +32,7 @@ export class UserService {
   set token(token: IUserAccessToken) {
     const $token = JSON.stringify(token);
 
-    localStorage.setItem('token', $token);
+    sessionStorage.setItem('token', $token);
   }
 
   constructor(private apiService: ApiService,
@@ -59,8 +59,8 @@ export class UserService {
     const url = this.apiService.host(usersApiEndpoints.client.logout);
     await this.http.post(url, {}).toPromise();
 
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
+    sessionStorage.removeItem('user');
+    sessionStorage.removeItem('token');
 
     this.user = Object.assign({}, GUEST_USER);
     this.router.navigateByUrl(paths.login.getAbsoluteUrl());
