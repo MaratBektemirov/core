@@ -4,17 +4,24 @@ import { TokenService } from '@api/services/token.service';
 import { Tables } from '@api/tables';
 import { IUser } from '@interfaces/user';
 
-import * as fs from 'fs';
 import * as moment from 'moment';
 import * as Handlebars from 'handlebars';
 import * as pdf from 'html-pdf';
+import * as NodeRSA from 'node-rsa';
 import { IRealty } from '@interfaces/realty';
 import { template } from '@utils/template';
+
+const fs = require('fs').promises;
+
 
 @Injectable()
 export class UsersService {
 
   constructor(private db: DbService, private tokenService: TokenService) {
+    // this.verifySignature(
+    //   '/home/iskandar/Desktop/hackaton/core/crypto/hello',
+    //   'HF0/HLSCCzEO5Mh+s4Yjr2tKHs0ieUek4PCi8SteVYw+7rAsayMb+08caz9/PmqXuPyiIEMShPYvi0/pjJoTpg==',
+    //   '-----BEGIN PUBLIC KEY-----MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBANf3eSbnAWPwylSnbHfL7CttJ6I/ZL8iDCcl62/roZeFf9gcgIyB5rmjqME+AnQ8ETTDSSo5NcFOJQ91laYPdlMCAwEAAQ==-----END PUBLIC KEY-----').then((data) => console.log(data));
   }
 
   public async getUserRoles(userId: number) {
@@ -71,5 +78,18 @@ export class UsersService {
     pdf.create(html, options).toStream(function(err, stream) {
       stream.pipe(res);
     });
+  }
+
+  async readFile(pathToFile) {
+    const data = await fs.readFile(pathToFile);
+
+    return new Buffer(data);
+  }
+
+  public async verifySignature(pathToFile, b64signature, publicKey) {
+    const key = new NodeRSA(publicKey);
+    const fileBuffer = await this.readFile(pathToFile);
+
+    return key.verify(fileBuffer, b64signature, 'binary', 'base64');
   }
 }

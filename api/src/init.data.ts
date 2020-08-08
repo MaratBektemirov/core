@@ -357,7 +357,8 @@ export async function writeAllData(connection: Connection) {
         passportDate: new Date('2015-07-10'),
         registrationAddress: 'г. Москва, ул. Миллионная, д. 11, корп. 1, кв. 100',
         birthDate: new Date('1994-02-17'),
-        birthPlace: 'г. Москва'
+        birthPlace: 'г. Москва',
+        publicKey: '-----BEGIN PUBLIC KEY-----MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJJK+Toh3dg58doz8TUreIAr7OgoumMDKpBbKtsT2c7edvZTyXJDUPFIb36T+X3ll3XeL/VkcdGuOGUYZPw0JXcCAwEAAQ==-----END PUBLIC KEY-----'
       },
       {
         phone: '79621234568',
@@ -373,7 +374,8 @@ export async function writeAllData(connection: Connection) {
         passportDate: new Date('2015-07-10'),
         registrationAddress: 'г. Москва, ул. Кировоградская, д. 17, кв. 555',
         birthDate: new Date('1986-10-08'),
-        birthPlace: 'г. Москва'
+        birthPlace: 'г. Москва',
+        publicKey: '-----BEGIN PUBLIC KEY-----MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALQX9PzIpodwwft4v/lg9g4wrO6HgM/QEBZjNT9CugxfGcwS5KAuSzPrv3ZIiSqNX/KspQVZdqXASdtlOkXVwl8CAwEAAQ==-----END PUBLIC KEY-----'
       },
       {
         phone: '79621234569',
@@ -389,7 +391,8 @@ export async function writeAllData(connection: Connection) {
         passportDate: new Date('2015-07-10'),
         registrationAddress: 'г. Москва, ул. Кировоградская, д. 17, кв. 555',
         birthDate: new Date('1986-10-08'),
-        birthPlace: 'г. Москва'
+        birthPlace: 'г. Москва',
+        publicKey: '-----BEGIN PUBLIC KEY-----MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAMDmicHWlY6uyZGq1juE3V5X0o3q2KZNVgn7aG+3l95NopeO4g1MGgm/ADmwyN/rtBcolrOCMc6b7DBWzTeKzZECAwEAAQ==-----END PUBLIC KEY-----'
       }
     ], connection);
 

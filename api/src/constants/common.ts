@@ -23,5 +23,6 @@ export const GUEST_USER: UserUI = {
   passportSerial: null,
   passportIssuer: null,
   passportDate: null,
-  registrationAddress: null
+  registrationAddress: null,
+  publicKey: null
 };

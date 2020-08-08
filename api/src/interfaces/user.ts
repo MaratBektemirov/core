@@ -36,6 +36,8 @@ export interface IUser {
   passportIssuer: string;
   passportDate: Date;
   registrationAddress: string;
+
+  publicKey: string;
 }
 
 export interface IUserAccessToken {
