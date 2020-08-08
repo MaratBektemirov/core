@@ -7,6 +7,7 @@ import { CabinetRealtyUICard, RealtyUI } from '@interfaces/ui';
 import { IUserRealty } from '@interfaces/userRealty';
 import { map } from 'rxjs/operators';
 import { IUserDeal } from '@interfaces/userDeal';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'cabinet-realty-card',
@@ -113,7 +114,7 @@ export class CabinetRealtyCardComponent extends BaseComponent implements OnInit 
   }
 
   allIsOk(): boolean {
-    return (this.shares.length + 1) === this.deals.length;
+    return (_.uniq(this.shares.map((d) => d.userId)).length + 1) === _.uniq(this.deals.map((d) => d.userId)).length;
   }
 
   isDealTime() {

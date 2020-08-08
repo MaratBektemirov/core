@@ -107,6 +107,7 @@
     "http-server": "^0.12.1",
     "ie-shim": "^0.1.0",
     "libphonenumber-js": "^1.7.56",
+    "lodash": "^4.17.19",
     "moment": "^2.27.0",
     "reflect-metadata": "^0.1.12",
     "rxjs": "^6.5.4",
