@@ -6,6 +6,7 @@ import { realtyApiEndpoints } from '@endpoints/realty';
 import { RealtyUI, UserRealtyShareUI } from '@interfaces/ui';
 import { Tables } from '@api/tables';
 import { IUser } from '@interfaces/user';
+import * as fs from 'fs';
 
 @Controller(realtyApiEndpoints.prefix)
 export class RealtyController {
@@ -18,11 +19,22 @@ export class RealtyController {
   public async sign(@Body() body, @Req() req) {
     const user = await this.usersService.getUserByTokenId(req.headers['token-id']);
 
-    const res = await this.db.insert(Tables.userDeal, {
-      userId: user.id, realtyId: body.realtyId, checksum: 'e53815e8c095e270c6560be1bb76a65d',
-    });
+    const doc = await this.db.find(Tables.document, {realtyId: body.realtyId});
 
-    return res[0];
+    const isOk = this.usersService.verifySignature(doc[0].path, body.sign, user.publicKey);
+
+    if (isOk) {
+      const res = await this.db.insert(Tables.userDeal, {
+        userId: user.id,
+        realtyId: body.realtyId,
+        documentId: doc[0].id,
+        sign: body.sign
+      });
+
+      return res[0];
+    } else {
+      throw new BadRequestException('Sign is bad');
+    }
   }
 
   @Post(realtyApiEndpoints.api.reserve)
@@ -140,7 +152,7 @@ export class RealtyController {
   @Get(realtyApiEndpoints.api.pdf)
   @HttpCode(HttpStatus.OK)
   @Header('Content-Type', 'application/pdf')
-  @Header('Content-Disposition', 'attachment; filename=document.pdf')
+  @Header('Content-Disposition', 'attachment;')
   async pdf(
     @Query('realtyId') realtyId,
     @Res() res,
@@ -148,10 +160,23 @@ export class RealtyController {
     const realty = await this.db.find(Tables.realty, {id: realtyId});
     const userRealtyList = await this.db.find(Tables.userRealty, {realtyId});
     const owner = await this.db.find(Tables.user, {id: userRealtyList[0].userId});
+    const document = await this.db.find(Tables.document, {realtyId});
 
     const customersWhere = userRealtyList.map((ur) => 'u.id = ' + ur.reservedUserId).join(' OR ');
     const customers = await this.db.query<IUser[]>(`SELECT * FROM ${Tables.user} u WHERE ${customersWhere}`, []);
 
-    this.usersService.createAgreement(owner[0], customers, realty[0], res);
+    let docStream;
+
+    if (document[0]) {
+      docStream = fs.createReadStream(document[0].path);
+    } else {
+      docStream = await this.usersService.createAgreementStream(owner[0], customers, realty[0]);
+      const path = `./documents/${realtyId}-${Date.now()}.pdf`;
+      await this.db.insert(Tables.document, {realtyId, path});
+      const writeFileStream = fs.createWriteStream(path);
+      docStream.pipe(writeFileStream);
+    }
+
+    docStream.pipe(res);
   }
 }

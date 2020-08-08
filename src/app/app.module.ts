@@ -53,6 +53,7 @@ import { PhonePipe } from '@app/pipes/phone.pipe';
 import { Renew20Module } from '@carbon/icons-angular/lib/renew/20';
 import { CertificateCheckModule } from '@carbon/icons-angular/lib';
 import { CertificateCheck20Module } from '@carbon/icons-angular/lib/certificate--check/20';
+import { CheckmarkFilled20Module } from '@carbon/icons-angular/lib/checkmark--filled/20';
 
 const Providers = [
   RegionService,
@@ -135,7 +136,8 @@ const Pipes = [
     Renew20Module,
     AccordionModule,
     CertificateCheckModule,
-    CertificateCheck20Module
+    CertificateCheck20Module,
+    CheckmarkFilled20Module
   ],
   providers: [
     environment.ENV_PROVIDERS,

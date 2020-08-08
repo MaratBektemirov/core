@@ -13,8 +13,8 @@ export class Document implements IDocument {
     @UpdateDateColumn({type: 'timestamp'})
     updatedAt: Date;
 
-    @Column()
-    checksum: string;
+    @Column({unique: true})
+    realtyId: number;
 
     @Column()
     path: string;

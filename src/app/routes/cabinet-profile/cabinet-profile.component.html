@@ -1,5 +1,7 @@
+<div class="fs-1-6 bold mb2">Профиль пользователя</div>
+
 <div *ngIf="baseComponentService.userService.user as user" class="fx">
-  <div style="width: 400px;">
+  <div style="width: 600px;">
     <div class="fx fx-jc-between fx-al-items-center mb-0-5">
       <div class="fs-1-3 light">Имя:</div>
       <div class="fs-1-4">
@@ -29,6 +31,16 @@
       <div class="fs-1-3 light">На удержании:</div>
       <div class="fs-1-4 bold">
         {{user.onHoldBalance | currency:'₽':true:'1.0-0'}}
+      </div>
+    </div>
+
+    <div class="fx fx-jc-between fx-al-items-center mb-0-5">
+      <div class="fs-1-3 light">Цифровая-электронная подпись:</div>
+      <div class="fs-1-4 bold fx fx-al-items-center">
+        Активна
+        <span class="cabinet-profile-sign pl1">
+          <svg ibmIconCheckmarkFilled20 fill="#2bca7d"></svg>
+        </span>
       </div>
     </div>
   </div>

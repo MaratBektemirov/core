@@ -40,10 +40,10 @@ export class RealtyService {
     return url + `?realtyId=${realtyId}`;
   }
 
-  public async sign(realtyId: number) {
+  public async sign(realtyId: number, sign: string) {
     const url = this.apiService.host(realtyApiEndpoints.client.sign);
 
-    return await this.http.post(url, {realtyId}).toPromise();
+    return await this.http.post(url, {realtyId, sign}).toPromise();
   }
 
   // getUserProfitPerMonth(realty: UserRealtyShareUI): number {

@@ -26,6 +26,8 @@
   </ibm-modal>
 
   <div class="fx fx-dir-col" style="width: 500px;">
+    <div class="fs-1-6 bold mb2">Карточка объекта</div>
+
     <realty-card [realty]="realty" [userRealty]="true"></realty-card>
 
     <div class="pl1">
@@ -43,11 +45,21 @@
                   </div>
 
                   <div *ngIf="calc.reservedForMe" class="bold fs-1-1">
-                    Забронировано вами
+                    <span *ngIf="findDealForShare(share)">
+                      Подписано вами
+                    </span>
+                    <span *ngIf="!findDealForShare(share)">
+                      Забронировано вами
+                    </span>
                   </div>
 
                   <div *ngIf="!calc.reservedForMe && share.reservedUserId" class="bold fs-1-1">
-                    Забронировано
+                    <span *ngIf="findDealForShare(share)">
+                      Подписано
+                    </span>
+                    <span *ngIf="!findDealForShare(share)">
+                      Забронировано
+                    </span>
                   </div>
 
                   <div *ngIf="!calc.my && !share.reservedUserId" class="bold fs-1-1">
@@ -141,6 +153,7 @@
               Электронно-цифровая подпись
               <textarea
                 ibmTextArea
+                [formControl]="signControl"
                 [invalid]="signIsNotValid"
                 [disabled]="signIsSended"
                 aria-label="textarea"></textarea>
@@ -155,7 +168,7 @@
             <button ibmButton size="normal"
                     class="fs-1-1"
                     (click)="sign()"
-                    [disabled]="!agreement || signIsSended">
+                    [disabled]="!isValid() || signIsSended">
               <span>Совершить сделку</span>
             </button>
           </div>

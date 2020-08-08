@@ -41,7 +41,7 @@ export class UsersService {
     }
   }
 
-  public createAgreement(owner: IUser, customers: IUser[], realty: IRealty, res) {
+  public createAgreementStream(owner: IUser, customers: IUser[], realty: IRealty) {
     const options = {
       format: 'A4',
       orientation: 'portrait',
@@ -76,8 +76,10 @@ export class UsersService {
 
     const html = Handlebars.compile(document.html)(document.data);
 
-    pdf.create(html, options).toStream(function(err, stream) {
-      stream.pipe(res);
+    return new Promise((resolve, reject) => {
+      pdf.create(html, options).toStream(function(err, stream) {
+        resolve(stream);
+      });
     });
   }
 

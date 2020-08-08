@@ -32,6 +32,7 @@ export interface IRealty {
   utilityBillCost: number;
   rentRate: number;
   photoId: number;
+  photoUrl: string;
   cadastralNumber: string;
   createdAt: Date;
   updatedAt: Date;

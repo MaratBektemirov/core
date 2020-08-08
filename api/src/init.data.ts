@@ -44,6 +44,7 @@ export async function writeAllData(connection: Connection) {
   writeData(connection, 'initData', async () => {
     const realties0 = await saveData(Realty, [
       {
+        photoUrl: '/assets/images/stock-photo-135205347.jpg',
         address: 'г. Казань, ул. Пушкина д.105',
         cityId: 0,
         conference: false,
@@ -60,6 +61,7 @@ export async function writeAllData(connection: Connection) {
         priceIncreasePerMonth: 1,
         cadastralNumber: '50:08:01:05050:001',
       }, {
+        photoUrl: '/assets/images/stock-photo-182024669.jpg',
         address: 'г. Казань, ул. Пушкина д.25',
         cityId: 0,
         conference: true,
@@ -76,6 +78,7 @@ export async function writeAllData(connection: Connection) {
         priceIncreasePerMonth: 1,
         cadastralNumber: '50:08:01:05050:002',
       }, {
+        photoUrl: '/assets/images/stock-photo-182024725.jpg',
         address: 'г. Казань, ул. Пушкина д.33',
         cityId: 0,
         conference: false,
@@ -92,6 +95,7 @@ export async function writeAllData(connection: Connection) {
         priceIncreasePerMonth: 1,
         cadastralNumber: '50:08:01:05050:003',
       }, {
+        photoUrl: '/assets/images/stock-photo-211386375.jpg',
         address: 'г. Казань, ул. Пушкина д.25',
         cityId: 0,
         conference: false,
@@ -108,6 +112,7 @@ export async function writeAllData(connection: Connection) {
         priceIncreasePerMonth: 1,
         cadastralNumber: '50:08:01:05050:003',
       }, {
+        photoUrl: '/assets/images/stock-photo-230634153.jpg',
         address: 'г. Казань, ул. Ершова д.28',
         cityId: 0,
         conference: false,
@@ -124,6 +129,7 @@ export async function writeAllData(connection: Connection) {
         priceIncreasePerMonth: 1,
         cadastralNumber: '50:08:01:05050:004',
       }, {
+        photoUrl: '/assets/images/stock-photo-135205347.jpg',
         address: 'г. Казань, ул. Пушкина д.22',
         cityId: 0,
         conference: false,
@@ -144,6 +150,7 @@ export async function writeAllData(connection: Connection) {
 
     const realties1 = await saveData(Realty, [
       {
+        photoUrl: '/assets/images/stock-photo-135205347.jpg',
         address: 'г. Казань, ул. Адоратского д.105',
         cityId: 0,
         conference: false,
@@ -160,6 +167,7 @@ export async function writeAllData(connection: Connection) {
         priceIncreasePerMonth: 1,
         cadastralNumber: '50:08:01:05050:006',
       }, {
+        photoUrl: '/assets/images/stock-photo-135205347.jpg',
         address: 'г. Казань, ул. Адоратского д.25',
         cityId: 0,
         conference: true,
@@ -176,6 +184,7 @@ export async function writeAllData(connection: Connection) {
         priceIncreasePerMonth: 1,
         cadastralNumber: '50:08:01:05050:006',
       }, {
+        photoUrl: '/assets/images/stock-photo-135205347.jpg',
         address: 'г. Казань, ул. Адоратского д.33',
         cityId: 0,
         conference: false,
@@ -192,6 +201,7 @@ export async function writeAllData(connection: Connection) {
         priceIncreasePerMonth: 1,
         cadastralNumber: '50:08:01:05050:007',
       }, {
+        photoUrl: '/assets/images/stock-photo-135205347.jpg',
         address: 'г. Казань, ул. Адоратского д.25',
         cityId: 0,
         conference: false,
@@ -208,6 +218,7 @@ export async function writeAllData(connection: Connection) {
         priceIncreasePerMonth: 1,
         cadastralNumber: '50:08:01:05050:008',
       }, {
+        photoUrl: '/assets/images/stock-photo-135205347.jpg',
         address: 'г. Казань, ул. Адоратского д.28',
         cityId: 0,
         conference: false,
@@ -224,6 +235,7 @@ export async function writeAllData(connection: Connection) {
         priceIncreasePerMonth: 1,
         cadastralNumber: '50:08:01:05050:009',
       }, {
+        photoUrl: '/assets/images/stock-photo-135205347.jpg',
         address: 'г. Казань, ул. Адоратского д.22',
         cityId: 0,
         conference: false,
@@ -244,6 +256,7 @@ export async function writeAllData(connection: Connection) {
 
     const realties2 = await saveData(Realty, [
       {
+        photoUrl: '/assets/images/stock-photo-135205347.jpg',
         address: 'г. Казань, ул. Чистопольская д.105',
         cityId: 0,
         conference: false,
@@ -260,6 +273,7 @@ export async function writeAllData(connection: Connection) {
         priceIncreasePerMonth: 1,
         cadastralNumber: '50:08:01:05050:011',
       }, {
+        photoUrl: '/assets/images/stock-photo-135205347.jpg',
         address: 'г. Казань, ул. Чистопольская д.25',
         cityId: 0,
         conference: true,
@@ -276,6 +290,7 @@ export async function writeAllData(connection: Connection) {
         priceIncreasePerMonth: 1,
         cadastralNumber: '50:08:01:05050:012',
       }, {
+        photoUrl: '/assets/images/stock-photo-135205347.jpg',
         address: 'г. Казань, ул. Чистопольская д.33',
         cityId: 0,
         conference: false,
@@ -292,6 +307,7 @@ export async function writeAllData(connection: Connection) {
         priceIncreasePerMonth: 1,
         cadastralNumber: '50:08:01:05050:013',
       }, {
+        photoUrl: '/assets/images/stock-photo-135205347.jpg',
         address: 'г. Казань, ул. Чистопольская д.25',
         cityId: 0,
         conference: false,
@@ -308,6 +324,7 @@ export async function writeAllData(connection: Connection) {
         priceIncreasePerMonth: 1,
         cadastralNumber: '50:08:01:05050:014',
       }, {
+        photoUrl: '/assets/images/stock-photo-135205347.jpg',
         address: 'г. Казань, ул. Чистопольская д.28',
         cityId: 0,
         conference: false,
@@ -324,6 +341,7 @@ export async function writeAllData(connection: Connection) {
         priceIncreasePerMonth: 1,
         cadastralNumber: '50:08:01:05050:015',
       }, {
+        photoUrl: '/assets/images/stock-photo-135205347.jpg',
         address: 'г. Казань, ул. Чистопольская д.22',
         cityId: 0,
         conference: false,

@@ -1,7 +1,8 @@
 export interface IUserDeal {
   id: number;
   realtyId: number;
-  checksum: string;
+  documentId: number;
   createdAt: Date;
   userId: number;
+  sign: string;
 }

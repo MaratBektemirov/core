@@ -1,3 +1,10 @@
 @import '../../styles/variables';
 @import '../../styles/mixins';
 
+.cabinet-profile-sign {
+  svg {
+    width: 40px;
+    height: 40px;
+  }
+}
+

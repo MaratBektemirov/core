@@ -1,5 +1,11 @@
 <div class="card-container">
-  <div class="fx fx-jc-between mb1">
+  <div class="fx fx-jc-between fx-wrap mb1">
+    <div style="    width: 100%;
+    border-radius: 2px;
+    max-height: 180px;
+    overflow: hidden;" class="fx-fixed mb1">
+      <img [attr.src]="realty.photoUrl" style="width: 100%;">
+    </div>
     <div class="realty-card-address fs-1-1">{{realty.address}}</div>
     <div *ngIf="realty.officeCategory" class="realty-card-office-category">{{realty.officeCategory}}</div>
   </div>

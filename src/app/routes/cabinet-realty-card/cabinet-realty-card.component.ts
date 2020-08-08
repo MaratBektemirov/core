@@ -3,11 +3,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BaseComponent } from '@app/base/base.component';
 import { BaseComponentService } from '@app/base/base-component.service';
 import { RealtyService } from '@app/services/realty.service';
-import { CabinetRealtyUICard, RealtyUI } from '@interfaces/ui';
+import { RealtyUI } from '@interfaces/ui';
 import { IUserRealty } from '@interfaces/userRealty';
 import { map } from 'rxjs/operators';
 import { IUserDeal } from '@interfaces/userDeal';
 import * as _ from 'lodash';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'cabinet-realty-card',
@@ -27,6 +28,7 @@ export class CabinetRealtyCardComponent extends BaseComponent implements OnInit 
   public agreement = false;
   public signIsSended = false;
   public signIsNotValid = false;
+  public signControl = new FormControl();
   data: any;
   options: any;
 
@@ -115,7 +117,7 @@ export class CabinetRealtyCardComponent extends BaseComponent implements OnInit 
   }
 
   allIsOk(): boolean {
-    return (_.uniq(this.shares.map((d) => d.userId)).length + 1) === _.uniq(this.deals.map((d) => d.userId)).length;
+    return this.shares.length + 1 === this.deals.length;
   }
 
   isDealTime() {
@@ -130,9 +132,17 @@ export class CabinetRealtyCardComponent extends BaseComponent implements OnInit 
     return this.realtyService.pdfGetLink(this.realty.id);
   }
 
+  isValid() {
+    return this.agreement && this.signControl.value;
+  }
+
   sign() {
-    this.realtyService.sign(this.realty.id);
+    this.realtyService.sign(this.realty.id, this.signControl.value);
     this.signIsSended = true;
     this.cdr.detectChanges();
+  }
+
+  findDealForShare(share: IUserRealty): boolean {
+    return !!this.deals.find((d) => d.userId === share.reservedUserId && d.sign);
   }
 }

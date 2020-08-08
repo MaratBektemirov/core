@@ -3,6 +3,7 @@ import { IData } from '@interfaces/data';
 import { IUserRealty } from '@interfaces/userRealty';
 import { IRealty } from '@interfaces/realty';
 import { IUserDeal } from '@interfaces/userDeal';
+import { IDocument } from '@interfaces/document';
 
 export enum Tables {
   user = 'public.user',
@@ -12,6 +13,7 @@ export enum Tables {
   userRealty = 'public.user_realty',
   realty = 'public.realty',
   userDeal = 'public.user_deal',
+  document = 'public.document',
 }
 
 export interface TablesSpec {
@@ -22,4 +24,5 @@ export interface TablesSpec {
   [Tables.userRealty]: IUserRealty;
   [Tables.realty]: IRealty;
   [Tables.userDeal]: IUserDeal;
+  [Tables.document]: IDocument;
 }

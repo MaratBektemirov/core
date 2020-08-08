@@ -8,7 +8,7 @@ export class UserDeal implements IUserDeal {
   id: number;
 
   @Column()
-  checksum: string;
+  documentId: number;
 
   @CreateDateColumn({type: 'timestamp'})
   createdAt: Date;
@@ -18,4 +18,7 @@ export class UserDeal implements IUserDeal {
 
   @Column()
   userId: number;
+
+  @Column()
+  sign: string;
 }
